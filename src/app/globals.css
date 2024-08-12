@@ -26,7 +26,6 @@
   font-style: normal;
 }
 
-/* Utility classes for fonts */
 .font-valorant {
   font-family: "VALORANT", sans-serif;
 }
@@ -57,17 +56,17 @@
   --text-color-2: rgba(154, 119, 35, 1);
   --text-color-3: rgba(3, 140, 54, 1);
   --text-color-4: #a395df;
-  --text-color-5: #9f91de;
-  --text-color-6: #826dff;
+  --text-color-5: #FEE865;
+  --text-color-6: #FCD437;
   --text-color-7: #9a7723;
   --text-color-8: #eaa742;
   --text-color-9: #e9a742;
   --text-color-10: #c4893b;
   --text-color-11: #ffe0b7;
   --text-color-12: #dfa650;
-  --text-color-13: #ffca79;
+  --text-color-13: #E32931;
   --border-color-2: #6b5536;
-  --text-color-14: #038c36;
+  --text-color-14: #5797D1;
   --text-color-15: #04bc49;
   --text-color-16: #01ab3f;
   --text-color-17: #d4ffe4;
@@ -135,7 +134,7 @@ h1 {
   font-weight: 400;
   line-height: 104px;
   letter-spacing: 5.16px;
-  background: linear-gradient(180deg, #6d4be7 0%, #998be5 90%);
+  background: linear-gradient(180deg, #6d4be7 0%, #FEFEFE 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -165,3 +164,69 @@ h6 {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+/* 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+} */

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import CustomHeroNavigationTopBar from "./CustomHeroNavigationTopBar";
+import Image from "next/image";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
@@ -36,11 +37,13 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
           </h6>
           <p className="max-w-[250px]">{content}</p>
         </span>
-        <img
+        {/* <Image
           src="https://em-content.zobj.net/source/microsoft-teams/363/face-holding-back-tears_1f979.png"
           alt=""
-          className="w-10 h-10"
-        />
+          className="object-cover w-10 h-10"
+          width={10}
+          height={10}
+        /> */}
       </div>
     </div>
   );
@@ -94,7 +97,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       <CustomHeroNavigationTopBar />
 
       <CustomInformativeBox
-        bottomPosition={250}
+        bottomPosition={200}
         title=""
         content="Download for Android"
       />

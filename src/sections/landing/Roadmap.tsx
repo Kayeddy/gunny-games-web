@@ -33,6 +33,7 @@ export default function Roadmap() {
                   <div className="popup-title">Laying Foundations</div>
                   Team Formation, Creative Project Planning, and Value
                   Proposition
+                  <p className="mt-2"> - 2022 Q1</p>
                 </div>
               </div>
             </div>
@@ -52,6 +53,7 @@ export default function Roadmap() {
                   <div className="popup-title">Building Blueprints</div>
                   Creation of Economic Model, Whitepaper Development, Website
                   Development, and Value Proposition
+                  <p className="mt-2"> - 2022 Q2</p>
                 </div>
               </div>
             </div>
@@ -72,6 +74,7 @@ export default function Roadmap() {
                   Alpha Development, AWS Database Creation, Asset Creation on
                   Algorand, Gacha System Development, Inugis Airdrop, Heroes
                   Airdrop
+                  <p className="mt-2"> - 2023 Q3</p>
                 </div>
               </div>
             </div>
@@ -91,6 +94,7 @@ export default function Roadmap() {
                   <div className="popup-title">Unleashing Power</div>
                   Private Alpha Release, Gacha System Launch, Open Alpha
                   Release, Tournament Launch
+                  <p className="mt-2"> - 2023 Q4</p>
                 </div>
               </div>
             </div>
@@ -111,6 +115,7 @@ export default function Roadmap() {
                   2nd Gen Inugis Development, PVP Game Development, UI/UX
                   Update, Animated Short Films, PVP Beta Launch, Battle Pass
                   Release
+                  <p className="mt-2"> - 2024 </p>
                 </div>
               </div>
             </div>

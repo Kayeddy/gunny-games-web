@@ -26,6 +26,7 @@ interface CharacterProps {
   iconsInnerClass: string;
   viewContractBtnClass: string;
   characterImgSize?: number;
+  contractButtonLink: string;
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -48,6 +49,7 @@ const Character: React.FC<CharacterProps> = ({
   iconsInnerClass,
   viewContractBtnClass,
   characterImgSize,
+  contractButtonLink,
 }) => {
   return (
     <div
@@ -93,7 +95,11 @@ const Character: React.FC<CharacterProps> = ({
           ))}
         </div>
         <div className={viewContractBtnClass + " cursor-scale"}>
-          <a href="#" className="view-contract-btn">
+          <a
+            href={contractButtonLink}
+            target="_blank"
+            className="view-contract-btn"
+          >
             view contract
           </a>
         </div>
@@ -107,7 +113,8 @@ const characters = [
     backgroundImage: "/assets/nft_cards/FUZZY_100.png",
     logoSrc:
       "https://www.yudiz.com/codepen/valorant-characters/gl-logo-first.svg",
-    bindText: "BIND PERSONALIZADA",
+
+    bindText: "Skins",
     characterImageSrc: "/assets/chibis/Fuzzy Chibi_100.png",
     factionName: "Air elemental",
     characterName: "Fuzzy",
@@ -125,11 +132,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/abilities/icon-hability-1_100.png",
+        src: "/assets/icons/ORA PNG_100.png",
         key: "Type",
       },
       {
-        src: "/assets/gems/Gema (16)_100.png",
+        src: "/assets/icons/ORA PNG_100.png",
         key: "Element",
       },
     ],
@@ -141,37 +148,37 @@ const characters = [
     iconsMainClass: "controller-icons-main",
     iconsInnerClass: "controller-icons-inner",
     viewContractBtnClass: "view-contract-btn-main",
+    contractButtonLink: "https://explorer.perawallet.app/asset/1166502923/",
   },
   {
     backgroundImage:
       "https://www.yudiz.com/codepen/valorant-characters/phoenix.jpg",
     logoSrc:
       "https://www.yudiz.com/codepen/valorant-characters/gl-logo-second.svg",
-    bindText: "BIND PERSONALIZADA",
+    bindText: "Skins",
     characterImageSrc: "/assets/chibis/Rocky Chibi_100.png",
-    factionName: "Duelist",
-    characterName: "Phoenix",
-    roleImageSrc:
-      "https://www.yudiz.com/codepen/valorant-characters/subtract-second.svg",
-    roleName: "DUELIST",
+    factionName: "Earth Elemental",
+    characterName: "Rockie",
+    roleImageSrc: "/assets/factions/icon-othila_100.png",
+    roleName: "OTHILA",
     description:
-      "A phantom of a memory, Omen hunts in the shadows. He renders enemies blind, teleports across the field, then lets paranoia take hold as his foe scrambles to learn where he might strike next.",
+      "This earthy buddy might look rough, but don't be fooled - it's actually a big softie, super affectionate, and sweet. Rockie is all about keeping the good vibes alive and protecting its teammates.",
     abilities: [
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/q-second-icon.svg",
-        key: "q",
+        src: "/assets/abilities/icon-hability-2_100.png",
+        key: "Ability",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/e-second-icon.svg",
-        key: "e",
+        src: "/assets/factions/icon-othila_100.png",
+        key: "Faction",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/c-second-icon.svg",
-        key: "c",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Type",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/x-second-icon.svg",
-        key: "x",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Element",
       },
     ],
     containerClass: "banner-section-loop",
@@ -182,37 +189,37 @@ const characters = [
     iconsMainClass: "controller-icons-main",
     iconsInnerClass: "controller-icons-inner",
     viewContractBtnClass: "view-contract-btn-main",
+    contractButtonLink: "https://explorer.perawallet.app/asset/1166485390/",
   },
   {
     backgroundImage:
       "https://www.yudiz.com/codepen/valorant-characters/viper.jpg",
     logoSrc:
       "https://www.yudiz.com/codepen/valorant-characters/gl-logo-third.svg",
-    bindText: "BIND PERSONALIZADA",
+    bindText: "Skins",
     characterImageSrc: "/assets/chibis/Taily Chibi Jumping_100.png",
-    factionName: "Controller",
-    characterName: "Viper",
-    roleImageSrc:
-      "https://www.yudiz.com/codepen/valorant-characters/subtract-third.svg",
-    roleName: "CONTROLLER",
+    factionName: "Water elemental",
+    characterName: "Taily",
+    roleImageSrc: "/assets/factions/Iconos (3)_100.png",
+    roleName: "Perth",
     description:
-      "A phantom of a memory, Omen hunts in the shadows. He renders enemies blind, teleports across the field, then lets paranoia take hold as his foe scrambles to learn where he might strike next.",
+      "the enchanting Inugi character in the Gunny video game, where canine charm meets aquatic prowess. This magical blend creates a creature that's like no other, effortlessly gliding across water surfaces, making every aquatic move a graceful masterpiece.",
     abilities: [
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/q-third-icon.svg",
-        key: "q",
+        src: "/assets/abilities/icon-hability-1_100.png",
+        key: "Ability",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/e-third-icon.svg",
-        key: "e",
+        src: "/assets/factions/Iconos (3)_100.png",
+        key: "Faction",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/c-third-icon.svg",
-        key: "c",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Type",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/x-third-icon.svg",
-        key: "x",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Element",
       },
     ],
     containerClass: "banner-section-loop",
@@ -223,37 +230,37 @@ const characters = [
     iconsMainClass: "controller-icons-main",
     iconsInnerClass: "controller-icons-inner",
     viewContractBtnClass: "view-contract-btn-main",
+    contractButtonLink: "https://explorer.perawallet.app/asset/1166590241/",
   },
   {
     backgroundImage:
       "https://www.yudiz.com/codepen/valorant-characters/viper.jpg",
     logoSrc:
       "https://www.yudiz.com/codepen/valorant-characters/gl-logo-third.svg",
-    bindText: "BIND PERSONALIZADA",
+    bindText: "Skins",
     characterImageSrc: "/assets/chibis/Bolty Chibi Atack_100.png",
-    factionName: "Controller",
-    characterName: "Viper",
-    roleImageSrc:
-      "https://www.yudiz.com/codepen/valorant-characters/subtract-third.svg",
-    roleName: "CONTROLLER",
+    factionName: "Lightning Elemental",
+    characterName: "Bolty",
+    roleImageSrc: "/assets/factions/icon-thurizas_100.png",
+    roleName: "Thurizas",
     description:
-      "A phantom of a memory, Omen hunts in the shadows. He renders enemies blind, teleports across the field, then lets paranoia take hold as his foe scrambles to learn where he might strike next.",
+      "an Inugi that stands as a distinctive character within Gunny. Coming directly from the lightning element, this creature emanates an air of solemnity while remaining steadfastly loyal to its masters.",
     abilities: [
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/q-third-icon.svg",
-        key: "q",
+        src: "/assets/abilities/icon-hability-3_100.png",
+        key: "Ability",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/e-third-icon.svg",
-        key: "e",
+        src: "/assets/factions/icon-thurizas_100.png",
+        key: "Faction",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/c-third-icon.svg",
-        key: "c",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Type",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/x-third-icon.svg",
-        key: "x",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Element",
       },
     ],
     containerClass: "banner-section-loop",
@@ -264,37 +271,37 @@ const characters = [
     iconsMainClass: "controller-icons-main",
     iconsInnerClass: "controller-icons-inner",
     viewContractBtnClass: "view-contract-btn-main",
+    contractButtonLink: "https://explorer.perawallet.app/asset/1166518213/",
   },
   {
     backgroundImage:
       "https://www.yudiz.com/codepen/valorant-characters/viper.jpg",
     logoSrc:
       "https://www.yudiz.com/codepen/valorant-characters/gl-logo-third.svg",
-    bindText: "BIND PERSONALIZADA",
+    bindText: "Skins",
     characterImageSrc: "/assets/chibis/Blaze Chibi_100.png",
-    factionName: "Controller",
-    characterName: "Viper",
-    roleImageSrc:
-      "https://www.yudiz.com/codepen/valorant-characters/subtract-third.svg",
+    factionName: "Fire Elemental",
+    characterName: "Blaze",
+    roleImageSrc: "/assets/factions/icon-ratio_100.png",
     roleName: "CONTROLLER",
     description:
-      "A phantom of a memory, Omen hunts in the shadows. He renders enemies blind, teleports across the field, then lets paranoia take hold as his foe scrambles to learn where he might strike next.",
+      "This fierce Inugi does not hold back, diving into battle with unmatched toughness and a fiery spirit. Its loyalty to its master is unwavering, and it’s always ready to strike when the occasion demands it.",
     abilities: [
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/q-third-icon.svg",
-        key: "q",
+        src: "/assets/abilities/icon-hability-4_100.png",
+        key: "Ability",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/e-third-icon.svg",
-        key: "e",
+        src: "/assets/factions/icon-ratio_100.png",
+        key: "Faction",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/c-third-icon.svg",
-        key: "c",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Type",
       },
       {
-        src: "https://www.yudiz.com/codepen/valorant-characters/x-third-icon.svg",
-        key: "x",
+        src: "/assets/icons/ORA PNG_100.png",
+        key: "Element",
       },
     ],
     containerClass: "banner-section-loop",
@@ -305,6 +312,7 @@ const characters = [
     iconsMainClass: "controller-icons-main",
     iconsInnerClass: "controller-icons-inner",
     viewContractBtnClass: "view-contract-btn-main",
+    contractButtonLink: "https://explorer.perawallet.app/asset/1166579975/",
   },
 ];
 
@@ -359,7 +367,7 @@ const Characters = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div>
+        <div className="my-auto">
           <header className="header-section-main">
             <div className="cursor"></div>
             <div className="custom-container">

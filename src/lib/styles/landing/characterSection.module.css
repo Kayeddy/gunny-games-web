@@ -161,7 +161,7 @@
 }
 .banner-section-main .banner-section-loop {
   position: relative;
-  padding-top: 42px;
+
   display: flex;
   align-items: center;
   background: no-repeat top center / 100% 100%;
@@ -234,8 +234,8 @@
   border: 1px solid var(--text-color-6);
   background: linear-gradient(
     180deg,
-    rgba(68, 45, 142, 0.2) 0%,
-    rgba(82, 51, 180, 0.09) 100%
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 0, 0.09) 100%
   );
   padding: 19.771px 22.218px 20.229px 22.799px;
   display: flex;
@@ -298,7 +298,7 @@
   font-size: 18px;
   line-height: 22px;
   text-transform: uppercase;
-  color: #ccc4ed;
+  color: #fff;
   position: absolute;
   top: 50%;
   left: 40%;
@@ -363,7 +363,7 @@
   border: 1px solid var(--border-color-2);
   background: linear-gradient(
     180deg,
-    rgba(101, 75, 37, 0.13) 0%,
+    rgba(0, 0, 0, 0.13) 0%,
     rgba(246, 186, 98, 0.05) 100%
   );
 }
@@ -380,7 +380,7 @@
   color: var(--text-color-10);
 }
 .banner-loop-second .view-contract-btn-main {
-  background-image: url("https://www.yudiz.com/codepen/valorant-characters/button-bg-2.svg");
+  background-image: url("https://www.yudiz.com/codepen/valorant-characters/button-bg.svg");
 }
 .banner-loop-second .view-contract-btn-main a {
   color: var(--text-color-11);
@@ -444,7 +444,7 @@
   color: var(--text-color-14);
 }
 .banner-loop-third .view-contract-btn-main {
-  background-image: url("https://www.yudiz.com/codepen/valorant-characters/button-bg-3.svg");
+  background-image: url("https://www.yudiz.com/codepen/valorant-characters/button-bg.svg");
 }
 .banner-loop-third .view-contract-btn-main a {
   color: var(--text-color-17);
