@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import headerStyles from "@/lib/styles/shared/Header.module.scss";
+import headerStyles from "@/lib/styles/shared/header.module.scss";
 import { AnimatePresence } from "framer-motion";
 import LeftNavigationBar from "./LeftNavigationBar";
 
