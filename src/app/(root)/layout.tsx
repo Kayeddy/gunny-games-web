@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Head from "next/head";
 import "../globals.css";
 import localFont from "next/font/local";
+import Header from "@/components/shared/Header";
 
 export const metadata: Metadata = {
   title: "Gunny Games",
@@ -32,7 +33,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"
         />
       </Head>
-      <body className={`${Valorant.className}`}>{children}</body>
+      <body className={`${Valorant.className}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

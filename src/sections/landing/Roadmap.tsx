@@ -1,27 +1,34 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useTransform } from "framer-motion";
 import Image from "next/image";
 
-export default function Roadmap() {
+export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
   const ref = useRef(null);
   const isInView = useInView(ref);
 
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
+
   return (
-    <div ref={ref}>
+    <motion.div
+      ref={ref}
+      className="sticky top-0 h-screen"
+      style={{ scale, rotate }}
+    >
       {isInView && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-center min-h-screen h-fit bg-[#1D1B26]"
+          className="flex items-center justify-center h-full relative bg-[#1D1B26]"
         >
           <div className="z-20 timeline-container">
             {/* Phase 1: Laying the Foundation */}
             <div className="timeline-point">
               <Image
-                src="/assets/gems/Gema (8)_100.png"
+                src="/assets/gems/Gema (8)_100.webp"
                 alt=""
                 width={50}
                 height={50}
@@ -41,7 +48,7 @@ export default function Roadmap() {
             {/* Phase 2: Building the Blueprint */}
             <div className="timeline-point">
               <Image
-                src="/assets/gems/Gema (3)_100.png"
+                src="/assets/gems/Gema-_2__100.webp"
                 alt=""
                 width={50}
                 height={50}
@@ -61,7 +68,7 @@ export default function Roadmap() {
             {/* Phase 3: Forging the Path */}
             <div className="timeline-point">
               <Image
-                src="/assets/gems/Gema (11)_100.png"
+                src="/assets/gems/Gema (10)_100.webp"
                 alt=""
                 width={50}
                 height={50}
@@ -82,7 +89,7 @@ export default function Roadmap() {
             {/* Phase 4: Unleashing the Power */}
             <div className="timeline-point">
               <Image
-                src="/assets/gems/Gema (18)_100.png"
+                src="/assets/gems/Gema (18)_100.webp"
                 alt=""
                 width={50}
                 height={50}
@@ -102,7 +109,7 @@ export default function Roadmap() {
             {/* Phase 5: The Next Evolution */}
             <div className="timeline-point">
               <Image
-                src="/assets/gems/Gema (23)_100.png"
+                src="/assets/gems/Gema (19)_100.webp"
                 alt=""
                 width={50}
                 height={50}
@@ -122,6 +129,6 @@ export default function Roadmap() {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

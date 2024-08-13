@@ -5,6 +5,8 @@ import Script from "next/script";
 import Loader from "@/components/shared/Loader";
 import "../../app/globals.css";
 import Image from "next/image";
+import { useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface CharacterProps {
   backgroundImage: string;
@@ -77,7 +79,7 @@ const Character: React.FC<CharacterProps> = ({
         <h1 className="font-insomnia">{characterName}</h1>
         <div className={boxSectionClass}>
           <div className="controller-box-img">
-            <img src={roleImageSrc} alt="role-img" />
+            <Image src={roleImageSrc} alt="role-img" width={100} height={100} />
           </div>
           <div className="controller-box-content">
             <h5>{roleName}</h5>
@@ -88,7 +90,7 @@ const Character: React.FC<CharacterProps> = ({
           {abilities.map((ability, index) => (
             <div key={index} className={iconsInnerClass}>
               <div className="controller-img">
-                <img src={ability.src} alt="" />
+                <Image src={ability.src} alt="" width={100} height={100} />
               </div>
               <p>{ability.key}</p>
             </div>
@@ -98,6 +100,7 @@ const Character: React.FC<CharacterProps> = ({
           <a
             href={contractButtonLink}
             target="_blank"
+            rel="referrer noreferrer"
             className="view-contract-btn"
           >
             view contract
@@ -132,11 +135,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Type",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Element",
       },
     ],
@@ -173,11 +176,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Type",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Element",
       },
     ],
@@ -214,11 +217,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Type",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Element",
       },
     ],
@@ -255,11 +258,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Type",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Element",
       },
     ],
@@ -296,11 +299,11 @@ const characters = [
         key: "Faction",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Type",
       },
       {
-        src: "/assets/icons/ORA PNG_100.png",
+        src: "/assets/icons/ORA-PNG_100.webp",
         key: "Element",
       },
     ],
@@ -316,8 +319,11 @@ const characters = [
   },
 ];
 
-const Characters = () => {
+const Characters = ({ scrollYProgress }: { scrollYProgress: any }) => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   useEffect(() => {
     const handleScriptsLoaded = () => {
@@ -336,7 +342,10 @@ const Characters = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#1D1B26]">
+    <motion.div
+      className="sticky top-0 h-screen bg-[#1D1B26] overflow-hidden"
+      style={{ scale, rotate }}
+    >
       {/* Load necessary libraries via CDN */}
       <Script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -367,8 +376,8 @@ const Characters = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="my-auto">
-          <header className="header-section-main">
+        <div className="relative my-auto">
+          {/* <header className="header-section-main">
             <div className="cursor"></div>
             <div className="custom-container">
               <div className="header-section-inner">
@@ -407,7 +416,7 @@ const Characters = () => {
                 </div>
               </div>
             </div>
-          </header>
+          </header> */}
           <section className="banner-section-main">
             {Array.from({ length: 200 }, (_, index) => (
               <i key={index} className="rain"></i>
@@ -420,26 +429,51 @@ const Characters = () => {
             <div className="controller-right-icons-main">
               <div className="controller-right-icons-inner">
                 <div>
-                  <img src="/assets/chibis/Fuzzy Chibi_100.png" alt="" />
+                  <Image
+                    src="/assets/chibis/Fuzzy Chibi_100.png"
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
                 </div>
                 <div>
-                  <img src="/assets/chibis/Rocky Chibi_100.png" alt="" />
+                  <Image
+                    src="/assets/chibis/Rocky Chibi_100.png"
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
                 </div>
                 <div>
-                  <img src="/assets/chibis/Taily Winner_100.png" alt="" />
+                  <Image
+                    src="/assets/chibis/Taily Winner_100.png"
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
                 </div>
                 <div>
-                  <img src="/assets/chibis/Bolty Chibi Atack_100.png" alt="" />
+                  <Image
+                    src="/assets/chibis/Bolty Chibi Atack_100.png"
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
                 </div>
                 <div>
-                  <img src="/assets/chibis/Blaze Chibi_100.png" alt="" />
+                  <Image
+                    src="/assets/chibis/Blaze Chibi_100.png"
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
                 </div>
               </div>
             </div>
           </section>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

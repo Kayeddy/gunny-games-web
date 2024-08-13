@@ -3,6 +3,9 @@
 import CustomAnimatedBlockCard from "@/components/custom/CustomAnimatedBlocksCard";
 import { CustomInfiniteMovingCards } from "@/components/custom/CustomInfiniteMovingCards";
 import { CustomWobbleCard } from "@/components/custom/CustomWobbleCard";
+import { useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+
 import Image from "next/image";
 
 const poweredBy = [
@@ -222,9 +225,19 @@ const testimonials = [
   },
 ];
 
-export default function Showcase() {
+export default function Showcase({
+  scrollYProgress,
+}: {
+  scrollYProgress: any;
+}) {
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.5]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
+
   return (
-    <div className="flex flex-col gap-8 items-center justify-center h-fit min-h-screen p-4 overflow-hidden bg-[#1D1B26]">
+    <motion.div
+      className="flex flex-col gap-8 items-center justify-center min-h-fit lg:h-screen p-4  bg-[#1D1B26] sticky top-0"
+      style={{ scale, rotate }}
+    >
       <section className="flex flex-col items-center justify-center gap-4">
         <h2>Powered by</h2>
         <div className="flex flex-row items-center justify-center gap-8">
@@ -310,7 +323,7 @@ export default function Showcase() {
               prizes as the ultimate champion!
             </p>
             <Image
-              src="/assets/icons/icongunny_100.png"
+              src="/assets/icons/icongunny_100.webp"
               alt=""
               width={100}
               height={100}
@@ -326,6 +339,6 @@ export default function Showcase() {
           />
         </CustomWobbleCard>
       </section>
-    </div>
+    </motion.div>
   );
 }

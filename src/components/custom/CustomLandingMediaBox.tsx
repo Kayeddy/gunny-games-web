@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import CustomHeroNavigationTopBar from "./CustomHeroNavigationTopBar";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
@@ -17,34 +17,69 @@ interface CustomInformativeBoxProps {
   title: string;
   content: string;
   bottomPosition?: number;
-  decorations?: any | React.ReactElement;
+  mediaUrl?: string;
+  mediaWidth?: number;
+  mediaHeight?: number;
+  link?: string;
 }
 
 const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   title,
   content,
+  mediaUrl,
   bottomPosition,
+  mediaWidth,
+  mediaHeight,
+  link,
 }) => {
   return (
     <div
-      className="absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl lg:flex z-20"
+      className="absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl lg:flex z-20"
       style={{ bottom: bottomPosition }}
     >
-      <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
-        <span className="flex flex-col items-start justify-center gap-2">
-          <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
-            {title}
-          </h6>
-          <p className="max-w-[250px]">{content}</p>
-        </span>
-        {/* <Image
-          src="https://em-content.zobj.net/source/microsoft-teams/363/face-holding-back-tears_1f979.png"
-          alt=""
-          className="object-cover w-10 h-10"
-          width={10}
-          height={10}
-        /> */}
-      </div>
+      {link ? (
+        <Link
+          href={link}
+          target="_blank"
+          className="transition-all duration-300 ease-in-out hover:scale-105"
+        >
+          <div className="flex flex-row items-center justify-center gap-2 p-3 text-[#1e1c1c]">
+            <span className="flex flex-col items-start justify-center gap-2">
+              <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
+                {title}
+              </h6>
+              <p className="max-w-[250px]">{content}</p>
+            </span>
+            {mediaUrl && (
+              <Image
+                src={mediaUrl}
+                alt=""
+                className="object-contain"
+                width={mediaWidth}
+                height={mediaHeight}
+              />
+            )}
+          </div>
+        </Link>
+      ) : (
+        <div className="flex flex-row items-center justify-center gap-2 p-3 text-[#1e1c1c]">
+          <span className="flex flex-col items-start justify-center gap-2">
+            <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
+              {title}
+            </h6>
+            <p className="max-w-[250px]">{content}</p>
+          </span>
+          {mediaUrl && (
+            <Image
+              src={mediaUrl}
+              alt=""
+              className="object-contain"
+              width={mediaWidth}
+              height={mediaHeight}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -94,23 +129,25 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       className="w-[75vw] h-full -translate-x-7 custom-landing-media-box relative"
       style={{ width, height }}
     >
-      <CustomHeroNavigationTopBar />
+      <CustomInformativeBox
+        bottomPosition={120}
+        title=""
+        link="https://play.google.com/store/apps/details?id=com.Gunny.googleauth"
+        content="Download for Android"
+        mediaUrl="/assets/other/playstore_icon.webp"
+        mediaWidth={30}
+        mediaHeight={30}
+      />
 
       <CustomInformativeBox
         bottomPosition={200}
         title=""
-        content="Download for Android"
-      />
-
-      <CustomInformativeBox
-        bottomPosition={100}
-        title=""
-        content="Download for IOS"
+        content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
       />
 
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">
-          <div className="loader"></div>
+          <div className="w-12 h-12 border-purple-500 border-solid rounded-full shadow-md animate-spin border-y-4 border-t-transparent"></div>
         </div>
       )}
 

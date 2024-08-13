@@ -1,5 +1,9 @@
+"use client";
+
 import CustomLandingMediaBox from "@/components/custom/CustomLandingMediaBox";
+import { useTransform } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const LeftInformationBar = () => {
   return (
@@ -7,7 +11,7 @@ const LeftInformationBar = () => {
       <span className="w-[300px] h-[100px] relative flex items-center justify-start">
         <Image
           layout="fill"
-          src="/assets/icons/logo1024_100.png"
+          src="/assets/icons/logo1024_100.webp"
           alt=""
           className="object-fill -rotate-90 -translate-x-[40px] w-full h-full mt-32"
         />
@@ -24,9 +28,15 @@ const LeftInformationBar = () => {
   );
 };
 
-export default function Hero() {
+export default function Hero({ scrollYProgress }: { scrollYProgress: any }) {
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
+
   return (
-    <div className="w-full h-screen min-h-max p-4 overflow-x-hidden bg-[#1D1B26]">
+    <motion.div
+      className="w-full h-screen p-4 overflow-x-hidden bg-[#1D1B26] sticky top-0"
+      style={{ scale, rotate }}
+    >
       <div className="relative flex flex-row items-center justify-around w-screen h-full gap-12">
         <LeftInformationBar />
         <CustomLandingMediaBox
@@ -37,6 +47,6 @@ export default function Hero() {
           ]}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
