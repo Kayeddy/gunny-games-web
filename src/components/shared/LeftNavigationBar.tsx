@@ -36,7 +36,7 @@ const navItems = [
 export default function LeftNavigationBar({
   currentSection,
 }: {
-  currentSection: string;
+  currentSection?: string;
 }) {
   const [selectedIndicator, setSelectedIndicator] = useState(currentSection);
 
