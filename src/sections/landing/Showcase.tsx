@@ -234,12 +234,12 @@ export default function Showcase({
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <motion.div
+    <motion.section
       className="flex flex-col gap-8 items-center justify-center min-h-fit lg:h-screen p-4  bg-[#1D1B26] sticky top-0"
       style={{ scale, rotate }}
     >
       <section className="flex flex-col items-center justify-center gap-4">
-        <h2>Powered by</h2>
+        <h2 className="text-slate-200">Powered by</h2>
         <div className="flex flex-row items-center justify-center gap-8">
           {poweredBy.map((item, index) => (
             <span
@@ -339,6 +339,6 @@ export default function Showcase({
           />
         </CustomWobbleCard>
       </section>
-    </motion.div>
+    </motion.section>
   );
 }

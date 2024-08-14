@@ -7,7 +7,7 @@ export default function Ranking({ scrollYProgress }: { scrollYProgress: any }) {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <motion.div
+    <motion.section
       className="flex items-center justify-center h-screen bg-[#1D1B26] sticky top-0"
       style={{ scale, rotate }}
     >
@@ -15,6 +15,6 @@ export default function Ranking({ scrollYProgress }: { scrollYProgress: any }) {
         <h1>Ranking Board</h1>
         <Scoreboard />
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

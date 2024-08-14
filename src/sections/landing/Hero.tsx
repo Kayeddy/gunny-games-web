@@ -33,7 +33,7 @@ export default function Hero({ scrollYProgress }: { scrollYProgress: any }) {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
 
   return (
-    <motion.div
+    <motion.section
       className="w-full h-screen p-4 overflow-x-hidden bg-[#1D1B26] sticky top-0"
       style={{ scale, rotate }}
     >
@@ -47,6 +47,6 @@ export default function Hero({ scrollYProgress }: { scrollYProgress: any }) {
           ]}
         />
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

@@ -322,7 +322,7 @@ const characters = [
 const Characters = ({ scrollYProgress }: { scrollYProgress: any }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   useEffect(() => {
@@ -342,7 +342,7 @@ const Characters = ({ scrollYProgress }: { scrollYProgress: any }) => {
   }, []);
 
   return (
-    <motion.div
+    <motion.section
       className="sticky top-0 h-screen bg-[#1D1B26] overflow-hidden"
       style={{ scale, rotate }}
     >
@@ -473,7 +473,7 @@ const Characters = ({ scrollYProgress }: { scrollYProgress: any }) => {
           </section>
         </div>
       )}
-    </motion.div>
+    </motion.section>
   );
 };
 

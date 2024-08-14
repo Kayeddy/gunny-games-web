@@ -11,7 +11,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <motion.div
+    <motion.section
       ref={ref}
       className="sticky top-0 h-screen"
       style={{ scale, rotate }}
@@ -129,6 +129,6 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
           </div>
         </motion.div>
       )}
-    </motion.div>
+    </motion.section>
   );
 }

@@ -3,32 +3,49 @@
 import React, { useState } from "react";
 import leftNavigationBarStyles from "@/lib/styles/shared/leftNavigationBar.module.scss";
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { menuSlide } from "@/lib/scripts/shared/LeftNavigationBarAnimations";
-import CustomSidebarNavigationLink from "../custom/CustomSidebarNavigationLink";
 
 const navItems = [
   {
     title: "Home",
-    href: "/",
+    href: "#home",
+    sectionId: "home",
   },
   {
-    title: "Work",
-    href: "/work",
+    title: "Showcase",
+    href: "#showcase",
+    sectionId: "showcase",
   },
   {
-    title: "About",
-    href: "/about",
+    title: "Characters",
+    href: "#characters",
+    sectionId: "characters",
   },
   {
-    title: "Contact",
-    href: "/contact",
+    title: "Roadmap",
+    href: "#roadmap",
+    sectionId: "roadmap",
+  },
+  {
+    title: "Ranking",
+    href: "#ranking",
+    sectionId: "ranking",
   },
 ];
 
-export default function LeftNavigationBar() {
-  const pathname = usePathname();
-  const [selectedIndicator, setSelectedIndicator] = useState(pathname);
+export default function LeftNavigationBar({
+  currentSection,
+}: {
+  currentSection: string;
+}) {
+  const [selectedIndicator, setSelectedIndicator] = useState(currentSection);
+
+  const handleNavItemClick = (sectionId: string) => {
+    const event = new CustomEvent("scrollToSection", {
+      detail: { sectionId },
+    });
+    window.dispatchEvent(event);
+  };
 
   return (
     <motion.div
@@ -41,29 +58,34 @@ export default function LeftNavigationBar() {
       <div className={leftNavigationBarStyles.body}>
         <div
           onMouseLeave={() => {
-            setSelectedIndicator(pathname);
+            setSelectedIndicator(window.location.hash.replace("#", ""));
           }}
           className={leftNavigationBarStyles.nav}
         >
           <div className={leftNavigationBarStyles.header}>
             <p>Navigation</p>
           </div>
-          {navItems.map((data, index) => {
-            return (
-              <CustomSidebarNavigationLink
-                key={index}
-                data={{ ...data, index }}
-                isActive={selectedIndicator == data.href}
-                setSelectedIndicator={setSelectedIndicator}
-              ></CustomSidebarNavigationLink>
-            );
-          })}
+          {navItems.map((data, index) => (
+            <motion.div
+              key={index}
+              className={leftNavigationBarStyles.link}
+              onMouseEnter={() => setSelectedIndicator(data.sectionId)}
+              custom={index}
+              variants={menuSlide}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+              onClick={() => handleNavItemClick(data.sectionId)}
+            >
+              <a>{data.title}</a>
+            </motion.div>
+          ))}
         </div>
         <div className={leftNavigationBarStyles.footer}>
-          <a>Awwwards</a>
-          <a>Instagram</a>
-          <a>Dribble</a>
-          <a>LinkedIn</a>
+          <a href="/#">Awwwards</a>
+          <a href="/#">Instagram</a>
+          <a href="/#">Dribble</a>
+          <a href="/#">LinkedIn</a>
         </div>
       </div>
     </motion.div>
