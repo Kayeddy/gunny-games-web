@@ -153,7 +153,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
             className="flex items-start justify-start w-full py-4"
           >
             <button
-              className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold text-white transition-all duration-300 ease-in-out border rounded-md group/button ${
+              className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold transition-all duration-300 ease-in-out border rounded-md group/button ${
                 styles.backgroundColor
               } ${
                 styles.backgroundColor === "bg-fuzzy-backgroundColor" &&
