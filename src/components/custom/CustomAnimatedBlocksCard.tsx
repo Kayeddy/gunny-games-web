@@ -6,13 +6,23 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function CustomAnimatedBlockCard() {
+  const handleViewCharacters = () => {
+    const event = new CustomEvent("scrollToSection", {
+      detail: { sectionId: "characters" },
+    });
+    window.dispatchEvent(event);
+  };
+
   return (
     <Card>
       <CardSkeletonContainer>
         <Skeleton />
       </CardSkeletonContainer>
       <CardTitle>
-        <button className="hover:animate-pulse hover:scale-[50px]">
+        <button
+          className="hover:animate-pulse hover:scale-[50px]"
+          onClick={handleViewCharacters}
+        >
           Check them out!
         </button>
       </CardTitle>
@@ -79,35 +89,35 @@ const Skeleton = () => {
         <Container className="w-12 h-12 circle-1">
           <Image
             layout="fill"
-            src="/assets/chibis/Fuzzy Chibi_100.png"
+            src="/assets/chibis/Fuzzy Chibi_100.webp"
             alt=""
           />
         </Container>
         <Container className="w-12 h-12 circle-2">
           <Image
             layout="fill"
-            src="/assets/chibis/Rocky Chibi_100.png"
+            src="/assets/chibis/Rocky Chibi_100.webp"
             alt=""
           />
         </Container>
         <Container className="w-12 h-12 circle-3">
           <Image
             layout="fill"
-            src="/assets/chibis/Taily Chibi Jumping_100.png"
+            src="/assets/chibis/Taily Chibi Jumping_100.webp"
             alt=""
           />
         </Container>
         <Container className="w-12 h-12 circle-4">
           <Image
             layout="fill"
-            src="/assets/chibis/Bolty Chibi Atack_100.png"
+            src="/assets/chibis/Bolty Chibi Atack_100.webp"
             alt=""
           />
         </Container>
         <Container className="w-12 h-12 circle-5">
           <Image
             layout="fill"
-            src="/assets/chibis/Blaze Chibi_100.png"
+            src="/assets/chibis/Blaze Chibi_100.webp"
             alt=""
           />
         </Container>

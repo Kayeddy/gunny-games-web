@@ -5,7 +5,6 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { gsap } from "gsap";
 import { Divider } from "@nextui-org/divider";
-import Link from "next/link";
 
 interface Skin {
   name: string;
@@ -24,7 +23,6 @@ interface Faction {
 
 interface Character {
   id: number;
-  contractLink: string;
   characterImage: string;
   characterName: string;
   faction: Faction;
@@ -55,12 +53,7 @@ const SkinsSection: React.FC<SkinsProps> = ({ skins }) => {
       {skins.map((skin, index) => (
         <div key={index}>
           <p>{skin.name}</p>
-          <Image
-            src={skin.image}
-            alt={`Skin - ${skin.name}`}
-            width={100}
-            height={100}
-          />
+          <Image src={skin.image} alt={skin.name} width={100} height={100} />
         </div>
       ))}
     </div>
@@ -68,7 +61,6 @@ const SkinsSection: React.FC<SkinsProps> = ({ skins }) => {
 };
 
 const CharacterContentSection: React.FC<CharacterContentProps> = ({
-  contractLink,
   characterImage,
   characterName,
   faction,
@@ -87,9 +79,9 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
       <div className="parallax-image lg:w-[500px] lg:h-[500px] w-[300px] h-[300px] relative">
         <Image
           src={characterImage}
-          alt={`Character Image - ${characterName}`}
-          fill
-          style={{ objectFit: "contain" }}
+          alt={characterName}
+          layout="fill"
+          objectFit="contain"
           className="object-cover w-full h-full"
         />
       </div>
@@ -110,7 +102,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
           >
             <Image
               src={faction.image}
-              alt={`Faction - ${faction.name}`}
+              alt={faction.name}
               width={60}
               height={60}
               className="object-contain"
@@ -132,7 +124,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               >
                 <Image
                   src={attr.image}
-                  alt={`Attribute - ${attr.name}`}
+                  alt={attr.name}
                   width={50}
                   height={50}
                   className="object-contain"
@@ -146,26 +138,6 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               </span>
             ))}
           </div>
-          <Link
-            href={contractLink}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-start justify-start w-full py-4"
-          >
-            <button
-              className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold text-white transition-all duration-300 ease-in-out border rounded-md group/button ${
-                styles.backgroundColor
-              } ${
-                styles.backgroundColor === "bg-fuzzy-backgroundColor" &&
-                "text-[#575113]"
-              } backdrop-blur-lg hover:scale-110 border-white/20`}
-            >
-              <span className="text-lg">View contract</span>
-              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
-                <div className="relative w-10 h-full bg-white/30"></div>
-              </div>
-            </button>
-          </Link>
         </div>
       </div>
     </div>
@@ -180,7 +152,6 @@ const Characters = () => {
   const characters: Character[] = [
     {
       id: 1,
-      contractLink: "https://explorer.perawallet.app/asset/1166502923/",
       characterImage: "/assets/chibis/Fuzzy Chibi_100.webp",
       characterName: "Fuzzy",
       faction: { name: "Inguz", image: "/assets/factions/icon-air_100.webp" },
@@ -210,7 +181,6 @@ const Characters = () => {
     },
     {
       id: 2,
-      contractLink: "https://explorer.perawallet.app/asset/1166485390/",
       characterImage: "/assets/chibis/Rocky Chibi_100.webp",
       characterName: "Rocky",
       faction: {
@@ -243,13 +213,12 @@ const Characters = () => {
     },
     {
       id: 3,
-      contractLink: "https://explorer.perawallet.app/asset/1166590241/",
       characterImage: "/assets/chibis/Taily Chibi Jumping_100.webp",
       characterName: "Taily",
       faction: { name: "Inguz", image: "/assets/factions/icon-peth_100.webp" },
       element: "Water",
       description:
-        "The enchanting Inugi character in the Gunny video game, where canine charm meets aquatic prowess. This magical blend creates a creature that's like no other, effortlessly gliding across water surfaces, making every aquatic move a graceful masterpiece.",
+        "the enchanting Inugi character in the Gunny video game, where canine charm meets aquatic prowess. This magical blend creates a creature that's like no other, effortlessly gliding across water surfaces, making every aquatic move a graceful masterpiece.",
       attributes: [
         {
           name: "Ability",
@@ -273,7 +242,6 @@ const Characters = () => {
     },
     {
       id: 4,
-      contractLink: "https://explorer.perawallet.app/asset/1166518213/",
       characterImage: "/assets/chibis/Bolty Chibi Atack_100.webp",
       characterName: "Bolty",
       faction: {
@@ -282,7 +250,7 @@ const Characters = () => {
       },
       element: "Electric",
       description:
-        "An Inugi that stands as a distinctive character within Gunny. Coming directly from the lightning element, this creature emanates an air of solemnity while remaining steadfastly loyal to its masters.",
+        "an Inugi that stands as a distinctive character within Gunny. Coming directly from the lightning element, this creature emanates an air of solemnity while remaining steadfastly loyal to its masters.",
       attributes: [
         {
           name: "Ability",
@@ -306,7 +274,6 @@ const Characters = () => {
     },
     {
       id: 5,
-      contractLink: "https://explorer.perawallet.app/asset/1166579975/",
       characterImage: "/assets/chibis/Blaze Chibi_100.webp",
       characterName: "Blaze",
       faction: { name: "Inguz", image: "/assets/factions/icon-ratio_100.webp" },
@@ -421,7 +388,7 @@ const Characters = () => {
                 <span className="flex items-center justify-center bg-transparent border-transparent w-[100px] h-[100px]">
                   <Image
                     src={character.characterImage}
-                    alt={`${character.characterName} thumbnail`}
+                    alt={`Character ${index + 1}`}
                     width={100}
                     height={100}
                     className={`object-contain ${
@@ -443,7 +410,7 @@ const Characters = () => {
                 <span className="flex items-center justify-center bg-transparent border-transparent w-[100px] h-[100px]">
                   <Image
                     src={character.characterImage}
-                    alt={`${character.characterName} thumbnail`}
+                    alt={`Character ${index + 1}`}
                     width={60}
                     height={60}
                     className={`object-contain ${

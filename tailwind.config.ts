@@ -1,13 +1,15 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
+const { nextui } = require("@nextui-org/react");
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,7 +54,39 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        fuzzy: {
+          borderColor: "#FFB462",
+          backgroundColor: "#DCDCDC", // gainsboro-like color
+          badgeColor: "#DCDCDC",
+        },
+        rocky: {
+          borderColor: "#E3AB55",
+          backgroundColor: "#E3AB55",
+          badgeColor: "#E3AB55",
+        },
+        taily: {
+          borderColor: "#FFE47C",
+          backgroundColor: "#2EAA8E",
+          badgeColor: "#5797D1",
+        },
+        bolty: {
+          borderColor: "#484A4B",
+          backgroundColor: "#CAA238",
+          badgeColor: "#FED53A",
+        },
+        blaze: {
+          borderColor: "#AA2291",
+          backgroundColor: "#C5602B",
+          badgeColor: "#E52931",
+        },
       },
+      backgroundImage: (theme) => ({
+        "fuzzy-title": "linear-gradient(to right, #FFE765, white)",
+        "rocky-title": "linear-gradient(to right, #FEAE4F, #A6585C)",
+        "taily-title": "linear-gradient(to right, #0EB75A, #41A1AD)",
+        "bolty-title": "linear-gradient(to right, #FED53A, #9D97BD)",
+        "blaze-title": "linear-gradient(to right, #F87E2F, #E52931)",
+      }),
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -74,7 +108,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [require("tailwindcss-animate"), nextui(), require("daisyui")],
+} satisfies Config;
 
-export default config
+export default config;

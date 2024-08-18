@@ -95,6 +95,13 @@ body {
   color: var(--text-color-1);
   scroll-behavior: smooth;
 }
+body.loading {
+  visibility: hidden;
+}
+
+body.loading .loading-indicator-wrapper {
+  visibility: visible;
+}
 a {
   text-decoration: none;
   outline: none;
@@ -135,7 +142,7 @@ h1 {
   font-weight: 400;
   line-height: 104px;
   letter-spacing: 5.16px;
-  background: linear-gradient(180deg, #6d4be7 0%, #FEFEFE 90%);
+  /* background: linear-gradient(180deg, #6d4be7 0%, #FEFEFE 90%); */
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

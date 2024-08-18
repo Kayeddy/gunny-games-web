@@ -34,7 +34,7 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
 }) => {
   return (
     <div
-      className="absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl lg:flex z-20"
+      className="absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl lg:flex z-20 "
       style={{ bottom: bottomPosition }}
     >
       {link ? (
@@ -126,11 +126,11 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
 
   return (
     <div
-      className="w-[75vw] h-full -translate-x-7 custom-landing-media-box relative"
+      className="lg:w-[75vw] w-screen lg:h-full h-screen lg:-translate-x-7 custom-landing-media-box relative lg:rounded-[30px]"
       style={{ width, height }}
     >
       <CustomInformativeBox
-        bottomPosition={120}
+        bottomPosition={140}
         title=""
         link="https://play.google.com/store/apps/details?id=com.Gunny.googleauth"
         content="Download for Android"
@@ -140,7 +140,17 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       />
 
       <CustomInformativeBox
-        bottomPosition={200}
+        bottomPosition={53}
+        title=""
+        link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
+        content="Download for IOS"
+        mediaUrl="/assets/other/apple_icon.webp"
+        mediaWidth={50}
+        mediaHeight={50}
+      />
+
+      <CustomInformativeBox
+        bottomPosition={210}
         title=""
         content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
       />
@@ -161,12 +171,20 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         transition={{ duration: 0.5 }} // Faster fade-in
         onLoadedData={handleVideoLoad}
         onEnded={handleVideoEnd}
-        className="absolute inset-0 object-cover w-full h-full"
+        className="absolute inset-0 object-cover w-full h-full blur-md lg:blur-none"
+      />
+
+      <Image
+        src="/assets/icons/logo1024_100.webp"
+        alt=""
+        width={300}
+        height={300}
+        className="object-contain max-w-lg mx-auto my-auto lg:hidden -translate-y-[100px]"
       />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="top-0 right-0 cutout" />
-        <div className="bottom-0 left-0 cutout" />
+        <div className="top-0 right-0 hidden cutout lg:block" />
+        <div className="bottom-0 left-0 hidden cutout lg:block" />
       </div>
     </div>
   );

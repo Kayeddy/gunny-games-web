@@ -1,25 +1,28 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useInView, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 
 export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
   const ref = useRef(null);
-  const isInView = useInView(ref);
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
-    <motion.section
-      ref={ref}
-      className="sticky top-0 h-screen"
-      style={{ scale, rotate }}
-    >
-      {isInView && (
+    <AnimatePresence mode="wait">
+      <motion.section
+        className="h-fit lg:h-screen"
+        // style={{ scale, rotate }}
+      >
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.5 }}
           className="flex items-center justify-center h-full relative bg-[#1D1B26]"
@@ -29,7 +32,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             <div className="timeline-point">
               <Image
                 src="/assets/gems/Gema (8)_100.webp"
-                alt=""
+                alt="Gem representing Phase 1: Laying the Foundation"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -49,7 +52,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             <div className="timeline-point">
               <Image
                 src="/assets/gems/Gema-_2__100.webp"
-                alt=""
+                alt="Gem representing Phase 2: Building the Blueprint"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -69,7 +72,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             <div className="timeline-point">
               <Image
                 src="/assets/gems/Gema (10)_100.webp"
-                alt=""
+                alt="Gem representing Phase 3: Forging the Path"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -90,7 +93,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             <div className="timeline-point">
               <Image
                 src="/assets/gems/Gema (18)_100.webp"
-                alt=""
+                alt="Gem representing Phase 4: Unleashing the Power"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -110,7 +113,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             <div className="timeline-point">
               <Image
                 src="/assets/gems/Gema (19)_100.webp"
-                alt=""
+                alt="Gem representing Phase 5: The Next Evolution"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -128,7 +131,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
             </div>
           </div>
         </motion.div>
-      )}
-    </motion.section>
+      </motion.section>
+    </AnimatePresence>
   );
 }

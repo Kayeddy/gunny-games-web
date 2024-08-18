@@ -3,54 +3,57 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+let lenisInstance: Lenis | null = null;
+
+export const enableLenis = () => {
+  if (lenisInstance) {
+    lenisInstance.start();
+  }
+};
+
+export const disableLenis = () => {
+  if (lenisInstance) {
+    lenisInstance.stop();
+  }
+};
+
 const CustomLandingNavigationEventHandler = () => {
   useEffect(() => {
-    const lenis = new Lenis({
+    lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
     function raf(time: number) {
-      lenis.raf(time);
+      lenisInstance?.raf(time);
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
 
-    const updateURL = (sectionId: string) => {
-      const newHash = `#${sectionId}`;
-      if (window.location.hash !== newHash) {
-        window.history.pushState(null, "", newHash);
+    // Scroll to the top of the page (first section) on load
+    const scrollToTop = () => {
+      const homeSection = document.getElementById("home");
+      if (homeSection) {
+        lenisInstance?.scrollTo(homeSection, {
+          offset: 0,
+          immediate: true, // Ensure immediate scrolling without delay
+        });
       }
     };
+
+    // Scroll to the first section when the page loads
+    scrollToTop();
 
     const handleScrollToSection = (event: CustomEvent) => {
       const { sectionId } = event.detail;
       const targetElement = document.getElementById(sectionId);
 
       if (targetElement) {
-        lenis.scrollTo(targetElement, {
+        lenisInstance?.scrollTo(targetElement, {
           offset: 0,
           immediate: false,
         });
-        updateURL(sectionId);
-      }
-    };
-
-    const handleManualScroll = () => {
-      const sections = Array.from(
-        document.querySelectorAll<HTMLElement>("section[id]")
-      );
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-      for (const section of sections) {
-        if (
-          section.offsetTop <= scrollPosition &&
-          section.offsetTop + section.offsetHeight > scrollPosition
-        ) {
-          updateURL(section.id);
-          break;
-        }
       }
     };
 
@@ -58,15 +61,13 @@ const CustomLandingNavigationEventHandler = () => {
       "scrollToSection",
       handleScrollToSection as EventListener
     );
-    window.addEventListener("scroll", handleManualScroll);
 
     return () => {
       window.removeEventListener(
         "scrollToSection",
         handleScrollToSection as EventListener
       );
-      window.removeEventListener("scroll", handleManualScroll);
-      lenis.destroy();
+      lenisInstance?.destroy();
     };
   }, []);
 

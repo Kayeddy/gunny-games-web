@@ -5,28 +5,26 @@ import { CustomInfiniteMovingCards } from "@/components/custom/CustomInfiniteMov
 import { CustomWobbleCard } from "@/components/custom/CustomWobbleCard";
 import { useTransform } from "framer-motion";
 import { motion } from "framer-motion";
-
 import Image from "next/image";
 
 const poweredBy = [
   <Image
-    src="/assets/other/algorand-logo-white-CMYK.png"
-    alt=""
-    layout="fill"
+    src="/assets/other/algorand-logo-white-CMYK.webp"
+    alt="Algorand logo"
+    fill
     className="object-contain"
   />,
   <Image
-    src="/assets/other/Borderless-Cube-Logo.png"
-    alt=""
-    layout="fill"
+    src="/assets/other/Borderless-Cube-Logo.webp"
+    alt="Borderless Capital logo"
+    fill
     className="object-contain"
   />,
   <Image
     src="/assets/other/awsLogo.webp"
-    alt=""
-    width={100}
-    height={100}
-    className="object-scale-down"
+    alt="AWS logo"
+    fill
+    className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[50px] max-h-[50px] my-auto ml-3"
   />,
 ];
 
@@ -38,7 +36,7 @@ const testimonials = [
         src="/assets/skins/Fuzzy Default_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Fuzzy - Default skin"
         className="object-cover"
       />
     ),
@@ -50,7 +48,7 @@ const testimonials = [
         src="/assets/skins/Cartas Skins Fondo--Recuperado_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Fuzzy - Coming soon skin"
         className="object-cover"
       />
     ),
@@ -62,7 +60,7 @@ const testimonials = [
         src="/assets/skins/Rockie Default_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Rockie - Default skin"
         className="object-cover"
       />
     ),
@@ -74,7 +72,7 @@ const testimonials = [
         src="/assets/skins/Sage Rune rockie_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Rockie - Sage Rune skin"
         className="object-cover"
       />
     ),
@@ -86,7 +84,7 @@ const testimonials = [
         src="/assets/skins/Nightstone Rockie_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Rockie - Nightstone skin"
         className="object-cover"
       />
     ),
@@ -98,7 +96,7 @@ const testimonials = [
         src="/assets/skins/Mystic Grayward Rockie_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Rockie - Mystic Grayward skin"
         className="object-cover"
       />
     ),
@@ -110,7 +108,7 @@ const testimonials = [
         src="/assets/skins/Taily Default_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Taily - Default skin"
         className="object-cover"
       />
     ),
@@ -122,7 +120,7 @@ const testimonials = [
         src="/assets/skins/Taily Sweet Aurora_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Taily - Sweet Aurora skin"
         className="object-cover"
       />
     ),
@@ -134,7 +132,7 @@ const testimonials = [
         src="/assets/skins/Taily Abyssal Obsidian_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Taily - Abyssal Obsidian skin"
         className="object-cover"
       />
     ),
@@ -146,7 +144,7 @@ const testimonials = [
         src="/assets/skins/Cartas Skins Fondo 12-_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Volty - Default skin"
         className="object-cover"
       />
     ),
@@ -158,7 +156,7 @@ const testimonials = [
         src="/assets/skins/Cartas Skins Fondo- 8_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Volty - Sapphire Blitz skin"
         className="object-cover"
       />
     ),
@@ -170,7 +168,7 @@ const testimonials = [
         src="/assets/skins/Cartas Skins Fondo 7-_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Volty - Blizzard Bolt skin"
         className="object-cover"
       />
     ),
@@ -182,7 +180,7 @@ const testimonials = [
         src="/assets/skins/Blaze Default_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Blaze - Default skin"
         className="object-cover"
       />
     ),
@@ -194,7 +192,7 @@ const testimonials = [
         src="/assets/skins/Azureflare Blaze_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Blaze - Azurflare skin"
         className="object-cover"
       />
     ),
@@ -206,7 +204,7 @@ const testimonials = [
         src="/assets/skins/Cherry Blaze_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Blaze - Cherry skin"
         className="object-cover"
       />
     ),
@@ -218,32 +216,27 @@ const testimonials = [
         src="/assets/skins/Cartas Skins Fondo-_100.png"
         width={100}
         height={100}
-        alt=""
+        alt="Blaze - Coming soon skin"
         className="object-cover"
       />
     ),
   },
 ];
 
-export default function Showcase({
-  scrollYProgress,
-}: {
-  scrollYProgress: any;
-}) {
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.5]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
-
+export default function Showcase() {
   return (
     <motion.section
-      className="flex flex-col gap-8 items-center justify-center min-h-fit lg:h-screen p-4  bg-[#1D1B26] sticky top-0"
-      style={{ scale, rotate }}
+      className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
+      // style={{ scale, rotate }}
     >
       <section className="flex flex-col items-center justify-center gap-4">
-        <h2 className="text-slate-200">Powered by</h2>
+        <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
+          Powered by
+        </h2>
         <div className="flex flex-row items-center justify-center gap-8">
           {poweredBy.map((item, index) => (
             <span
-              className="w-[200px] h-[100px] flex items-center justify-center object-contain relative animate-pulse"
+              className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative animate-pulse"
               key={index}
             >
               {item}
@@ -265,7 +258,7 @@ export default function Showcase({
               abilities!
             </p>
           </div>
-          <div className="absolute object-contain -right-4 grayscale filter -bottom-10 rounded-2xl">
+          <div className="absolute object-contain -right-7 lg:-right-4 filter -bottom-10 rounded-2xl">
             <CustomAnimatedBlockCard />
           </div>
         </CustomWobbleCard>
@@ -279,8 +272,8 @@ export default function Showcase({
           <div className="flex flex-row items-center justify-around">
             <span className="">
               <Image
-                src="/assets/chibis/Bolty Painting_100.png"
-                alt=""
+                src="/assets/chibis/Bolty Painting_100.webp"
+                alt="Bolty Painting"
                 width={100}
                 height={100}
                 className="object-contain"
@@ -288,8 +281,8 @@ export default function Showcase({
             </span>
             <span className="">
               <Image
-                src="/assets/chibis/Taily Chibi Jumping_100.png"
-                alt=""
+                src="/assets/chibis/Taily Chibi Jumping_100.webp"
+                alt="Taily Chibi Jumping"
                 width={100}
                 height={100}
                 className="object-contain"
@@ -324,7 +317,7 @@ export default function Showcase({
             </p>
             <Image
               src="/assets/icons/icongunny_100.webp"
-              alt=""
+              alt="Gunny icon"
               width={100}
               height={100}
               className="object-cover mx-auto mt-4"
@@ -334,8 +327,8 @@ export default function Showcase({
             src="/assets/other/valorantScoreboard.png"
             width={550}
             height={500}
-            alt="linear demo image"
-            className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-cover rounded-2xl"
+            alt="Valorant scoreboard"
+            className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain lg:object-cover rounded-2xl"
           />
         </CustomWobbleCard>
       </section>

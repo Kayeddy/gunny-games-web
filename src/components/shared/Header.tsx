@@ -7,6 +7,11 @@ import LeftNavigationBar from "./LeftNavigationBar";
 
 export default function Header() {
   const [isActive, setIsActive] = useState(false);
+
+  const closeMenu = () => {
+    setIsActive(false);
+  };
+
   return (
     <>
       <div
@@ -22,7 +27,12 @@ export default function Header() {
         ></div>
       </div>
       <AnimatePresence mode="wait">
-        {isActive && <LeftNavigationBar />}
+        {isActive && (
+          <LeftNavigationBar
+            currentSection={window.location.hash.replace("#", "")}
+            onClose={closeMenu}
+          />
+        )}
       </AnimatePresence>
     </>
   );

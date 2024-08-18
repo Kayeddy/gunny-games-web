@@ -1,6 +1,5 @@
 .custom-landing-media-box {
   position: relative;
-  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -10,7 +9,6 @@
   width: 99%;
   height: 99%;
   object-fit: cover;
-  border-radius: 30px;
 }
 
 .custom-landing-media-box .cutout {

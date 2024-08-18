@@ -7,6 +7,7 @@
   justify-content: center;
   font-weight: 900;
   font-size: 67px;
+  flex-wrap: wrap;
 }
 
 /* Individual timeline point styling */
@@ -206,7 +207,7 @@
   }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1024px) {
   body {
     height: auto;
     display: block;
@@ -216,14 +217,38 @@
     height: auto;
     width: 100%;
     padding: 100px 0px;
+    font-size: 25px;
+    gap: 200px;
   }
 
   .timeline-point {
-    height: 134px;
+    height: 100px;
+    width: 100px;
     flex-shrink: 0;
-    left: calc(-321px / 2);
+    left: calc(-321px / 2.8);
     margin: 0px auto;
     position: relative;
+  }
+
+  .timeline-point::before {
+    content: "";
+    width: 120px;
+    height: 120px;
+    z-index: -1;
+    border-radius: 50%;
+    position: absolute;
+    background: conic-gradient(
+      var(--color) var(--angle),
+      transparent 0deg 360deg
+    );
+    animation: rotateBorder 1s linear var(--delay) forwards;
+  }
+
+  /* Popup styling */
+  .popup {
+    width: 210px;
+    left: 130px;
+    height: auto;
   }
 
   .timeline-point:nth-child(odd)::before {
