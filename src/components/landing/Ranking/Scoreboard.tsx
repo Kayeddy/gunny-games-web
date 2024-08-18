@@ -131,7 +131,7 @@ export function Scoreboard() {
         <TableBody>
           {filteredItems.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={3} className="text-gray-800">
+              <TableCell colSpan={3} className="text-white">
                 There is no matching wallet
               </TableCell>
             </TableRow>

@@ -150,17 +150,13 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
             href={contractLink}
             target="_blank"
             rel="noreferrer"
-            className="flex items-start justify-start w-full py-4"
+            className="flex items-center justify-center w-full py-4 lg:items-start lg:justify-start"
           >
             <button
-              className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold transition-all duration-300 ease-in-out border rounded-md group/button ${
-                styles.backgroundColor
-              } ${
-                styles.backgroundColor === "bg-fuzzy-backgroundColor" &&
-                "text-[#575113]"
-              } backdrop-blur-lg hover:scale-110 border-white/20`}
+              className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold transition-all duration-300 ease-in-out border text-white rounded-md group/button ${styles.titleGradient} backdrop-blur-lg hover:scale-110 border-white/20`}
             >
-              <span className="text-lg">View contract</span>
+              <div className="absolute inset-0 flex justify-center w-full h-full bg-black bg-opacity-60 blur-lg"></div>
+              <span className="z-10 w-full h-full text-lg">View contract</span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
                 <div className="relative w-10 h-full bg-white/30"></div>
               </div>
