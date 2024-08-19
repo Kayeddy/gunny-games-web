@@ -105,21 +105,21 @@ export function Scoreboard() {
   };
 
   return (
-    <div className="relative overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg">
-      <div className="mb-4">
+    <div className="relative w-full overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg">
+      <div className="flex items-center justify-center w-full mb-4 lg:justify-start">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className={`p-4 border rounded-md text-gray-800 focus:outline-none ${
+          className={`p-4 border w-full rounded-md text-gray-800 focus:outline-none ${
             focused ? "border-[#5E31B8]" : "border-gray-300"
           }`}
           placeholder="Search your Wallet"
         />
       </div>
-      <Table className="text-white">
+      <Table className="mt-4 text-white">
         <TableCaption>Top Scores</TableCaption>
         <TableHeader>
           <TableRow>

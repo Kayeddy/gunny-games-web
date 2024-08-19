@@ -87,39 +87,23 @@ const Skeleton = () => {
     <div className="relative flex items-center justify-center h-full p-8 overflow-hidden">
       <div className="flex flex-row items-center justify-center flex-shrink-0 gap-2">
         <Container className="w-12 h-12 circle-1">
-          <Image
-            layout="fill"
-            src="/assets/chibis/Fuzzy Chibi_100.webp"
-            alt=""
-          />
+          <Image fill src="/assets/chibis/Fuzzy Chibi_100.webp" alt="" />
         </Container>
         <Container className="w-12 h-12 circle-2">
-          <Image
-            layout="fill"
-            src="/assets/chibis/Rocky Chibi_100.webp"
-            alt=""
-          />
+          <Image fill src="/assets/chibis/Rocky Chibi_100.webp" alt="" />
         </Container>
         <Container className="w-12 h-12 circle-3">
           <Image
-            layout="fill"
+            fill
             src="/assets/chibis/Taily Chibi Jumping_100.webp"
             alt=""
           />
         </Container>
         <Container className="w-12 h-12 circle-4">
-          <Image
-            layout="fill"
-            src="/assets/chibis/Bolty Chibi Atack_100.webp"
-            alt=""
-          />
+          <Image fill src="/assets/chibis/Bolty Chibi Atack_100.webp" alt="" />
         </Container>
         <Container className="w-12 h-12 circle-5">
-          <Image
-            layout="fill"
-            src="/assets/chibis/Blaze Chibi_100.webp"
-            alt=""
-          />
+          <Image fill src="/assets/chibis/Blaze Chibi_100.webp" alt="" />
         </Container>
       </div>
 

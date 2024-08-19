@@ -12,7 +12,7 @@ export default function Ranking({ scrollYProgress }: { scrollYProgress: any }) {
       // style={{ scale, rotate }}
     >
       <div className="flex flex-col items-center justify-center gap-12">
-        <h1 className="text-[43px] leading-[55px] lg:leading-[100px] lg:text-[86px] bg-clip-text bg-fuzzy-title">
+        <h1 className="text-[43px] leading-[55px] lg:leading-[100px] lg:text-[86px] bg-clip-text bg-fuzzy-title text-center">
           Ranking Board
         </h1>
         <Scoreboard />
