@@ -12,8 +12,8 @@ interface CustomLandingMediaBoxProps {
 }
 
 interface CustomInformativeBoxProps {
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
   title: string;
   content: string;
   bottomPosition?: number;
@@ -23,6 +23,20 @@ interface CustomInformativeBoxProps {
   link?: string;
 }
 
+const boxVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3, // Delay between each child's animation
+    },
+  },
+};
+
 const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   title,
   content,
@@ -31,11 +45,18 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   mediaWidth,
   mediaHeight,
   link,
+  width,
+  height,
 }) => {
   return (
-    <div
-      className="absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl lg:flex z-20 "
+    <motion.div
+      className={`absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
+        width && width
+      } ${height && height}`}
       style={{ bottom: bottomPosition }}
+      variants={boxVariants} // Apply the animation variants
+      initial="hidden"
+      animate="visible"
     >
       {link ? (
         <Link
@@ -80,7 +101,7 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
@@ -129,31 +150,41 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       className="lg:w-[75vw] w-screen lg:h-full h-screen lg:-translate-x-7 custom-landing-media-box relative lg:rounded-[30px]"
       style={{ width, height }}
     >
-      <CustomInformativeBox
-        bottomPosition={140}
-        title=""
-        link="https://play.google.com/store/apps/details?id=com.Gunny.googleauth"
-        content="Download for Android"
-        mediaUrl="/assets/other/playstore_icon.webp"
-        mediaWidth={30}
-        mediaHeight={30}
-      />
+      <motion.div
+        variants={containerVariants} // Apply the container variants
+        initial="hidden"
+        animate="visible"
+      >
+        <CustomInformativeBox
+          bottomPosition={120}
+          title=""
+          link="https://play.google.com/store/apps/details?id=com.Gunny.googleauth"
+          content="Download for Android"
+          mediaUrl="/assets/other/playstore_icon.webp"
+          mediaWidth={30}
+          mediaHeight={30}
+          width="w-[250px]"
+          height="h-[80px]"
+        />
 
-      <CustomInformativeBox
-        bottomPosition={53}
-        title=""
-        link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
-        content="Download for IOS"
-        mediaUrl="/assets/other/apple_icon.webp"
-        mediaWidth={50}
-        mediaHeight={50}
-      />
+        <CustomInformativeBox
+          bottomPosition={30}
+          title=""
+          link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
+          content="Download for IOS"
+          mediaUrl="/assets/other/apple_icon.webp"
+          mediaWidth={50}
+          mediaHeight={50}
+          width="w-[250px]"
+          height="h-[80px]"
+        />
 
-      <CustomInformativeBox
-        bottomPosition={210}
-        title=""
-        content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
-      />
+        <CustomInformativeBox
+          bottomPosition={210}
+          title=""
+          content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
+        />
+      </motion.div>
 
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">

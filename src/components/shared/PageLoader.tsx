@@ -1,28 +1,51 @@
-// components/Loader.tsx
-import Image from "next/image";
-import React from "react";
+"use client";
 
-const PageLoader = () => {
+import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { Spinner } from "@nextui-org/react";
+
+interface PageLoaderProps {
+  onVideoEnd: () => void;
+  isParentLoaded: boolean;
+}
+
+const PageLoader: React.FC<PageLoaderProps> = ({
+  onVideoEnd,
+  isParentLoaded,
+}) => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+  };
+
+  const handleVideoEnd = () => {
+    onVideoEnd();
+  };
+
   return (
-    <div className="w-screen text-white bg-[#1D1B26] h-screen z-[999] fixed flex flex-col items-center justify-center">
-      <Image
-        src="/assets/icons/icongunny_100.webp"
-        alt="Gunny logo"
-        width={200}
-        height={200}
-        className="hidden object-contain animate-bounce lg:block"
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      className="w-screen text-white bg-black h-screen z-[999] fixed flex flex-col items-center justify-center"
+    >
+      {!videoLoaded && (
+        <div className="flex items-center justify-center translate-y-[90vh]">
+          <Spinner size="lg" />
+        </div>
+      )}
+      <video
+        ref={videoRef}
+        src="/assets/other/intro.mp4"
+        autoPlay
+        muted
+        onLoadedData={handleVideoLoad}
+        onEnded={handleVideoEnd}
+        className="object-contain w-screen h-screen"
       />
-      <Image
-        src="/assets/icons/icongunny_100.webp"
-        alt="Gunny logo"
-        width={100}
-        height={100}
-        className="object-contain animate-bounce lg:hidden"
-      />
-      <h1 className="text-white animate-pulse font-valorant text-[40px] bg-fuzzy-backgroundColor bg-clip-text">
-        Loading...
-      </h1>
-    </div>
+    </motion.div>
   );
 };
 

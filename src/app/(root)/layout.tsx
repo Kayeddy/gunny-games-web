@@ -4,6 +4,7 @@ import "../globals.css";
 import localFont from "next/font/local";
 import Header from "@/components/shared/Header";
 import { NextUIProvider } from "@nextui-org/react";
+import ClientLoaderWrapper from "@/wrappers/ClientLoaderWrapper";
 
 export const metadata: Metadata = {
   title: "Gunny Games - Unleash the Elements in Blockchain Gaming",
@@ -59,7 +60,7 @@ export default function RootLayout({
       <body className={`${Valorant.className}`}>
         <NextUIProvider>
           <Header />
-          {children}
+          <ClientLoaderWrapper>{children}</ClientLoaderWrapper>
         </NextUIProvider>
       </body>
     </html>

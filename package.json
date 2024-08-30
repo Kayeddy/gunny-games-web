@@ -15,6 +15,8 @@
     "@nextui-org/react": "^2.4.6",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-separator": "^1.1.0",
+    "@react-three/drei": "^9.111.3",
+    "@react-three/fiber": "^8.17.5",
     "@tanstack/react-table": "^8.20.1",
     "@types/jquery": "^3.5.30",
     "algosdk": "^2.8.0",
@@ -25,6 +27,7 @@
     "jquery": "^3.7.1",
     "lenis": "^1.1.9",
     "lucide-react": "^0.427.0",
+    "meshoptimizer": "^0.21.0",
     "next": "14.2.5",
     "parallax-js": "^3.1.0",
     "react": "^18",
@@ -36,7 +39,8 @@
     "sass": "^1.77.8",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.5.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "three": "^0.167.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -44,6 +48,7 @@
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
     "@types/slick-carousel": "^1.6.40",
+    "@types/three": "^0.167.2",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.10",
     "postcss": "^8.4.41",

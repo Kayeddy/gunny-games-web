@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactElement } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import { gsap } from "gsap";
 import { Divider } from "@nextui-org/divider";
 import Link from "next/link";
+import RockyModel from "@/components/3dModels/Rocky";
+import BoltyModel from "@/components/3dModels/Bolty";
+import FuzzyModel from "@/components/3dModels/Fuzzy";
+import TailyModel from "@/components/3dModels/Taily";
+import BlazeModel from "@/components/3dModels/Blaze";
 
 interface Skin {
   name: string;
@@ -31,6 +36,7 @@ interface Character {
   element: string;
   description: string;
   attributes: CharacterAttribute[];
+  visualModel?: any;
   skins: Skin[];
   styles: {
     titleGradient: string;
@@ -76,6 +82,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
   description,
   attributes,
   skins,
+  visualModel,
   styles,
   parallaxRef,
 }) => {
@@ -84,14 +91,20 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
       ref={parallaxRef}
       className="flex flex-col items-center justify-around h-full gap-12 px-24 lg:ml-10 lg:flex-row"
     >
-      <div className="parallax-image lg:w-[500px] lg:h-[500px] w-[300px] h-[300px] relative">
-        <Image
-          src={characterImage}
-          alt={`Character Image - ${characterName}`}
-          fill
-          style={{ objectFit: "contain" }}
-          className="object-cover w-full h-full"
-        />
+      <div className="parallax-image lg:w-[500px] lg:h-[500px] w-full h-[300px] relative">
+        {visualModel ? (
+          <div className="flex items-center justify-center w-full h-full">
+            {visualModel}
+          </div>
+        ) : (
+          <Image
+            src={characterImage}
+            alt={`Character Image - ${characterName}`}
+            fill
+            style={{ objectFit: "contain" }}
+            className="object-cover w-full h-full"
+          />
+        )}
       </div>
       <div className="flex flex-col items-start justify-center">
         <p
@@ -156,7 +169,9 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               className={`relative inline-flex items-center justify-center px-12 py-2 overflow-hidden text-base font-semibold transition-all duration-300 ease-in-out border text-white rounded-md group/button ${styles.titleGradient} backdrop-blur-lg hover:scale-110 border-white/20`}
             >
               <div className="absolute inset-0 flex justify-center w-full h-full bg-black bg-opacity-60 blur-lg"></div>
-              <span className="z-10 w-full h-full text-lg">View contract</span>
+              <span className="z-10 w-full h-full text-lg">
+                View on explorer
+              </span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
                 <div className="relative w-10 h-full bg-white/30"></div>
               </div>
@@ -172,6 +187,8 @@ const Characters = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(0);
   const sliderRef1 = useRef<Slider | null>(null);
   const parallaxRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([]);
+  const clickAllowedRef = useRef(true); // Ref to manage click state
+  const clickDelay = 500;
 
   const characters: Character[] = [
     {
@@ -196,6 +213,7 @@ const Characters = () => {
         { name: "Skin 1A", image: "/path/to/skin1a.png" },
         { name: "Skin 1B", image: "/path/to/skin1b.png" },
       ],
+      visualModel: <FuzzyModel />,
       styles: {
         titleGradient: "bg-fuzzy-title", // Tailwind class for the gradient
         borderColor: "border-fuzzy-borderColor", // Tailwind class
@@ -229,6 +247,7 @@ const Characters = () => {
         { name: "Skin 2A", image: "/path/to/skin2a.png" },
         { name: "Skin 2B", image: "/path/to/skin2b.png" },
       ],
+      visualModel: <RockyModel />,
       styles: {
         titleGradient: "bg-rocky-title", // Tailwind class for the gradient
         borderColor: "border-rocky-borderColor", // Tailwind class
@@ -259,6 +278,7 @@ const Characters = () => {
         { name: "Skin 3A", image: "/path/to/skin3a.png" },
         { name: "Skin 3B", image: "/path/to/skin3b.png" },
       ],
+      visualModel: <TailyModel />,
       styles: {
         titleGradient: "bg-taily-title", // Tailwind class for the gradient
         borderColor: "border-taily-borderColor", // Tailwind class
@@ -292,6 +312,7 @@ const Characters = () => {
         { name: "Skin 4A", image: "/path/to/skin4a.png" },
         { name: "Skin 4B", image: "/path/to/skin4b.png" },
       ],
+      visualModel: <BoltyModel />,
       styles: {
         titleGradient: "bg-bolty-title", // Tailwind class for the gradient
         borderColor: "border-bolty-borderColor", // Tailwind class
@@ -322,6 +343,7 @@ const Characters = () => {
         { name: "Skin 5A", image: "/path/to/skin5a.png" },
         { name: "Skin 5B", image: "/path/to/skin5b.png" },
       ],
+      visualModel: <BlazeModel />, // React component for the visual model
       styles: {
         titleGradient: "bg-blaze-title", // Tailwind class for the gradient
         borderColor: "border-blaze-borderColor", // Tailwind class
@@ -378,6 +400,13 @@ const Characters = () => {
   }, [characters]);
 
   const goToCharacter = (index: number) => {
+    if (!clickAllowedRef.current) return;
+
+    clickAllowedRef.current = false;
+    setTimeout(() => {
+      clickAllowedRef.current = true;
+    }, clickDelay);
+
     setSelectedCharacter(index);
     if (sliderRef1.current) {
       sliderRef1.current.slickGoTo(index);

@@ -3,32 +3,110 @@
 import CustomAnimatedBlockCard from "@/components/custom/CustomAnimatedBlocksCard";
 import { CustomInfiniteMovingCards } from "@/components/custom/CustomInfiniteMovingCards";
 import { CustomWobbleCard } from "@/components/custom/CustomWobbleCard";
-import { useTransform } from "framer-motion";
-import { motion } from "framer-motion";
+import { motion, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
-const poweredBy = [
-  <Image
-    src="/assets/other/algorand-logo-white-CMYK.webp"
-    alt="Algorand logo"
-    fill
-    className="object-contain"
-  />,
-  <Image
-    src="/assets/other/Borderless-Cube-Logo.webp"
-    alt="Borderless Capital logo"
-    fill
-    className="object-contain"
-  />,
-  <Image
-    src="/assets/other/awsLogo.webp"
-    alt="AWS logo"
-    fill
-    className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[50px] max-h-[50px] my-auto ml-3"
-  />,
+// TypeScript interfaces for the data
+interface ShowcaseItem {
+  image: JSX.Element;
+  link?: string;
+}
+
+interface CharacterItem {
+  title: string;
+  image: JSX.Element;
+}
+
+interface ShowcaseProps {
+  scrollYProgress: MotionValue<number>;
+}
+
+// Sample data
+const poweredBy: ShowcaseItem[] = [
+  {
+    image: (
+      <Image
+        src="/assets/other/algorand-logo-white-CMYK.webp"
+        alt="Algorand logo"
+        fill
+        className="object-contain"
+      />
+    ),
+    link: "https://www.algorand.com/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/Unity-Logo-White.webp"
+        alt="Unity logo"
+        fill
+        className="object-contain"
+      />
+    ),
+    link: "https://unity.com/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/nodely.webp"
+        alt="Nodely logo"
+        fill
+        className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[100px] lg:max-h-[100px]"
+      />
+    ),
+    link: "https://nodely.io/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/awsLogo.webp"
+        alt="AWS logo"
+        fill
+        className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[60px] max-h-[60px] lg:-translate-x-[60px]"
+      />
+    ),
+    link: "https://aws.amazon.com/",
+  },
 ];
 
-const testimonials = [
+const sponsors: ShowcaseItem[] = [
+  {
+    image: (
+      <Image
+        src="/assets/other/algorand-foundation-logo.webp"
+        alt="Algorand foundation logo"
+        fill
+        className="object-contain"
+      />
+    ),
+    link: "https://algorand.foundation/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/Borderless-Cube-Logo.webp"
+        alt="Borderless Capital logo"
+        fill
+        className="object-contain"
+      />
+    ),
+    link: "https://www.borderlesscapital.io/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/AlgoFam-logo.webp"
+        alt="Algo fam logo"
+        fill
+        className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[100px] lg:max-h-[100px]"
+      />
+    ),
+    link: "https://github.com/algorandfoundation/xGov/blob/main/Proposals/xgov-194.md",
+  },
+];
+
+const characters: CharacterItem[] = [
   {
     title: "Fuzzy - Default",
     image: (
@@ -223,32 +301,88 @@ const testimonials = [
   },
 ];
 
-export default function Showcase() {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delay between each child animation
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+export default function Showcase({ scrollYProgress }: ShowcaseProps) {
+  // Scroll-based transformations
+  const yTransform = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const scaleTransform = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const rotateTransform = useTransform(scrollYProgress, [0, 1], [0, 10]);
+
   return (
     <motion.section
       className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
-      // style={{ scale, rotate }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants} // Apply the container variants
+      style={{
+        y: yTransform, // Apply scroll-based transformations
+        scale: scaleTransform,
+        rotate: rotateTransform,
+      }}
     >
-      <section className="flex flex-col items-center justify-center gap-4">
-        <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
-          Powered by
-        </h2>
-        <div className="flex flex-row items-center justify-center gap-8">
-          {poweredBy.map((item, index) => (
-            <span
-              className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative animate-pulse"
-              key={index}
-            >
-              {item}
-            </span>
-          ))}
+      {/* Powered By Section */}
+      <motion.section
+        className="flex flex-col items-center justify-center gap-14 lg:gap-8 lg:flex-row"
+        variants={itemVariants}
+      >
+        <div className="flex flex-col items-center justify-center gap-4">
+          <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
+            Made with 💖 and
+          </h2>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-8">
+            {poweredBy.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative"
+              >
+                <Link href={item.link!} target="_blank" rel="noreferrer">
+                  {item.image}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </section>
-      <section className="grid w-full grid-cols-1 gap-4 mx-auto lg:grid-cols-3 max-w-7xl">
-        <CustomWobbleCard
-          containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
-          className=""
-        >
+        <div className="flex flex-col items-center justify-center gap-4">
+          <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
+            Trusted by
+          </h2>
+          <div className="flex flex-row items-center justify-center gap-8">
+            {sponsors.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative"
+              >
+                <Link href={item.link!} target="_blank" rel="noreferrer">
+                  {item.image}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Character Cards Section */}
+      <motion.section
+        className="grid w-full grid-cols-1 gap-4 mx-auto lg:grid-cols-3 max-w-7xl"
+        variants={itemVariants}
+      >
+        <CustomWobbleCard containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]">
           <div className="max-w-xs">
             <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
               Unleash the Elements
@@ -300,7 +434,7 @@ export default function Showcase() {
           </p>
           <div className="h-[10rem] rounded-md flex flex-col antialiased bg-transparent items-center justify-center relative overflow-hidden">
             <CustomInfiniteMovingCards
-              items={testimonials}
+              items={characters}
               direction="right"
               speed="slow"
             />
@@ -331,7 +465,7 @@ export default function Showcase() {
             className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain lg:object-cover rounded-2xl"
           />
         </CustomWobbleCard>
-      </section>
+      </motion.section>
     </motion.section>
   );
 }
