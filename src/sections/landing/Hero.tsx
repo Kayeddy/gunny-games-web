@@ -212,7 +212,7 @@ const LeftInformationBar = () => {
           className="flex flex-row gap-4 text-[20px]"
           variants={variants.container}
         >
-          <motion.div variants={variants.itemFadeInRight}>
+          <motion.div>
             <Link
               href="https://discord.com/invite/SX6bkkHcAD"
               rel="noreferrer"
@@ -221,7 +221,7 @@ const LeftInformationBar = () => {
               <FaDiscord />
             </Link>
           </motion.div>
-          <motion.div variants={variants.itemFadeInRight}>
+          <motion.div>
             <Link
               href="https://x.com/Gunny_es"
               rel="noreferrer"
@@ -230,7 +230,7 @@ const LeftInformationBar = () => {
               <FaTwitter />
             </Link>
           </motion.div>
-          <motion.div variants={variants.itemFadeInRight}>
+          <motion.div>
             <Link
               href="https://www.instagram.com/gunnygame/"
               rel="noreferrer"
@@ -239,7 +239,7 @@ const LeftInformationBar = () => {
               <FaInstagram />
             </Link>
           </motion.div>
-          <motion.div variants={variants.itemFadeInRight}>
+          <motion.div>
             <Link
               href="https://www.linkedin.com/company/gunny-games-studio-llc/"
               rel="noreferrer"
@@ -260,25 +260,8 @@ const LeftInformationBar = () => {
 };
 
 export default function Hero({ scrollYProgress }: { scrollYProgress: any }) {
-  const { scrollY } = useScroll();
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const yPos = useTransform(scrollY, [0, 500], isMobile ? [0, 0] : [0, -100]);
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    isMobile ? [1, 1] : [1, 0.8]
-  );
-  const rotate = useTransform(
-    scrollYProgress,
-    [0, 1],
-    isMobile ? [0, 0] : [0, -5]
-  );
-
   return (
-    <motion.section
-      className="w-full h-screen lg:p-4 overflow-x-hidden bg-[#1D1B26] dark"
-      style={{ scale, rotate, y: yPos }} // Apply transformations
-    >
+    <motion.section className="w-full h-screen lg:p-4 overflow-x-hidden bg-[#1D1B26] dark ">
       <div className="relative flex flex-row items-center justify-around w-screen h-full gap-12">
         <LeftInformationBar />
         <CustomLandingMediaBox

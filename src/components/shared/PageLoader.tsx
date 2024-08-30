@@ -32,7 +32,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({
       className="w-screen text-white bg-black h-screen z-[999] fixed flex flex-col items-center justify-center"
     >
       {!videoLoaded && (
-        <div className="flex items-center justify-center translate-y-[90vh]">
+        <div className="flex items-center justify-center translate-y-[80vh]">
           <Spinner size="lg" />
         </div>
       )}

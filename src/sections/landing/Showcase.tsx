@@ -318,21 +318,16 @@ const itemVariants = {
 
 export default function Showcase({ scrollYProgress }: ShowcaseProps) {
   // Scroll-based transformations
-  const yTransform = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const scaleTransform = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const rotateTransform = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  // const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  // const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
 
   return (
     <motion.section
       className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants} // Apply the container variants
-      style={{
-        y: yTransform, // Apply scroll-based transformations
-        scale: scaleTransform,
-        rotate: rotateTransform,
-      }}
+      // style={{
+      //   scale: scale,
+      //   rotate: rotate,
+      // }}
     >
       {/* Powered By Section */}
       <motion.section
