@@ -3,9 +3,10 @@
 import CustomAnimatedBlockCard from "@/components/custom/CustomAnimatedBlocksCard";
 import { CustomInfiniteMovingCards } from "@/components/custom/CustomInfiniteMovingCards";
 import { CustomWobbleCard } from "@/components/custom/CustomWobbleCard";
-import { motion, useTransform, MotionValue } from "framer-motion";
+import { motion, MotionValue } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { BackgroundBeamsWithCollision } from "@/components/ui/BackgroundBeamsCollisions";
 
 // TypeScript interfaces for the data
 interface ShowcaseItem {
@@ -301,14 +302,10 @@ const characters: CharacterItem[] = [
   },
 ];
 
-const containerVariants = {
+// Animation Variants
+const fadeIn = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2, // Delay between each child animation
-    },
-  },
+  visible: { opacity: 1, transition: { duration: 1 } },
 };
 
 const itemVariants = {
@@ -317,18 +314,8 @@ const itemVariants = {
 };
 
 export default function Showcase({ scrollYProgress }: ShowcaseProps) {
-  // Scroll-based transformations
-  // const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  // const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
-
   return (
-    <motion.section
-      className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
-      // style={{
-      //   scale: scale,
-      //   rotate: rotate,
-      // }}
-    >
+    <motion.div className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]">
       {/* Powered By Section */}
       <motion.section
         className="flex flex-col items-center justify-center gap-14 lg:gap-8 lg:flex-row"
@@ -372,7 +359,7 @@ export default function Showcase({ scrollYProgress }: ShowcaseProps) {
         </div>
       </motion.section>
 
-      {/* Character Cards Section */}
+      {/* Showcase Cards Section */}
       <motion.section
         className="grid w-full grid-cols-1 gap-4 mx-auto lg:grid-cols-3 max-w-7xl"
         variants={itemVariants}
@@ -461,6 +448,6 @@ export default function Showcase({ scrollYProgress }: ShowcaseProps) {
           />
         </CustomWobbleCard>
       </motion.section>
-    </motion.section>
+    </motion.div>
   );
 }

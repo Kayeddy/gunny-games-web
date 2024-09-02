@@ -9,6 +9,7 @@ import Showcase from "@/sections/landing/Showcase";
 import CustomLandingNavigationEventHandler from "@/components/custom/CustomLandingNavigationEventHandler";
 import Footer from "@/components/shared/Footer";
 import useSectionObserver from "@/lib/hooks/useSectionObserver";
+import InteractiveRewards from "@/sections/landing/InteractiveRewards";
 
 const Home = () => {
   const { scrollYProgress } = useScroll();
@@ -32,6 +33,9 @@ const Home = () => {
       </section>
       <section id="ranking">
         <Ranking scrollYProgress={scrollYProgress} />
+      </section>
+      <section id="ranking">
+        <InteractiveRewards />
       </section>
       <section>
         <Footer />

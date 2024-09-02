@@ -1,4 +1,4 @@
-// components/RockyModel.tsx
+// components/FuzzyModel.tsx
 "use client";
 
 import React, { useEffect, useRef, Suspense } from "react";
@@ -7,7 +7,7 @@ import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 
-const RockyModelContent: React.FC = () => {
+const FuzzyModelContent: React.FC = () => {
   const gltf = useLoader(GLTFLoader, "/assets/3dModels/Fuzzy.glb");
   const mixer = useRef<THREE.AnimationMixer | null>(null);
 
@@ -35,7 +35,7 @@ const RockyModelContent: React.FC = () => {
     });
 
     // Adjust the entire scene's Y position
-    gltf.scene.position.y -= 80;
+    gltf.scene.position.y -= 100;
     console.log("Adjusted Y Position:", gltf.scene.position.y);
   }, [gltf]);
 
@@ -43,10 +43,10 @@ const RockyModelContent: React.FC = () => {
     mixer.current?.update(delta);
   });
 
-  return <primitive object={gltf.scene} scale={110} />;
+  return <primitive object={gltf.scene} scale={120} />;
 };
 
-const RockyModel: React.FC = () => {
+const FuzzyModel: React.FC = () => {
   return (
     <div className="h-full w-[300px]">
       <Canvas
@@ -62,7 +62,7 @@ const RockyModel: React.FC = () => {
         <directionalLight position={[0, 50, 50]} intensity={1.2} />
 
         <Suspense fallback={null}>
-          <RockyModelContent />
+          <FuzzyModelContent />
           <OrbitControls enableZoom={false} />
         </Suspense>
       </Canvas>
@@ -70,4 +70,4 @@ const RockyModel: React.FC = () => {
   );
 };
 
-export default RockyModel;
+export default FuzzyModel;

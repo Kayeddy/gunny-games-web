@@ -105,7 +105,7 @@ export function Scoreboard() {
   };
 
   return (
-    <div className="relative w-full overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg">
+    <div className="relative lg:w-full w-[90%] overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg">
       <div className="flex items-center justify-center w-full mb-4 lg:justify-start">
         <input
           type="text"
@@ -119,7 +119,7 @@ export function Scoreboard() {
           placeholder="Search your Wallet"
         />
       </div>
-      <Table className="mt-4 text-white">
+      <Table className="relative mt-4 text-white">
         <TableCaption>Top Scores</TableCaption>
         <TableHeader>
           <TableRow>
@@ -136,20 +136,37 @@ export function Scoreboard() {
               </TableCell>
             </TableRow>
           ) : (
-            filteredItems.map((item) => (
-              <TableRow
-                key={item.position}
-                className="bg-gray-800 border-b border-gray-700 hover:bg-gray-600"
-              >
-                <TableCell>{item.position}</TableCell>
-                <TableCell>
-                  {isMobile
-                    ? `${item.address.substring(0, 16)}...`
-                    : item.address}
-                </TableCell>
-                <TableCell>{item.score}</TableCell>
-              </TableRow>
-            ))
+            <>
+              {filteredItems.map((item) => (
+                <TableRow
+                  key={item.position}
+                  className={`border-b border-gray-700 ${
+                    item.position === 1
+                      ? "bg-[#5c5be5] text-white"
+                      : item.position % 2 === 0
+                      ? "bg-gray-800"
+                      : "bg-gray-700"
+                  }`}
+                >
+                  <TableCell className="text-xl font-bold">
+                    {item.position}
+                    {item.position === 1 && (
+                      <img
+                        src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
+                        alt="gold medal"
+                        className="inline-block w-6 h-6 ml-2"
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {isMobile
+                      ? `${item.address.substring(0, 16)}...`
+                      : item.address}
+                  </TableCell>
+                  <TableCell className="font-bold">{item.score}</TableCell>
+                </TableRow>
+              ))}
+            </>
           )}
         </TableBody>
       </Table>

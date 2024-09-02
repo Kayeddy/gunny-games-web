@@ -1,16 +1,23 @@
 "use client";
 
-import React, { useState, useEffect, useRef, ReactElement } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ReactElement,
+  Suspense,
+} from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import { gsap } from "gsap";
 import { Divider } from "@nextui-org/divider";
 import Link from "next/link";
-import RockyModel from "@/components/3dModels/Rocky";
-import BoltyModel from "@/components/3dModels/Bolty";
-import FuzzyModel from "@/components/3dModels/Fuzzy";
-import TailyModel from "@/components/3dModels/Taily";
-import BlazeModel from "@/components/3dModels/Blaze";
+import { Spinner } from "@nextui-org/react";
+const RockyModel = React.lazy(() => import("@/components/3dModels/Rocky"));
+const BoltyModel = React.lazy(() => import("@/components/3dModels/Bolty"));
+const FuzzyModel = React.lazy(() => import("@/components/3dModels/Fuzzy"));
+const TailyModel = React.lazy(() => import("@/components/3dModels/Taily"));
+const BlazeModel = React.lazy(() => import("@/components/3dModels/Blaze"));
 
 interface Skin {
   name: string;
@@ -92,19 +99,22 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
       className="flex flex-col items-center justify-around h-full gap-12 px-24 lg:ml-10 lg:flex-row"
     >
       <div className="parallax-image lg:w-[500px] lg:h-[500px] w-full h-[300px] relative">
-        {visualModel ? (
-          <div className="flex items-center justify-center w-full h-full">
-            {visualModel}
-          </div>
-        ) : (
-          <Image
-            src={characterImage}
-            alt={`Character Image - ${characterName}`}
-            fill
-            style={{ objectFit: "contain" }}
-            className="object-cover w-full h-full"
-          />
-        )}
+        <Suspense fallback={<Spinner size="lg" color="secondary" />}>
+          {visualModel ? (
+            <div className="relative flex items-center justify-center w-full h-full">
+              <div className="absolute inset-x-auto inset-y-auto hidden mx-auto my-auto gradient lg:block" />
+              {visualModel}
+            </div>
+          ) : (
+            <Image
+              src={characterImage}
+              alt={`Character Image - ${characterName}`}
+              fill
+              style={{ objectFit: "contain" }}
+              className="object-cover w-full h-full"
+            />
+          )}
+        </Suspense>
       </div>
       <div className="flex flex-col items-start justify-center">
         <p

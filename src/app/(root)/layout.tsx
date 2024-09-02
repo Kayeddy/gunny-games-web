@@ -44,8 +44,8 @@ export default function RootLayout({
           property="og:description"
           content="Join Gunny Games and experience the thrill of blockchain-based gaming. Unleash unique elemental powers, earn rewards, and dominate the leaderboard!"
         />
-        <meta property="og:image" content="/path-to-your-image.jpg" />
-        <meta property="og:url" content="https://www.yoursite.com/" />
+        <meta property="og:image" content="/assets/icons/icongunny_100.webp" />
+        <meta property="og:url" content="https://www.gunnygames.com/" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
@@ -55,7 +55,7 @@ export default function RootLayout({
           name="twitter:description"
           content="Join Gunny Games and experience the thrill of blockchain-based gaming. Unleash unique elemental powers, earn rewards, and dominate the leaderboard!"
         />
-        <meta name="twitter:image" content="/path-to-your-image.jpg" />
+        <meta name="twitter:image" content="/assets/icons/icongunny_100.webp" />
       </Head>
       <body className={`${Valorant.className}`}>
         <NextUIProvider>

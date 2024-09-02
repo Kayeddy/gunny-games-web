@@ -6,8 +6,10 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 @import "../lib/styles/landing/characterSection.module.css";
-@import "../lib/styles/landing/HeroSection.module.css";
-@import '../lib/styles/landing/RoadmapSection.module.css';
+@import "../lib/styles/landing/heroSection.module.css";
+@import '../lib/styles/landing/roadmapSection.module.css';
+@import '../lib/styles/landing/rankingSection.module.css';
+
 
 @import url("https://db.onlinewebfonts.com/c/e7322a6673613ab13604fadda3d20e56?family=VALORANT");
 @import url("https://db.onlinewebfonts.com/c/b2437a24f47a94383eb02858f8a4df97?family=Insomnia");
@@ -47,6 +49,14 @@
   --background-custom-dark: #1E1C1C
 
   --global-animation-delay: 5s;
+
+
+  /** Custom Leadboard incentives styles*/
+
+  --first-place-height: 180px;
+  --second-place-height: 140px;
+  --third-place-height: 100px;
+  --animation: 2s ease forwards 1s;
 
   /** Custom colors */
   --white: #ffffff;

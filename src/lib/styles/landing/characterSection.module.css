@@ -1,4 +1,22 @@
-/* Rain Css Start -- */
+/* BACKGROUND ANIMATION */
+
+.gradient {
+  width: 500px;
+  height: 500px;
+  filter: blur(50px);
+  background-image: linear-gradient(#4ddc9e, #5b37eb, #f1307e);
+  animation: rotate 10s cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate infinite;
+  border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .rain {
   background: white;

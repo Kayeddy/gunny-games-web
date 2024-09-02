@@ -5,34 +5,45 @@ import React, { useEffect, useRef, Suspense } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { AnimationMixer } from "three";
+import * as THREE from "three";
 
 const RockyModelContent: React.FC = () => {
   const gltf = useLoader(GLTFLoader, "/assets/3dModels/Rockie.glb");
-  const mixer = useRef<AnimationMixer | null>(null);
+  const mixer = useRef<THREE.AnimationMixer | null>(null);
 
   useEffect(() => {
     if (gltf.animations.length) {
-      mixer.current = new AnimationMixer(gltf.scene);
+      mixer.current = new THREE.AnimationMixer(gltf.scene);
       const action = mixer.current.clipAction(gltf.animations[0]);
       action.play();
-
-      // Log the names of all available animations
-      gltf.animations.forEach((clip: any) => {
-        console.log("Animation name:", clip.name);
-      });
-
-      return () => {
-        mixer.current?.stopAllAction();
-      };
     }
+
+    // Thoroughly log the structure of the GLTF model
+    console.log("GLTF Scene Structure (Detailed):", gltf.scene);
+
+    // Traverse and find different types of objects
+    gltf.scene.traverse((node: any) => {
+      if (node.isMesh) {
+        console.log("Found a Mesh:", node);
+      } else if (node.isGroup) {
+        console.log("Found a Group:", node);
+      } else if (node.isSkinnedMesh) {
+        console.log("Found a SkinnedMesh:", node);
+      } else {
+        console.log("Found an Object3D:", node);
+      }
+    });
+
+    // Adjust the entire scene's Y position
+    gltf.scene.position.y -= 10;
+    console.log("Adjusted Y Position:", gltf.scene.position.y);
   }, [gltf]);
 
   useFrame((state, delta) => {
     mixer.current?.update(delta);
   });
 
-  return <primitive object={gltf.scene} scale={50} />;
+  return <primitive object={gltf.scene} scale={100} />;
 };
 
 const RockyModel: React.FC = () => {
@@ -41,10 +52,10 @@ const RockyModel: React.FC = () => {
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{
-          position: [0, 20, 40], // Keep the camera relatively close
-          fov: 50, // Narrower field of view to keep the model looking large
-          near: 0.1, // Near clipping plane
-          far: 1000, // Far clipping plane
+          position: [0, 20, 200],
+          fov: 20,
+          near: 0.1,
+          far: 1000,
         }}
       >
         <ambientLight intensity={0.6} />
