@@ -1,4 +1,6 @@
-import "@/lib/styles/landing/rankingSectionDecoration.scss";
+"use client";
+
+import "@/lib/styles/landing/rankingBoardDecoration.scss";
 
 export default function RankingBoardDecoration() {
   return (
