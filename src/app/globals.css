@@ -5,8 +5,6 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-@import "../lib/styles/landing/heroSection.module.css";
-
 @import "../lib/styles/landing/characterSection.module.css";
 @import '../lib/styles/landing/roadmapSection.module.css';
 @import '../lib/styles/landing/rankingSection.module.css';
