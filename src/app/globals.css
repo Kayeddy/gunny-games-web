@@ -8,6 +8,7 @@
 @import "../lib/styles/landing/characterSection.module.css";
 @import '../lib/styles/landing/roadmapSection.module.css';
 @import '../lib/styles/landing/rankingSection.module.css';
+@import '../lib/styles/landing/heroSection.module.css';
 
 
 @import url("https://db.onlinewebfonts.com/c/e7322a6673613ab13604fadda3d20e56?family=VALORANT");

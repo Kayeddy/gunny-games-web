@@ -6,8 +6,6 @@ import { FaDiscord, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import CustomLandingMediaBox from "@/components/custom/CustomLandingMediaBox";
 
-import "@/lib/styles/landing/heroSection.module.css";
-
 const variants = {
   container: {
     show: {
