@@ -1,8 +1,4 @@
 import {
-  disableLenis,
-  enableLenis,
-} from "@/components/custom/CustomLandingNavigationEventHandler";
-import {
   Modal,
   ModalContent,
   ModalHeader,
@@ -39,14 +35,6 @@ export default function FaqsInformationModal({
 }: ComponentProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  useEffect(() => {
-    if (isOpen) {
-      disableLenis();
-    } else {
-      enableLenis();
-    }
-  }, [isOpen]);
-
   return (
     <>
       <Button onPress={onOpen} size="sm">
@@ -64,15 +52,17 @@ export default function FaqsInformationModal({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                <h1 className="text-[30px] leading-[40px] bg-clip-text bg-fuzzy-title">
+                <h1 className="text-[30px] leading-[40px] bg-clip-text bg-fuzzy-title font-valorant">
                   {title}
                 </h1>
               </ModalHeader>
               <ModalBody>
-                <div>{content}</div>
+                <div className="text-base text-slate-200 font-sen">
+                  {content}
+                </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="secondary" variant="light" onPress={onClose}>
                   Close
                 </Button>
               </ModalFooter>

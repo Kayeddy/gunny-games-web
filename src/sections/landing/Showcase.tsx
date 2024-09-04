@@ -313,9 +313,12 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-export default function Showcase({ scrollYProgress }: ShowcaseProps) {
+export default function Showcase() {
   return (
-    <motion.div className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]">
+    <motion.div
+      className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
+      id="showcase"
+    >
       {/* Powered By Section */}
       <motion.section
         className="flex flex-col items-center justify-center gap-14 lg:gap-8 lg:flex-row"

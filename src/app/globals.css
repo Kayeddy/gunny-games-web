@@ -12,6 +12,7 @@
 
 @import url("https://db.onlinewebfonts.com/c/e7322a6673613ab13604fadda3d20e56?family=VALORANT");
 @import url("https://db.onlinewebfonts.com/c/b2437a24f47a94383eb02858f8a4df97?family=Insomnia");
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
 
 @font-face {
   font-family: "VALORANT";
@@ -27,12 +28,24 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Pricedown";
+  src: url("../../public/fonts/pricedown_black.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .font-valorant {
   font-family: "VALORANT", sans-serif;
 }
 
 .font-insomnia {
   font-family: "Insomnia", sans-serif;
+}
+
+.font-pricedown {
+  font-family: "Pricedown", sans-serif;
 }
 
 :root {

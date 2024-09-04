@@ -11,11 +11,7 @@ const ClientLoaderWrapper: React.FC<{ children: React.ReactNode }> = ({
   const [videoFinished, setVideoFinished] = useState(false);
 
   useEffect(() => {
-    const handlePageLoad = () => {
-      // All images are fully loaded
-      setIsLoading(false);
-    };
-
+    // Handle image loading
     const loadImages = () => {
       return new Promise<void>((resolve) => {
         const images = Array.from(document.images);
@@ -46,10 +42,35 @@ const ClientLoaderWrapper: React.FC<{ children: React.ReactNode }> = ({
       });
     };
 
-    loadImages().then(handlePageLoad);
+    // Handle first video loading
+    const loadFirstVideo = () => {
+      return new Promise<void>((resolve) => {
+        const firstVideo = document.querySelector("video");
+
+        if (firstVideo) {
+          if (firstVideo.readyState >= 4) {
+            // First video is already ready
+            resolve();
+          } else {
+            firstVideo.oncanplaythrough = () => {
+              resolve();
+            };
+            firstVideo.onerror = () => {
+              resolve(); // Resolve on error to avoid getting stuck
+            };
+          }
+        } else {
+          resolve(); // Resolve if no video is found
+        }
+      });
+    };
+
+    Promise.all([loadImages(), loadFirstVideo()]).then(() => {
+      setIsLoading(false);
+    });
 
     // Fallback: ensure loader doesn't get stuck indefinitely
-    const timeout = setTimeout(handlePageLoad, 5000); // 5 seconds fallback
+    const timeout = setTimeout(() => setIsLoading(false), 8000); // 8 seconds fallback
 
     return () => {
       clearTimeout(timeout);

@@ -21,6 +21,8 @@ module.exports = {
       fontFamily: {
         valorant: ["VALORANT", "sans-serif"],
         insomnia: ["Insomnia", "sans-serif"],
+        sen: ["Sen", "sans-serif"],
+        pricedown: ["Pricedown", "sans-serif"],
       },
       colors: {
         fuzzy: {

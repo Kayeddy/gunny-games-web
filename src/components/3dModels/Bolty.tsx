@@ -1,4 +1,4 @@
-// components/RockyModel.tsx
+// components/BoltyModel.tsx
 "use client";
 
 import React, { useEffect, useRef, Suspense } from "react";
@@ -37,7 +37,7 @@ const BoltyModelContent: React.FC = () => {
 
 const BoltyModel: React.FC = () => {
   return (
-    <div className="h-full w-[300px]">
+    <div className="w-full h-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

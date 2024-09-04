@@ -35,7 +35,7 @@ const variants = {
 const LeftInformationBar = () => {
   return (
     <motion.div
-      className="relative flex-col items-start justify-around h-full gap-[300px] bg-transparent hidden lg:flex"
+      className="relative flex-col items-start justify-around h-max min-h-fit gap-[300px] bg-transparent hidden lg:flex"
       variants={variants.container}
       initial="hidden"
       animate="show"
@@ -58,7 +58,7 @@ const LeftInformationBar = () => {
         animate="show"
       >
         <motion.h1
-          className="text-[50px] bg-fuzzy-title bg-clip-text"
+          className="text-3xl leading-relaxed xl:leading-relaxed xl:text-5xl bg-fuzzy-title bg-clip-text"
           variants={variants.itemFadeInLeft}
         >
           Follow us
@@ -104,7 +104,10 @@ const LeftInformationBar = () => {
             </Link>
           </motion.div>
         </motion.span>
-        <motion.p variants={variants.itemFadeIn}>
+        <motion.p
+          variants={variants.itemFadeIn}
+          className="text-base leading-relaxed text-white font-sen"
+        >
           Join the Gunny Rush community and be part of an epic experience where
           fun and rewards go hand in hand. The world of Gunny Rush is waiting
           for you to become the best and push your skills to the limit!
@@ -114,9 +117,12 @@ const LeftInformationBar = () => {
   );
 };
 
-export default function Hero({ scrollYProgress }: { scrollYProgress: any }) {
+export default function Hero() {
   return (
-    <motion.section className="w-full h-screen lg:p-4 overflow-x-hidden bg-[#1D1B26] dark ">
+    <motion.section
+      className="w-full min-h-max h-fit lg:h-screen lg:p-4 overflow-x-hidden bg-[#1D1B26]"
+      id="home"
+    >
       <div className="relative flex flex-row items-center justify-around w-screen h-full gap-12">
         <LeftInformationBar />
         <CustomLandingMediaBox

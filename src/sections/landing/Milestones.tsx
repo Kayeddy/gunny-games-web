@@ -2,7 +2,7 @@ import { Cover } from "@/components/custom/CustomTextAnimatedCover";
 import { ShootingStars } from "@/components/ui/ShootingStars";
 import { StarsBackground } from "@/components/ui/StarsBackground";
 
-export default function InteractiveRewards() {
+export default function Milestones() {
   return (
     <div className="relative flex flex-col items-center justify-between w-screen min-h-screen gap-8 p-4 h-scren lg:p-8">
       <section className="flex flex-col items-center justify-center">

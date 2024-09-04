@@ -1,4 +1,4 @@
-// components/RockyModel.tsx
+// components/BlazeModel.tsx
 "use client";
 
 import React, { useEffect, useRef, Suspense } from "react";
@@ -35,7 +35,7 @@ const BlazeModelContent: React.FC = () => {
     });
 
     // Adjust the entire scene's Y position
-    gltf.scene.position.y -= 30;
+    gltf.scene.position.y -= 20;
     console.log("Adjusted Y Position:", gltf.scene.position.y);
   }, [gltf]);
 
@@ -48,7 +48,7 @@ const BlazeModelContent: React.FC = () => {
 
 const BlazeModel: React.FC = () => {
   return (
-    <div className="h-full w-[300px]">
+    <div className="w-full h-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

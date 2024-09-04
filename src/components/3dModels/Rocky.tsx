@@ -48,7 +48,7 @@ const RockyModelContent: React.FC = () => {
 
 const RockyModel: React.FC = () => {
   return (
-    <div className="h-full w-[300px]">
+    <div className="w-full h-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

@@ -48,7 +48,7 @@ const FuzzyModelContent: React.FC = () => {
 
 const FuzzyModel: React.FC = () => {
   return (
-    <div className="h-full w-[300px]">
+    <div className="w-full h-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

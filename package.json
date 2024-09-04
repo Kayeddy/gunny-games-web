@@ -49,6 +49,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-scroll": "^1.8.10",
     "@types/react-slick": "^0.23.13",
     "@types/slick-carousel": "^1.6.40",
     "@types/three": "^0.167.2",

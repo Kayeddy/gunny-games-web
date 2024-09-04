@@ -140,7 +140,7 @@ export function Scoreboard() {
               {filteredItems.map((item) => (
                 <TableRow
                   key={item.position}
-                  className={`border-b border-gray-700 ${
+                  className={`border-b border-gray-700 font-sen ${
                     item.position === 1
                       ? "bg-[#5c5be5] text-white"
                       : item.position % 2 === 0

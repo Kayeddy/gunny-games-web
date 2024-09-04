@@ -50,7 +50,7 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
 }) => {
   return (
     <motion.div
-      className={`absolute right-[2rem] px-1 py-1 bg-slate-200 bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
+      className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
         width && width
       } ${height && height}`}
       style={{ bottom: bottomPosition }}
@@ -62,14 +62,16 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
         <Link
           href={link}
           target="_blank"
-          className="transition-all duration-300 ease-in-out hover:scale-105"
+          className="flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-105"
         >
-          <div className="flex flex-row items-center justify-center gap-2 p-3 text-[#1e1c1c]">
+          <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
             <span className="flex flex-col items-start justify-center gap-2">
               <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
                 {title}
               </h6>
-              <p className="max-w-[250px]">{content}</p>
+              <p className="max-w-[250px] text-sm md:text-base font-sen">
+                {content}
+              </p>
             </span>
             {mediaUrl && (
               <Image
@@ -83,12 +85,14 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
           </div>
         </Link>
       ) : (
-        <div className="flex flex-row items-center justify-center gap-2 p-3 text-[#1e1c1c]">
+        <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
           <span className="flex flex-col items-start justify-center gap-2">
             <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
               {title}
             </h6>
-            <p className="max-w-[250px]">{content}</p>
+            <p className="max-w-[250px] text-sm md:text-base font-sen">
+              {content}
+            </p>
           </span>
           {mediaUrl && (
             <Image
@@ -156,7 +160,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         animate="visible"
       >
         <CustomInformativeBox
-          bottomPosition={120}
+          bottomPosition={170}
           title=""
           link="https://play.google.com/store/apps/details?id=com.Gunny.googleauth"
           content="Download for Android"
@@ -168,19 +172,19 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         />
 
         <CustomInformativeBox
-          bottomPosition={30}
+          bottomPosition={80}
           title=""
           link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
           content="Download for IOS"
           mediaUrl="/assets/other/apple_icon.webp"
-          mediaWidth={50}
-          mediaHeight={50}
+          mediaWidth={40}
+          mediaHeight={40}
           width="w-[250px]"
           height="h-[80px]"
         />
 
         <CustomInformativeBox
-          bottomPosition={210}
+          bottomPosition={260}
           title=""
           content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
         />
@@ -210,7 +214,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         alt=""
         width={300}
         height={300}
-        className="object-contain max-w-lg mx-auto my-auto lg:hidden -translate-y-[100px]"
+        className="object-contain max-w-lg mx-auto my-auto lg:hidden -translate-y-[150px]"
       />
 
       <div className="absolute inset-0 overflow-hidden">

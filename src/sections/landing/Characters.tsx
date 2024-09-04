@@ -96,7 +96,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
   return (
     <div
       ref={parallaxRef}
-      className="flex flex-col items-center justify-around h-full gap-12 px-24 lg:ml-10 lg:flex-row"
+      className="flex flex-col items-center justify-around h-full gap-12 p-4 lg:p-24 lg:ml-10 lg:flex-row"
     >
       <div className="parallax-image lg:w-[500px] lg:h-[500px] w-full h-[300px] relative">
         <Suspense fallback={<Spinner size="lg" color="secondary" />}>
@@ -129,7 +129,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
         </h1>
         <div className="flex flex-col items-center justify-center w-full gap-8">
           <div
-            className={`lg:w-[450px] lg:h-[150px] w-[300px] h-auto border-1 ${styles.borderColor} ${styles.backgroundColor} bg-opacity-10 flex flex-row items-start justify-start gap-8 p-3`}
+            className={`lg:w-[450px] lg:h-auto w-[300px] h-auto border-1 ${styles.borderColor} ${styles.backgroundColor} bg-opacity-10 flex flex-row items-start justify-start gap-8 p-3`}
           >
             <Image
               src={faction.image}
@@ -142,9 +142,9 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               <p
                 className={`bg-clip-text ${styles.backgroundColor} text-[20px]`}
               >
-                {faction.name}
+                {faction.name} faction
               </p>
-              <p className="text-white">{description}</p>
+              <p className="text-base text-white font-sen">{description}</p>
             </span>
           </div>
           <div className="grid flex-row items-center justify-between w-full grid-cols-2 grid-rows-2 lg:flex">
@@ -372,6 +372,7 @@ const Characters = () => {
     dots: false,
     fade: true,
     speed: 500,
+    swipe: false,
     touchThreshold: 100,
     beforeChange: (oldIndex: number, newIndex: number) => {
       setSelectedCharacter(newIndex);
@@ -424,7 +425,10 @@ const Characters = () => {
   };
 
   return (
-    <div className="h-fit min-h-screen bg-[#1D1B26] overflow-hidden lg:p-8 p-4 flex items-center justify-center relative w-full">
+    <div
+      className="h-fit min-h-screen bg-[#1D1B26] overflow-hidden lg:p-8 p-4 flex items-center justify-center relative w-full"
+      id="characters"
+    >
       {Array.from({ length: 200 }, (_, index) => (
         <i key={index} className="rain"></i>
       ))}
@@ -445,7 +449,7 @@ const Characters = () => {
           ))}
         </Slider>
 
-        <div className="absolute inset-x-0 top-0 flex flex-row items-center my-auto lg:flex-col lg:inset-y-0 lg:right-0 w-fit">
+        <div className="absolute inset-x-0 top-0 flex flex-row items-center my-auto lg:flex-col lg:inset-y-0 lg:right-0 lg:top-24 w-fit">
           <div className="items-center justify-center hidden w-full h-full lg:block">
             {characters.map((character, index) => (
               <div

@@ -9,13 +9,19 @@ const useSectionObserver = (sections: string[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
-          router.replace(`#${sectionId}`);
+          const currentHash = window.location.hash;
+
+          // Update the URL only if the section has changed
+          if (currentHash !== `#${sectionId}`) {
+            // Use history.replaceState to update the URL without triggering scroll behavior
+            window.history.replaceState(null, "", `#${sectionId}`);
+          }
         }
       });
     };
 
     const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5, // Adjust as needed to trigger at the middle of the section
+      threshold: 0.5, // Trigger when half of the section is in view
     });
 
     sections.forEach((sectionId) => {

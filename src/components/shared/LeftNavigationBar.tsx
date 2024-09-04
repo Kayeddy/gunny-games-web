@@ -4,34 +4,29 @@ import React, { useState, useEffect } from "react";
 import leftNavigationBarStyles from "@/lib/styles/shared/leftNavigationBar.module.scss";
 import { motion } from "framer-motion";
 import { menuSlide } from "@/lib/scripts/shared/LeftNavigationBarAnimations";
-import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll"; // Import react-scroll
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import Image from "next/image";
 
 const navItems = [
   {
     title: "Home",
-    href: "#home",
     sectionId: "home",
   },
   {
     title: "Showcase",
-    href: "#showcase",
     sectionId: "showcase",
   },
   {
     title: "Characters",
-    href: "#characters",
     sectionId: "characters",
   },
   {
     title: "Roadmap",
-    href: "#roadmap",
     sectionId: "roadmap",
   },
   {
     title: "Ranking",
-    href: "#ranking",
     sectionId: "ranking",
   },
 ];
@@ -44,27 +39,6 @@ export default function LeftNavigationBar({
   onClose: () => void;
 }) {
   const [selectedIndicator, setSelectedIndicator] = useState(currentSection);
-
-  const handleNavItemClick = (sectionId: string) => {
-    const event = new CustomEvent("scrollToSection", {
-      detail: { sectionId },
-    });
-    window.dispatchEvent(event);
-    console.log(sectionId);
-    onClose(); // Close the menu after clicking
-  };
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setSelectedIndicator(window.location.hash.replace("#", ""));
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
 
   return (
     <motion.div
@@ -94,27 +68,31 @@ export default function LeftNavigationBar({
           {navItems.map((data, index) => (
             <motion.div
               key={index}
-              className={`flex flex-col gap-2 ${
+              className={`flex flex-col gap-2 text-[25px] lg:text-[40px] hover:cursor-pointer ${
                 selectedIndicator === data.sectionId
-                  ? leftNavigationBarStyles.active // Apply active class when selected
+                  ? leftNavigationBarStyles.active
                   : ""
               }`}
-              onMouseEnter={() => setSelectedIndicator(data.sectionId)}
               custom={index}
               variants={menuSlide}
               initial="initial"
               animate="enter"
               exit="exit"
-              onClick={() => handleNavItemClick(data.sectionId)}
             >
-              <a href={data.href} className="text-[25px] lg:text-[40px]">
+              {/* Use ScrollLink for smooth scrolling */}
+              <ScrollLink
+                to={data.sectionId}
+                smooth={true}
+                duration={500}
+                onClick={() => onClose()} // Close the menu when a link is clicked
+              >
                 {data.title}
-              </a>
+              </ScrollLink>
             </motion.div>
           ))}
         </div>
         <div className={`${leftNavigationBarStyles.footer} mt-[20px] lg:mt-0`}>
-          <Link
+          <a
             href="https://discord.com/invite/SX6bkkHcAD"
             rel="noreferrer"
             target="_blank"
@@ -122,8 +100,8 @@ export default function LeftNavigationBar({
           >
             <FaDiscord aria-label="Discord icon" />
             <p>Join our Discord</p>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://x.com/Gunny_es"
             rel="noreferrer"
             target="_blank"
@@ -131,7 +109,7 @@ export default function LeftNavigationBar({
           >
             <FaTwitter aria-label="Twitter icon" />
             <p>Follow us on Twitter</p>
-          </Link>
+          </a>
         </div>
       </div>
     </motion.div>

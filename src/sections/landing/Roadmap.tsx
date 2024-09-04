@@ -9,11 +9,8 @@ import {
 import Image from "next/image";
 import { BackgroundBeamsWithCollision } from "@/components/ui/BackgroundBeamsCollisions";
 
-export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
+export default function Roadmap() {
   const ref = useRef(null);
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
     <AnimatePresence mode="wait">
@@ -21,6 +18,7 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
         <motion.section
           className="min-h-screen h-fit lg:h-screen pb-[50px] lg:pb-0"
           // style={{ scale, rotate }}
+          id="roadmap"
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -43,8 +41,10 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
                   <div className="popup-number">1</div>
                   <div className="popup-details">
                     <div className="popup-title">Laying Foundations</div>
-                    Team Formation, Creative Project Planning, and Value
-                    Proposition
+                    <p className="leading-tight text-left font-sen">
+                      Team Formation, Creative Project Planning, and Value
+                      Proposition
+                    </p>
                     <p className="mt-2"> - 2022 Q1</p>
                   </div>
                 </div>
@@ -63,8 +63,11 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
                   <div className="popup-number">2</div>
                   <div className="popup-details">
                     <div className="popup-title">Building Blueprints</div>
-                    Creation of Economic Model, Whitepaper Development, Website
-                    Development, and Value Proposition
+                    <p className="leading-tight text-left font-sen">
+                      Creation of Economic Model, Whitepaper Development,
+                      Website Development, and Value Proposition
+                    </p>
+
                     <p className="mt-2"> - 2022 Q2</p>
                   </div>
                 </div>
@@ -83,9 +86,13 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
                   <div className="popup-number">3</div>
                   <div className="popup-details">
                     <div className="popup-title">Forging the Path</div>
-                    Alpha Development, AWS Database Creation, Asset Creation on
-                    Algorand, Gacha System Development, Inugis Airdrop, Heroes
-                    Airdrop
+
+                    <p className="leading-tight text-left font-sen">
+                      Alpha Development, AWS Database Creation, Asset Creation
+                      on Algorand, Gacha System Development, Inugis Airdrop,
+                      Heroes Airdrop
+                    </p>
+
                     <p className="mt-2"> - 2023 Q3</p>
                   </div>
                 </div>
@@ -104,8 +111,11 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
                   <div className="popup-number">4</div>
                   <div className="popup-details">
                     <div className="popup-title">Unleashing Power</div>
-                    Private Alpha Release, Gacha System Launch, Open Alpha
-                    Release, Tournament Launch
+                    <p className="leading-tight text-left font-sen">
+                      Private Alpha Release, Gacha System Launch, Open Alpha
+                      Release, Tournament Launch
+                    </p>
+
                     <p className="mt-2"> - 2023 Q4</p>
                   </div>
                 </div>
@@ -124,9 +134,12 @@ export default function Roadmap({ scrollYProgress }: { scrollYProgress: any }) {
                   <div className="popup-number">5</div>
                   <div className="popup-details">
                     <div className="popup-title">The Next Evolution</div>
-                    2nd Gen Inugis Development, PVP Game Development, UI/UX
-                    Update, Animated Short Films, PVP Beta Launch, Battle Pass
-                    Release
+                    <p className="leading-tight text-left font-sen">
+                      2nd Gen Inugis Development, PVP Game Development, UI/UX
+                      Update, Animated Short Films, PVP Beta Launch, Battle Pass
+                      Release
+                    </p>
+
                     <p className="mt-2"> - 2024 </p>
                   </div>
                 </div>
