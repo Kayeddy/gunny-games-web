@@ -29,6 +29,10 @@ const navItems = [
     title: "Ranking",
     sectionId: "ranking",
   },
+  {
+    title: "Milestones",
+    sectionId: "milestones",
+  },
 ];
 
 export default function LeftNavigationBar({

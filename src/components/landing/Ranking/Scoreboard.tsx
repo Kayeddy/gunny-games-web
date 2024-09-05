@@ -28,7 +28,7 @@ type AssetBalance = {
 
 export function Scoreboard() {
   const server = "https://mainnet-idx.algonode.cloud";
-  const assetId = 1259645348;
+  const assetId = 2247034585;
 
   const indexerClient = useMemo(
     () => new algosdk.Indexer("", server, 443),

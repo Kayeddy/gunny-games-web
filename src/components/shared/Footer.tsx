@@ -6,7 +6,7 @@ import { Divider } from "@nextui-org/react";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col items-center justify-between w-full gap-8 pb-8 lg:flex-row lg:px-32 h-max">
+    <div className="flex flex-col items-center justify-between w-full gap-8 pb-8 mt-32 lg:flex-row lg:px-32 h-max">
       <div className="flex flex-col items-center justify-center gap-8">
         <Image
           src="/assets/icons/logo1024_100.webp"

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Spinner } from "@nextui-org/react";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
