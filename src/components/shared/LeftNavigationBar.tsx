@@ -57,7 +57,7 @@ export default function LeftNavigationBar({
           onMouseLeave={() => {
             setSelectedIndicator(window.location.hash.replace("#", ""));
           }}
-          className={`${leftNavigationBarStyles.nav} mt-[40px] lg:mt-[80px]`}
+          className={`${leftNavigationBarStyles.nav} gap-6 lg:gap-[40px] mt-[30px] lg:mt-[80px]`}
         >
           <Image
             src="/assets/icons/logo1024_100.webp"
@@ -72,7 +72,7 @@ export default function LeftNavigationBar({
           {navItems.map((data, index) => (
             <motion.div
               key={index}
-              className={`flex flex-col gap-2 text-[25px] lg:text-[40px] hover:cursor-pointer ${
+              className={`flex flex-col gap-2 text-xl hover:cursor-pointer ${
                 selectedIndicator === data.sectionId
                   ? leftNavigationBarStyles.active
                   : ""
