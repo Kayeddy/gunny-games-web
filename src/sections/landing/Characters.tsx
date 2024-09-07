@@ -26,7 +26,8 @@ interface Skin {
 
 interface CharacterAttribute {
   name: string;
-  image: string;
+  image?: string;
+  description?: string;
 }
 
 interface Faction {
@@ -144,7 +145,9 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               >
                 {faction.name} faction
               </p>
-              <p className="text-base text-white font-sen">{description}</p>
+              <span>
+                <p className="text-base text-white font-sen">{description}</p>
+              </span>
             </span>
           </div>
           <div className="grid flex-row items-center justify-between w-full grid-cols-2 grid-rows-2 lg:flex">
@@ -153,13 +156,21 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
                 key={index}
                 className={`lg:w-[100px] w-auto h-[120px] flex  flex-col items-center justify-center border-1 ${styles.borderColor} ${styles.backgroundColor} bg-opacity-10`}
               >
-                <Image
-                  src={attr.image}
-                  alt={`Attribute - ${attr.name}`}
-                  width={50}
-                  height={50}
-                  className="object-contain"
-                />
+                {attr.image ? (
+                  <Image
+                    src={attr.image}
+                    alt={`Attribute - ${attr.name}`}
+                    width={50}
+                    height={50}
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="flex items-center justify-center w-full h-full">
+                    <p className="text-base text-white font-sen font-valorant">
+                      {attr.description}
+                    </p>
+                  </span>
+                )}
                 <Divider className={`${styles.backgroundColor}`} />
                 <p
                   className={`py-1 text-center ${styles.backgroundColor} bg-clip-text`}
@@ -216,8 +227,8 @@ const Characters = () => {
           image: "/assets/abilities/icon-hability-5_100.webp",
         },
         { name: "Faction", image: "/assets/factions/icon-air_100.webp" },
-        { name: "Type", image: "/assets/icons/ORA-PNG_100.webp" },
-        { name: "Element", image: "/assets/icons/ORA-PNG_100.webp" },
+        { name: "Type", description: "support" },
+        { name: "Element", description: "Air" },
       ],
       skins: [
         { name: "Skin 1A", image: "/path/to/skin1a.png" },
@@ -250,8 +261,8 @@ const Characters = () => {
           image: "/assets/abilities/icon-hability-2_100.webp",
         },
         { name: "Faction", image: "/assets/factions/icon-othila_100.webp" },
-        { name: "Type", image: "/assets/icons/ORA-PNG_100.webp" },
-        { name: "Element", image: "/assets/icons/ORA-PNG_100.webp" },
+        { name: "Type", description: "Defense" },
+        { name: "Element", description: "Earth" },
       ],
       skins: [
         { name: "Skin 2A", image: "/path/to/skin2a.png" },
@@ -281,8 +292,8 @@ const Characters = () => {
           image: "/assets/abilities/icon-hability-1_100.webp",
         },
         { name: "Faction", image: "/assets/factions/icon-peth_100.webp" },
-        { name: "Type", image: "/assets/icons/ORA-PNG_100.webp" },
-        { name: "Element", image: "/assets/icons/ORA-PNG_100.webp" },
+        { name: "Type", description: "Defense" },
+        { name: "Element", description: "Water" },
       ],
       skins: [
         { name: "Skin 3A", image: "/path/to/skin3a.png" },
@@ -315,8 +326,8 @@ const Characters = () => {
           image: "/assets/abilities/icon-hability-3_100.webp",
         },
         { name: "Faction", image: "/assets/factions/icon-thurizas_100.webp" },
-        { name: "Type", image: "/assets/icons/ORA-PNG_100.webp" },
-        { name: "Element", image: "/assets/icons/ORA-PNG_100.webp" },
+        { name: "Type", description: "Attack" },
+        { name: "Element", description: "Lightning" },
       ],
       skins: [
         { name: "Skin 4A", image: "/path/to/skin4a.png" },
@@ -346,8 +357,8 @@ const Characters = () => {
           image: "/assets/abilities/icon-hability-4_100.webp",
         },
         { name: "Faction", image: "/assets/factions/icon-ratio_100.webp" },
-        { name: "Type", image: "/assets/icons/ORA-PNG_100.webp" },
-        { name: "Element", image: "/assets/icons/ORA-PNG_100.webp" },
+        { name: "Type", description: "Attack" },
+        { name: "Element", description: "Fire" },
       ],
       skins: [
         { name: "Skin 5A", image: "/path/to/skin5a.png" },

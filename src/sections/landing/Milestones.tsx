@@ -124,31 +124,37 @@ const milestoneData = [
     players: 150,
     reward: "$200 USD",
     cardBorderBackground: "/assets/svg/card-1.svg",
+    fulfilled: false,
   },
   {
     players: 300,
     reward: "$400 USD",
     cardBorderBackground: "/assets/svg/card-2.svg",
+    fulfilled: false,
   },
   {
     players: 1000,
     reward: "$1,200 USD",
     cardBorderBackground: "/assets/svg/card-3.svg",
+    fulfilled: false,
   },
   {
     players: 2000,
     reward: "?",
     cardBorderBackground: "/assets/svg/card-4.svg",
+    fulfilled: false,
   },
   {
     players: 5000,
     reward: "?",
     cardBorderBackground: "/assets/svg/card-5.svg",
+    fulfilled: false,
   },
   {
     players: 10000,
     reward: "?",
     cardBorderBackground: "/assets/svg/card-6.svg",
+    fulfilled: false,
   },
 ];
 
@@ -156,6 +162,7 @@ export default function Milestones() {
   const sphereRef = useRef<HTMLDivElement>(null);
   const textBlockRef = useRef<HTMLDivElement>(null);
   const [numberOfPlayers, setNumberOfPlayers] = useState<number>(0);
+  const [milestones, setMilestones] = useState(milestoneData);
 
   useEffect(() => {
     // Set up the Algorand Indexer client
@@ -176,6 +183,17 @@ export default function Milestones() {
     sphereAnimation(sphereRef.current, textBlockRef.current);
   }, []);
 
+  // Dynamic logic to update milestones when players reach objectives
+  useEffect(() => {
+    const updatedMilestones = milestoneData.map((milestone) => {
+      if (numberOfPlayers >= milestone.players && !milestone.fulfilled) {
+        return { ...milestone, fulfilled: true }; // Set fulfilled to true if reached
+      }
+      return milestone;
+    });
+    setMilestones(updatedMilestones);
+  }, [numberOfPlayers]);
+
   return (
     <div
       className="relative flex flex-col items-center justify-between w-screen min-h-screen gap-8 p-4 overflow-hidden lg:h-screen h-fit lg:p-8"
@@ -187,7 +205,7 @@ export default function Milestones() {
         <section className="relative flex flex-col items-center justify-start w-[45%] h-full lg:mt-[200px]">
           <Cover>
             <h1 className="relative z-20 w-full py-6 mt-6 text-xl font-semibold text-center bg-clip-text bg-blaze-title font-valorant md:text-2xl lg:text-4xl">
-              The More, The Merrier: Unlock Bigger Rewards!
+              The More, The Merrier: Unlock Weekly Rewards!
             </h1>
           </Cover>
 
@@ -257,9 +275,10 @@ export default function Milestones() {
 
         <section className="lg:w-[50%] w-full flex flex-col items-center justify-center mt-[100px] gap-8">
           <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-            {milestoneData.map((milestone, index) => (
+            {milestones.map((milestone, index) => (
               <CustomMilestoneCard
                 key={index}
+                milestoneReached={milestone.fulfilled}
                 title={`Objective: ${milestone.players} players`}
                 description={`Reward: ${milestone.reward}`}
                 cardBorderBackground={milestone.cardBorderBackground}

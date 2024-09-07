@@ -2,7 +2,7 @@
 
 import CustomAnimatedBlockCard from "@/components/custom/CustomAnimatedBlocksCard";
 import { CustomInfiniteMovingCards } from "@/components/custom/CustomInfiniteMovingCards";
-import { CustomWobbleCard } from "@/components/custom/CustomWobbleCard";
+import { CustomWobbleCard, Noise } from "@/components/custom/CustomWobbleCard";
 import { motion, MotionValue } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -64,7 +64,7 @@ const poweredBy: ShowcaseItem[] = [
         src="/assets/other/awsLogo.webp"
         alt="AWS logo"
         fill
-        className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[60px] max-h-[60px] lg:-translate-x-[60px]"
+        className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[60px] max-h-[60px] "
       />
     ),
     link: "https://aws.amazon.com/",
@@ -97,13 +97,13 @@ const sponsors: ShowcaseItem[] = [
   {
     image: (
       <Image
-        src="/assets/other/AlgoFam-logo.webp"
-        alt="Algo fam logo"
+        src="/assets/other/refi_logo.png"
+        alt="Borderless Capital logo"
         fill
-        className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[100px] lg:max-h-[100px]"
+        className="object-contain"
       />
     ),
-    link: "https://github.com/algorandfoundation/xGov/blob/main/Proposals/xgov-194.md",
+    link: "https://www.refimedellin.org/en",
   },
 ];
 
@@ -319,11 +319,12 @@ export default function Showcase() {
       className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
       id="showcase"
     >
-      {/* Powered By Section */}
+      {/* Powered By & Sponsors Section */}
       <motion.section
-        className="flex flex-col items-center justify-center gap-14 lg:gap-8 lg:flex-row"
+        className="flex flex-col items-center justify-center w-full gap-14 lg:gap-8 lg:flex-row"
         variants={itemVariants}
       >
+        {/* Powered By Content */}
         <div className="flex flex-col items-center justify-center gap-4">
           <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
             Made with 💖 and
@@ -342,11 +343,12 @@ export default function Showcase() {
             ))}
           </div>
         </div>
+        {/* Sponsors Content */}
         <div className="flex flex-col items-center justify-center gap-4">
           <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
             Trusted by
           </h2>
-          <div className="flex flex-row items-center justify-center gap-8">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-8">
             {sponsors.map((item, index) => (
               <motion.div
                 key={index}
@@ -358,6 +360,11 @@ export default function Showcase() {
                 </Link>
               </motion.div>
             ))}
+
+            <span className="border-white border-[0.5px] w-10 h-10 lg:p-12 p-8 rounded-full flex items-center justify-center relative overflow-hidden">
+              <Noise />
+              <p className="text-base text-white font-insomnia">XGOV</p>
+            </span>
           </div>
         </div>
       </motion.section>
@@ -411,10 +418,19 @@ export default function Showcase() {
         </CustomWobbleCard>
 
         <CustomWobbleCard containerClassName="col-span-1 min-h-[300px]">
-          <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
-            Pimp My Pet
-          </h2>
-          <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+          <div className="flex flex-row items-center justify-center gap-4">
+            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
+              Check it out
+            </h2>
+            <Image
+              src="https://em-content.zobj.net/source/microsoft-teams/363/smiling-face-with-sunglasses_1f60e.png"
+              alt="glasses-emoji"
+              width={30}
+              height={30}
+              className="object-contain"
+            />
+          </div>
+          {/* <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
             Customize your pets with unique skins!
           </p>
           <div className="h-[10rem] rounded-md flex flex-col antialiased bg-transparent items-center justify-center relative overflow-hidden">
@@ -423,7 +439,15 @@ export default function Showcase() {
               direction="right"
               speed="slow"
             />
-          </div>
+          </div> */}
+          <video
+            src="/assets/other/gunny_rush_gameplay.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full mt-4"
+          />
         </CustomWobbleCard>
         <CustomWobbleCard containerClassName="col-span-1 lg:col-span-2 h-full  bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
           <div className="max-w-sm">
