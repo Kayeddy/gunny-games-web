@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type ScoreboardItem = {
   position: number;
@@ -37,9 +38,11 @@ export function Scoreboard() {
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [data, setData] = useState<ScoreboardItem[]>([]);
+  const [filteredData, setFilteredData] = useState<ScoreboardItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // To handle loading state
   const [page, setPage] = useState<number>(1);
-  const [focused, setFocused] = useState<boolean>(false);
   const itemsPerPage = 5;
+  const [focused, setFocused] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -57,12 +60,13 @@ export function Scoreboard() {
 
   useEffect(() => {
     const fetchDataFromAPI = async () => {
+      setLoading(true); // Start loading
       try {
         const assetBalances = await indexerClient
           .lookupAssetBalances(assetId)
           .currencyLessThan(100000)
           .currencyGreaterThan(0)
-          .limit(100)
+          // .limit(100)
           .do();
 
         const leaderboardData: ScoreboardItem[] = (
@@ -76,26 +80,33 @@ export function Scoreboard() {
           }));
 
         setData(leaderboardData);
+        setFilteredData(leaderboardData); // Initially set filteredData to full data
       } catch (error) {
         console.error("Error fetching data from Algorand:", error);
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
 
     fetchDataFromAPI();
   }, [indexerClient, assetId]);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const filtered = data.filter((item) =>
+        item.address.toLowerCase().includes(term)
+      );
+      setFilteredData(filtered); // Update filtered data based on search term
+      setPage(1); // Reset to page 1 after filtering
+    } else {
+      setFilteredData(data); // Reset to full data if no search term
+    }
+  }, [searchTerm, data]);
+
   const indexOfLastItem = page * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-  const filteredItems = currentItems
-    .filter((item) =>
-      item.address.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .map((item, index) => ({
-      ...item,
-      position: indexOfFirstItem + index + 1,
-    }));
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -104,9 +115,27 @@ export function Scoreboard() {
     setPage(value);
   };
 
+  const highlightMatch = (address: string, searchTerm: string) => {
+    const lowerAddress = address.toLowerCase();
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    const index = lowerAddress.indexOf(lowerSearchTerm);
+    if (index === -1 || !searchTerm) {
+      return <span>{address}</span>;
+    }
+    return (
+      <span>
+        {address.substring(0, index)}
+        <span className="bg-yellow-300 text-black">
+          {address.substring(index, index + searchTerm.length)}
+        </span>
+        {address.substring(index + searchTerm.length)}
+      </span>
+    );
+  };
+
   return (
-    <div className="relative lg:w-full w-[90%] overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg">
-      <div className="flex items-center justify-center w-full mb-4 lg:justify-start">
+    <div className="relative w-[90%] overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg lg:w-full">
+      <div className="mb-4 flex w-full items-center justify-center lg:justify-start">
         <input
           type="text"
           value={searchTerm}
@@ -119,71 +148,74 @@ export function Scoreboard() {
           placeholder="Search your Wallet"
         />
       </div>
-      <Table className="relative mt-4 text-white">
-        <TableCaption>Top Scores</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Position</TableHead>
-            <TableHead>Address</TableHead>
-            <TableHead>Score</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredItems.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={3} className="text-white">
-                There is no matching wallet
-              </TableCell>
-            </TableRow>
-          ) : (
-            <>
-              {filteredItems.map((item) => (
-                <TableRow
-                  key={item.position}
-                  className={`border-b border-gray-700 font-sen ${
-                    item.position === 1
-                      ? "bg-[#5c5be5] text-white"
-                      : item.position % 2 === 0
-                      ? "bg-gray-800"
-                      : "bg-gray-700"
-                  }`}
-                >
-                  <TableCell className="text-xl font-bold">
-                    {item.position}
-                    {item.position === 1 && (
-                      <img
-                        src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                        alt="gold medal"
-                        className="inline-block w-6 h-6 ml-2"
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {isMobile
-                      ? `${item.address.substring(0, 16)}...`
-                      : item.address}
-                  </TableCell>
-                  <TableCell className="font-bold">{item.score}</TableCell>
-                </TableRow>
-              ))}
-            </>
-          )}
-        </TableBody>
-      </Table>
 
-      <Stack spacing={2} className="flex items-center justify-center p-2">
-        <Pagination
-          count={Math.ceil(data.length / itemsPerPage)}
-          color="secondary"
-          page={page}
-          onChange={handlePageChange}
-          sx={{
-            "& .MuiPaginationItem-root": {
-              color: "white", // Set the color of the pagination numbers to white
-            },
-          }}
-        />
-      </Stack>
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <CircularProgress color="secondary" />
+        </div>
+      ) : (
+        <>
+          <Table className="relative mt-4 text-white">
+            <TableCaption>{searchTerm ? "Search Results" : "Top Scores"}</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Position</TableHead>
+                <TableHead>Address</TableHead>
+                <TableHead>Score</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {currentItems.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={3} className="text-white">
+                    There is no matching wallet
+                  </TableCell>
+                </TableRow>
+              ) : (
+                <>
+                  {currentItems.map((item) => (
+                    <TableRow
+                      key={item.position}
+                      className={`border-b border-gray-700 font-sen ${
+                        item.position === 1
+                          ? "bg-[#5c5be5] text-white"
+                          : item.position % 2 === 0
+                          ? "bg-gray-800"
+                          : "bg-gray-700"
+                      }`}
+                    >
+                      <TableCell className="text-xl font-bold">
+                        {item.position}
+                      </TableCell>
+                      <TableCell>
+                        {highlightMatch(item.address, searchTerm)}
+                      </TableCell>
+                      <TableCell className="font-bold">{item.score}</TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              )}
+            </TableBody>
+          </Table>
+
+          {filteredData.length > itemsPerPage && (
+            <Stack spacing={2} className="flex items-center justify-center p-2">
+              <Pagination
+                count={Math.ceil(filteredData.length / itemsPerPage)}
+                color="secondary"
+                page={page}
+                onChange={handlePageChange}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "white",
+                    cursor: "pointer", // Ensure clickability
+                  },
+                }}
+              />
+            </Stack>
+          )}
+        </>
+      )}
     </div>
   );
 }

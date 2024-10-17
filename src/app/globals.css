@@ -109,6 +109,11 @@
   }
 }
 
+.MuiPagination-root {
+  z-index: 10; /* or higher if necessary */
+  position: relative;
+}
+
 body {
   font-family: "VALORANT", sans-serif;
   font-size: 12px;

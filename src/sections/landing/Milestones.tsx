@@ -196,46 +196,46 @@ export default function Milestones() {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-between w-screen min-h-screen gap-8 p-4 overflow-hidden lg:h-screen h-fit lg:p-8"
+      className="relative flex h-screen min-h-fit w-screen flex-col items-center justify-between gap-8 overflow-hidden p-4 lg:h-screen lg:p-8"
       id="milestones"
     >
       <ShootingStars />
       <StarsBackground />
       <div className="relative flex flex-col items-center justify-center lg:flex-row">
-        <section className="relative flex flex-col items-center justify-start w-[45%] h-full lg:mt-[200px]">
+        <section className="relative flex h-full w-[45%] flex-col items-center justify-start lg:mt-[200px]">
           <Cover>
-            <h1 className="relative z-20 w-full py-6 mt-6 text-xl font-semibold text-center bg-clip-text bg-blaze-title font-valorant md:text-2xl lg:text-4xl">
+            <h1 className="relative z-20 mt-6 w-full bg-blaze-title bg-clip-text py-6 text-center font-valorant text-xl font-semibold md:text-2xl lg:text-4xl">
               The More, The Merrier: Unlock Weekly Rewards!
             </h1>
           </Cover>
 
-          <div className="relative items-center justify-center hidden lg:flex animation-wrapper">
+          <div className="animation-wrapper relative hidden items-center justify-center lg:flex">
             <div
               ref={textBlockRef}
-              className="absolute z-20 flex flex-col items-center justify-center gap-4 leading-tight transform -translate-x-1/3 top-1/2 left-1/2 animate-pulse"
+              className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/3 transform animate-pulse flex-col items-center justify-center gap-4 leading-tight"
             >
-              <p className="text-[50px] text-center bg-clip-text bg-fuzzy-title font-insomnia">
+              <p className="bg-fuzzy-title bg-clip-text text-center font-insomnia text-[50px]">
                 Active players
               </p>
-              <p className="text-[40px] text-center bg-clip-text bg-rocky-title">
+              <p className="bg-rocky-title bg-clip-text text-center text-[40px]">
                 {numberOfPlayers}
               </p>
             </div>
-            <div ref={sphereRef} className="w-full sphere-animation">
+            <div ref={sphereRef} className="sphere-animation w-full">
               <CustomMilestoneSectionSeparator />
             </div>
           </div>
 
           <div className="flex items-center justify-center lg:hidden">
-            <div className="relative flex flex-col items-center justify-around shadow-inner before:absolute before:w-12 before:h-12 before:bg-orange-800 before:rounded-full before:blur-xl before:top-16 w-44 h-44 rounded-2xl shadow-gray-50 bg-neutral-900 text-gray-50">
+            <div className="relative flex h-44 w-44 flex-col items-center justify-around rounded-2xl bg-neutral-900 text-gray-50 shadow-inner shadow-gray-50 before:absolute before:top-16 before:h-12 before:w-12 before:rounded-full before:bg-orange-800 before:blur-xl">
               <span className="">Active players</span>
               <span className="z-10 flex items-center text-6xl text-amber-600 [text-shadow:_2px_2px_#fff,_1px_2px_#fff]">
                 {numberOfPlayers}
               </span>
-              <div className="flex flex-row w-48 text-gray-50 justify-evenly">
+              <div className="flex w-48 flex-row justify-evenly text-gray-50">
                 <div className="flex flex-row items-center">
                   <svg
-                    className="w-5 h-5 fill-red-500 animate-bounce"
+                    className="h-5 w-5 animate-bounce fill-red-500"
                     height="100"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 100 100"
@@ -245,14 +245,13 @@ export default function Milestones() {
                     y="0"
                   >
                     <path
-                      className=""
-                      d="M23,27.6a15.8,15.8,0,0,1,22.4,0L50,32.2l4.6-4.6A15.8,15.8,0,0,1,77,50L50,77,23,50A15.8,15.8,0,0,1,23,27.6Z"
+                      className="" d="M23,27.6a15.8,15.8,0,0,1,22.4,0L50,32.2l4.6-4.6A15.8,15.8,0,0,1,77,50L50,77,23,50A15.8,15.8,0,0,1,23,27.6Z"
                       fill-rule="evenodd"
                     ></path>
                   </svg>
                   <PiGameControllerBold />
                   <svg
-                    className="w-5 h-5 fill-current"
+                    className="h-5 w-5 fill-current"
                     height="100"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 100 100"
@@ -273,7 +272,7 @@ export default function Milestones() {
           </div>
         </section>
 
-        <section className="lg:w-[50%] w-full flex flex-col items-center justify-center mt-[100px] gap-8">
+        <section className="mt-[100px] flex h-full flex-col items-center justify-center gap-8 lg:w-[50%]">
           <div className="flex flex-row flex-wrap items-center justify-center gap-4">
             {milestones.map((milestone, index) => (
               <CustomMilestoneCard
@@ -286,20 +285,23 @@ export default function Milestones() {
               />
             ))}
           </div>
-          <Separator className="w-full h-[0.5px] my-4 bg-transparent bg-blaze-title" />
-          <p className="text-lg text-center text-slate-300 lg:text-left">
-            Join the race to the top and see your name in lights! Compete with
-            the best, snag exclusive rewards, and remember—the more, the
-            merrier! Bigger crowds mean even better prizes, so rally your
-            friends and let the games begin!
-          </p>
-          <Image
-            src="/assets/chibis/Taily Winner_100.webp"
-            alt="Taily-image"
-            width={100}
-            height={100}
-            className="object-contain mx-auto "
-          />
+          <Separator className="z-50 mt-10 h-[0.5px] w-full bg-transparent bg-blaze-title" />
+
+          <div className="mt-10 flex h-fit w-full flex-row items-center justify-start gap-4">
+            <p className="text-center text-lg text-slate-300 lg:text-left">
+              Join the race to the top and see your name in lights! Compete with
+              the best, snag exclusive rewards, and remember—the more, the
+              merrier! Bigger crowds mean even better prizes, so rally your
+              friends and let the games begin!
+            </p>
+            <Image
+              src="/assets/chibis/Taily Winner_100.webp"
+              alt="Taily-image"
+              width={100}
+              height={100}
+              className="object-contain"
+            />
+          </div>
         </section>
       </div>
     </div>
