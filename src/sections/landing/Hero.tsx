@@ -50,6 +50,7 @@ const LeftInformationBar = () => {
           alt="Gunny Rush logo rotated 90 degrees"
           className="object-fill -rotate-90 -translate-x-[40px] w-full h-full mt-32"
         />
+        {/* To-Do: replace Gunny logo for the Gunny Rush Icon */}
       </motion.span>
       <motion.span
         className="max-w-[250px] overflow-hidden flex flex-col gap-2"
@@ -106,7 +107,7 @@ const LeftInformationBar = () => {
         </motion.span>
         <motion.p
           variants={variants.itemFadeIn}
-          className="text-base leading-relaxed text-white font-sen"
+          className="text-base leading-relaxed text-white font-sen"//To-Do: add telegram and brand kit link
         >
           Join the Gunny Rush community and be part of an epic experience where
           fun and rewards go hand in hand. The world of Gunny Rush is waiting

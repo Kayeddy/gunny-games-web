@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import Header from "@/components/shared/Header";
 import { NextUIProvider } from "@nextui-org/react";
 import ClientLoaderWrapper from "@/wrappers/ClientLoaderWrapper";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "Gunny Games - Unleash the Elements in Blockchain Gaming",
@@ -57,10 +58,12 @@ export default function RootLayout({
         />
         <meta name="twitter:image" content="/assets/icons/icongunny_100.webp" />
       </Head>
+      <GoogleAnalytics />
       <body className={`${Valorant.className}`}>
         <NextUIProvider>
+          <ClientLoaderWrapper />
           <Header />
-          <ClientLoaderWrapper>{children}</ClientLoaderWrapper>
+          {children}
         </NextUIProvider>
       </body>
     </html>

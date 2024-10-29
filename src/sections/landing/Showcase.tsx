@@ -28,17 +28,6 @@ const poweredBy: ShowcaseItem[] = [
   {
     image: (
       <Image
-        src="/assets/other/algorand-logo-white-CMYK.webp"
-        alt="Algorand logo"
-        fill
-        className="object-contain"
-      />
-    ),
-    link: "https://www.algorand.com/",
-  },
-  {
-    image: (
-      <Image
         src="/assets/other/Unity-Logo-White.webp"
         alt="Unity logo"
         fill
@@ -50,10 +39,32 @@ const poweredBy: ShowcaseItem[] = [
   {
     image: (
       <Image
+        src="/assets/other/awsLogo.webp"
+        alt="AWS logo"
+        fill
+        className="max-h-[60px] max-w-[60px] object-contain lg:max-h-[100px] lg:max-w-[100px]"
+      />
+    ),
+    link: "https://aws.amazon.com/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/algorand-logo-teal-RGB.svg"
+        alt="Algorand logo"
+        fill
+        className="object-contain"
+      />
+    ),
+    link: "https://www.algorand.co/",
+  },
+  {
+    image: (
+      <Image
         src="/assets/other/nodely.webp"
         alt="Nodely logo"
         fill
-        className="object-contain max-w-[60px] max-h-[60px] lg:max-w-[100px] lg:max-h-[100px]"
+        className="max-h-[60px] max-w-[60px] object-contain lg:max-h-[100px] lg:max-w-[100px]"
       />
     ),
     link: "https://nodely.io/",
@@ -61,13 +72,24 @@ const poweredBy: ShowcaseItem[] = [
   {
     image: (
       <Image
-        src="/assets/other/awsLogo.webp"
-        alt="AWS logo"
+        src="/assets/other/nfd.avif"
+        alt="NFD logo"
         fill
-        className="object-contain lg:max-w-[100px] lg:max-h-[100px] max-w-[60px] max-h-[60px] "
+        className="max-h-[60px] max-w-[60px] object-contain lg:max-h-[100px] lg:max-w-[100px]"
       />
     ),
-    link: "https://aws.amazon.com/",
+    link: "https://app.nf.domains/",
+  },
+  {
+    image: (
+      <Image
+        src="/assets/other/orangeicon.svg"
+        alt="Oranges ($ORA) logo"
+        fill
+        className="max-h-[60px] max-w-[60px] object-contain lg:max-h-[100px] lg:max-w-[100px]"
+      />
+    ),
+    link: "https://oranges.meme/",
   },
 ];
 
@@ -81,7 +103,7 @@ const sponsors: ShowcaseItem[] = [
         className="object-contain"
       />
     ),
-    link: "https://algorand.foundation/",
+    link: "https://algorand.co/",
   },
   {
     image: (
@@ -316,25 +338,25 @@ const itemVariants = {
 export default function Showcase() {
   return (
     <motion.div
-      className="flex flex-col gap-8 items-center justify-center min-h-screen h-fit p-4 lg:py-4 py-8 bg-[#1D1B26]"
+      className="flex h-fit min-h-screen flex-col items-center justify-center gap-8 bg-[#1D1B26] p-4 py-8 lg:py-4"
       id="showcase"
     >
       {/* Powered By & Sponsors Section */}
       <motion.section
-        className="flex flex-col items-center justify-center w-full gap-14 lg:gap-8 lg:flex-row"
+        className="flex w-full flex-col items-center justify-center gap-14 lg:flex-row lg:gap-8"
         variants={itemVariants}
       >
         {/* Powered By Content */}
         <div className="flex flex-col items-center justify-center gap-4">
-          <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
-            Made with 💖 and
+          <h2 className="text-[30px] text-slate-200 lg:text-[20px]">
+            Made with 💖 and...
           </h2>
           <div className="flex flex-row flex-wrap items-center justify-center gap-8">
             {poweredBy.map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative"
+                className="relative flex h-[80px] w-[80px] items-center justify-center object-contain lg:h-[100px] lg:w-[200px]"
               >
                 <Link href={item.link!} target="_blank" rel="noreferrer">
                   {item.image}
@@ -345,15 +367,15 @@ export default function Showcase() {
         </div>
         {/* Sponsors Content */}
         <div className="flex flex-col items-center justify-center gap-4">
-          <h2 className="text-slate-200 lg:text-[20px] text-[30px]">
-            Trusted by
+          <h2 className="text-[30px] text-slate-200 lg:text-[20px]">
+            Trusted by:
           </h2>
           <div className="flex flex-row flex-wrap items-center justify-center gap-8">
             {sponsors.map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="lg:w-[200px] lg:h-[100px] w-[80px] h-[80px] flex items-center justify-center object-contain relative"
+                className="relative flex h-[80px] w-[80px] items-center justify-center object-contain lg:h-[100px] lg:w-[200px]"
               >
                 <Link href={item.link!} target="_blank" rel="noreferrer">
                   {item.image}
@@ -361,9 +383,10 @@ export default function Showcase() {
               </motion.div>
             ))}
 
-            <span className="border-white border-[0.5px] w-10 h-10 lg:p-12 p-8 rounded-full flex items-center justify-center relative overflow-hidden">
+            <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-[0.5px] border-white p-8 lg:p-12">
               <Noise />
-              <p className="text-base text-white font-insomnia">XGOV</p>
+              <p className="font-insomnia text-base text-white">xGov</p>
+              {/* //To-Do: add link to xGov */}
             </span>
           </div>
         </div>
@@ -371,28 +394,29 @@ export default function Showcase() {
 
       {/* Showcase Cards Section */}
       <motion.section
-        className="grid w-full grid-cols-1 gap-4 mx-auto lg:grid-cols-3 max-w-7xl"
+        className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3"
         variants={itemVariants}
       >
-        <CustomWobbleCard containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]">
+        <CustomWobbleCard containerClassName="col-span-1 h-full min-h-[500px] bg-pink-800 lg:col-span-2 lg:min-h-[300px]">
           <div className="max-w-xs">
-            <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
+            <h2 className="text-balance text-left font-insomnia text-base font-semibold tracking-[-0.015em] text-white md:text-xl lg:text-3xl">
               Unleash the Elements
             </h2>
+            {/* To-Do: link to gacha */}
             <p className="mt-4 text-left text-base/6 text-neutral-200">
               Collect unique elemental pets and unleash their extraordinary
               abilities!
             </p>
           </div>
-          <div className="absolute object-contain -right-7 lg:-right-4 filter -bottom-10 rounded-2xl">
+          <div className="absolute -bottom-10 -right-7 rounded-2xl object-contain filter lg:-right-4">
             <CustomAnimatedBlockCard />
           </div>
         </CustomWobbleCard>
         <CustomWobbleCard containerClassName="col-span-1 min-h-[300px]">
-          <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
+          <h2 className="max-w-80 text-balance text-left font-insomnia text-base font-semibold tracking-[-0.015em] text-white md:text-xl lg:text-3xl">
             Battle Buddies
           </h2>
-          <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+          <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
             Compete online with your favorite companion!
           </p>
           <div className="flex flex-row items-center justify-around">
@@ -419,9 +443,10 @@ export default function Showcase() {
 
         <CustomWobbleCard containerClassName="col-span-1 min-h-[300px]">
           <div className="flex flex-row items-center justify-center gap-4">
-            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
+            <h2 className="max-w-80 text-balance text-left font-insomnia text-base font-semibold tracking-[-0.015em] text-white md:text-xl lg:text-3xl">
               Check it out
             </h2>
+            {/* To-Do: add link to the video on youtube */}
             <Image
               src="https://em-content.zobj.net/source/microsoft-teams/363/smiling-face-with-sunglasses_1f60e.png"
               alt="glasses-emoji"
@@ -433,7 +458,7 @@ export default function Showcase() {
           {/* <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
             Customize your pets with unique skins!
           </p>
-          <div className="h-[10rem] rounded-md flex flex-col antialiased bg-transparent items-center justify-center relative overflow-hidden">
+          <div className="relative flex h-[10rem] flex-col items-center justify-center overflow-hidden rounded-md bg-transparent antialiased">
             <CustomInfiniteMovingCards
               items={characters}
               direction="right"
@@ -446,15 +471,16 @@ export default function Showcase() {
             loop
             muted
             playsInline
-            className="w-full mt-4"
+            className="mt-4 w-full"
           />
         </CustomWobbleCard>
-        <CustomWobbleCard containerClassName="col-span-1 lg:col-span-2 h-full  bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+        <CustomWobbleCard containerClassName="col-span-1 h-full min-h-[500px] bg-blue-900 lg:col-span-2 lg:min-h-[600px] xl:min-h-[300px]">
           <div className="max-w-sm">
-            <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white font-insomnia">
+            <h2 className="max-w-sm text-balance text-left font-insomnia text-base font-semibold tracking-[-0.015em] text-white md:max-w-lg md:text-xl lg:text-3xl">
               Champion’s Ascent
             </h2>
-            <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+            {/* To-Do: add our leaderboar img and explain how to get NFD and why with the link to mint subdomain */}
+            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
               Ascend to greatness atop our leaderboard and claim legendary
               prizes as the ultimate champion!
             </p>
@@ -463,7 +489,7 @@ export default function Showcase() {
               alt="Gunny icon"
               width={100}
               height={100}
-              className="object-cover mx-auto mt-4"
+              className="mx-auto mt-4 object-cover"
             />
           </div>
           <Image
@@ -471,7 +497,7 @@ export default function Showcase() {
             width={550}
             height={500}
             alt="Valorant scoreboard"
-            className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain lg:object-cover rounded-2xl"
+            className="absolute -bottom-10 -right-10 rounded-2xl object-contain md:-right-[40%] lg:-right-[20%] lg:object-cover"
           />
         </CustomWobbleCard>
       </motion.section>

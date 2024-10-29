@@ -28,7 +28,7 @@ const TailyModelContent: React.FC = () => {
 
       // Log the names of all available animations
       gltf.animations.forEach((clip) => {
-        console.log("Animation name:", clip.name);
+        // console.log("Animation name:", clip.name);
       });
 
       return () => {
@@ -46,7 +46,7 @@ const TailyModelContent: React.FC = () => {
 
 const TailyModel: React.FC = () => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

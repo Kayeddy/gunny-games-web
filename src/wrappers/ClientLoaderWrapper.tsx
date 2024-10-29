@@ -4,17 +4,18 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PageLoader from "@/components/shared/PageLoader";
 
-const ClientLoaderWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const ClientLoaderWrapper: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [videoFinished, setVideoFinished] = useState(false);
 
   useEffect(() => {
-    // Handle image loading
+    // Disable scrolling and reset scroll position at the start
+    document.body.style.overflow = "hidden";
+    window.scrollTo({ top: 0, behavior: "instant" });
+
     const loadImages = () => {
       return new Promise<void>((resolve) => {
-        const images = Array.from(document.images);
+        const images = Array.from(document.querySelectorAll("img"));
         let loadedImages = 0;
 
         images.forEach((img) => {
@@ -23,57 +24,53 @@ const ClientLoaderWrapper: React.FC<{ children: React.ReactNode }> = ({
           } else {
             img.onload = () => {
               loadedImages++;
-              if (loadedImages === images.length) {
-                resolve();
-              }
+              if (loadedImages === images.length) resolve();
             };
             img.onerror = () => {
               loadedImages++;
-              if (loadedImages === images.length) {
-                resolve();
-              }
+              if (loadedImages === images.length) resolve();
             };
           }
         });
 
-        if (images.length === 0) {
-          resolve();
-        }
+        if (images.length === 0) resolve();
       });
     };
 
-    // Handle first video loading
     const loadFirstVideo = () => {
       return new Promise<void>((resolve) => {
         const firstVideo = document.querySelector("video");
 
         if (firstVideo) {
           if (firstVideo.readyState >= 4) {
-            // First video is already ready
-            resolve();
+            resolve(); // First video is ready
           } else {
-            firstVideo.oncanplaythrough = () => {
-              resolve();
-            };
-            firstVideo.onerror = () => {
-              resolve(); // Resolve on error to avoid getting stuck
-            };
+            firstVideo.oncanplaythrough = () => resolve();
+            firstVideo.onerror = () => resolve(); // Avoid getting stuck
           }
         } else {
-          resolve(); // Resolve if no video is found
+          resolve(); // No video found
         }
       });
     };
 
+    // Wait for images and video to load
     Promise.all([loadImages(), loadFirstVideo()]).then(() => {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.overflow = ""; // Re-enable scrolling
+      }, 2000); // Delay for smooth transition
     });
 
-    // Fallback: ensure loader doesn't get stuck indefinitely
-    const timeout = setTimeout(() => setIsLoading(false), 8000); // 8 seconds fallback
+    // Fallback to avoid indefinite loading
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.overflow = ""; // Re-enable scrolling
+    }, 8000); // 8-second fallback
 
     return () => {
       clearTimeout(timeout);
+      document.body.style.overflow = ""; // Re-enable scrolling on cleanup
     };
   }, []);
 
@@ -84,14 +81,11 @@ const ClientLoaderWrapper: React.FC<{ children: React.ReactNode }> = ({
   const showLoader = isLoading || !videoFinished;
 
   return (
-    <>
-      <AnimatePresence>
-        {showLoader && (
-          <PageLoader onVideoEnd={handleVideoEnd} isParentLoaded={!isLoading} />
-        )}
-      </AnimatePresence>
-      {!showLoader && children}
-    </>
+    <AnimatePresence>
+      {showLoader && (
+        <PageLoader onVideoEnd={handleVideoEnd} isParentLoaded={!isLoading} />
+      )}
+    </AnimatePresence>
   );
 };
 

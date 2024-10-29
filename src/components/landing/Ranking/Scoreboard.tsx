@@ -64,7 +64,7 @@ export function Scoreboard() {
       try {
         const assetBalances = await indexerClient
           .lookupAssetBalances(assetId)
-          .currencyLessThan(100000)
+          .currencyLessThan(2000000) //To-Do: create an exclusion list
           .currencyGreaterThan(0)
           // .limit(100)
           .do();
@@ -72,7 +72,7 @@ export function Scoreboard() {
         const leaderboardData: ScoreboardItem[] = (
           assetBalances.balances as AssetBalance[]
         )
-          .sort((a: AssetBalance, b: AssetBalance) => b.amount - a.amount)
+          .sort((a: AssetBalance, b: AssetBalance) => b.amount - a.amount) //To-Do: add NFD call
           .map((balance: AssetBalance, index: number) => ({
             position: index + 1,
             address: balance.address,
@@ -134,7 +134,7 @@ export function Scoreboard() {
   };
 
   return (
-    <div className="relative w-[90%] overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg lg:w-full">
+    <div className="relative w-[90%] max-w-[90vw] overflow-x-auto overflow-y-hidden shadow-md sm:rounded-lg lg:w-full">
       <div className="mb-4 flex w-full items-center justify-center lg:justify-start">
         <input
           type="text"
@@ -156,7 +156,9 @@ export function Scoreboard() {
       ) : (
         <>
           <Table className="relative mt-4 text-white">
-            <TableCaption>{searchTerm ? "Search Results" : "Top Scores"}</TableCaption>
+            <TableCaption>
+              {searchTerm ? "Search Results" : "Top Scores"}
+            </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>Position</TableHead>

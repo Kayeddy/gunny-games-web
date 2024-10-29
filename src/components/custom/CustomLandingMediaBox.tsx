@@ -176,7 +176,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
           bottomPosition={80}
           title=""
           link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
-          content="Download for IOS"
+          content="Download for iOS"
           mediaUrl="/assets/other/apple_icon.webp"
           mediaWidth={40}
           mediaHeight={40}
@@ -187,7 +187,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         <CustomInformativeBox
           bottomPosition={260}
           title=""
-          content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
+          content="Play Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
         />
       </motion.div>
 

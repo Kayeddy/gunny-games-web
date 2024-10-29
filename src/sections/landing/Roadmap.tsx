@@ -26,7 +26,8 @@ export default function Roadmap() {
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.5 }}
             className="relative flex items-center justify-center h-full"
-          >
+          > 
+          {/* To-Do: update the roadmap and add "Roadmap" title */}
             <div className="z-20 timeline-container">
               {/* Phase 1: Laying the Foundation */}
               <div className="timeline-point">
