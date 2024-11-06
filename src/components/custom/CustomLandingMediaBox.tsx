@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Spinner } from "@nextui-org/react";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
@@ -48,50 +47,28 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   link,
   width,
   height,
-}) => {
-  return (
-    <motion.div
-      className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
-        width && width
-      } ${height && height}`}
-      style={{ bottom: bottomPosition }}
-      variants={boxVariants} // Apply the animation variants
-      initial="hidden"
-      animate="visible"
-    >
-      {link ? (
-        <Link
-          href={link}
-          target="_blank"
-          className="flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-105"
-        >
-          <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
-            <span className="flex flex-col items-start justify-center gap-2">
-              <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
-                {title}
-              </h6>
-              <p className="max-w-[250px] text-sm md:text-base font-sen">
-                {content}
-              </p>
-            </span>
-            {mediaUrl && (
-              <Image
-                src={mediaUrl}
-                alt=""
-                className="object-contain"
-                width={mediaWidth}
-                height={mediaHeight}
-              />
-            )}
-          </div>
-        </Link>
-      ) : (
+}) => (
+  <motion.div
+    className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
+      width && width
+    } ${height && height}`}
+    style={{ bottom: bottomPosition }}
+    variants={boxVariants}
+    initial="hidden"
+    animate="visible"
+  >
+    {link ? (
+      <Link
+        href={link}
+        target="_blank"
+        className="flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-105"
+      >
         <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
           <span className="flex flex-col items-start justify-center gap-2">
-            <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
+            <h6 className="text-xl font-semibold leading-[10px] tracking-wider">
               {title}
             </h6>
-            <p className="max-w-[250px] text-sm md:text-base font-sen">
+            <p className="max-w-[250px] font-sen text-sm md:text-base">
               {content}
             </p>
           </span>
@@ -105,10 +82,30 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
             />
           )}
         </div>
-      )}
-    </motion.div>
-  );
-};
+      </Link>
+    ) : (
+      <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
+        <span className="flex flex-col items-start justify-center gap-2">
+          <h6 className="text-xl font-semibold leading-[10px] tracking-wider">
+            {title}
+          </h6>
+          <p className="max-w-[250px] font-sen text-sm md:text-base">
+            {content}
+          </p>
+        </span>
+        {mediaUrl && (
+          <Image
+            src={mediaUrl}
+            alt=""
+            className="object-contain"
+            width={mediaWidth}
+            height={mediaHeight}
+          />
+        )}
+      </div>
+    )}
+  </motion.div>
+);
 
 const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   width,
@@ -119,9 +116,15 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleVideoLoad = () => {
-    setIsLoaded(true);
-  };
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      if (videoElement.readyState >= 3) {
+        setIsLoaded(true);
+        videoElement.play();
+      }
+    }
+  }, [currentVideoIndex]);
 
   const handleVideoEnd = () => {
     setIsLoaded(false); // Reset for the next video
@@ -130,33 +133,13 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
     );
   };
 
-  useEffect(() => {
-    const videoElement = videoRef.current;
-
-    const handleCanPlay = () => {
-      setIsLoaded(true); // Loader should disappear when the video can play
-      videoElement?.play(); // Play the video once it's ready
-    };
-
-    if (videoElement) {
-      videoElement.addEventListener("canplay", handleCanPlay);
-      videoElement.load(); // Ensure the video is loaded and ready before playing
-    }
-
-    return () => {
-      if (videoElement) {
-        videoElement.removeEventListener("canplay", handleCanPlay);
-      }
-    };
-  }, [currentVideoIndex]);
-
   return (
     <div
-      className="lg:w-[75vw] w-screen lg:h-full h-screen lg:-translate-x-7 custom-landing-media-box relative lg:rounded-[30px]"
+      className="custom-landing-media-box relative h-screen w-screen lg:h-full lg:w-[75vw] lg:-translate-x-7 lg:rounded-[30px]"
       style={{ width, height }}
     >
       <motion.div
-        variants={containerVariants} // Apply the container variants
+        variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
@@ -171,7 +154,6 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
           width="w-[250px]"
           height="h-[80px]"
         />
-
         <CustomInformativeBox
           bottomPosition={80}
           title=""
@@ -183,7 +165,6 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
           width="w-[250px]"
           height="h-[80px]"
         />
-
         <CustomInformativeBox
           bottomPosition={260}
           title=""
@@ -193,7 +174,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
 
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">
-          <div className="w-12 h-12 border-purple-500 border-solid rounded-full shadow-md animate-spin border-y-4 border-t-transparent"></div>
+          <div className="h-12 w-12 animate-spin rounded-full border-y-4 border-solid border-purple-500 border-t-transparent shadow-md"></div>
         </div>
       )}
 
@@ -202,12 +183,10 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         src={videoSrcs[currentVideoIndex]}
         loop={false}
         muted
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5 }} // Faster fade-in
-        onLoadedData={handleVideoLoad}
+        onLoadedData={() => setIsLoaded(true)}
         onEnded={handleVideoEnd}
-        className="absolute inset-0 object-cover w-full h-full blur-md lg:blur-none"
+        className="absolute inset-0 h-full w-full object-cover blur-md lg:blur-none"
+        autoPlay
       />
 
       <Image
@@ -215,12 +194,12 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         alt=""
         width={300}
         height={300}
-        className="object-contain max-w-lg mx-auto my-auto lg:hidden -translate-y-[150px]"
+        className="mx-auto my-auto max-w-lg -translate-y-[150px] object-contain lg:hidden"
       />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="top-0 right-0 hidden cutout lg:block" />
-        <div className="bottom-0 left-0 hidden cutout lg:block" />
+        <div className="cutout right-0 top-0 hidden lg:block" />
+        <div className="cutout bottom-0 left-0 hidden lg:block" />
       </div>
     </div>
   );
