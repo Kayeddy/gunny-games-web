@@ -2,13 +2,14 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaPlay, FaPause } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
   height?: number;
-  videoSrcs: string[]; // Array of video sources
+  videoSrcs: string[];
 }
 
 interface CustomInformativeBoxProps {
@@ -32,7 +33,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.3, // Delay between each child's animation
+      staggerChildren: 0.3,
     },
   },
 };
@@ -49,9 +50,7 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   height,
 }) => (
   <motion.div
-    className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
-      width && width
-    } ${height && height}`}
+    className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${width} ${height}`}
     style={{ bottom: bottomPosition }}
     variants={boxVariants}
     initial="hidden"
@@ -114,23 +113,35 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
 }) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const videoElement = videoRef.current;
-    if (videoElement) {
-      if (videoElement.readyState >= 3) {
-        setIsLoaded(true);
-        videoElement.play();
-      }
+    if (videoElement && videoElement.readyState >= 3 && isPlaying) {
+      setIsLoaded(true);
+      videoElement.play();
     }
-  }, [currentVideoIndex]);
+  }, [currentVideoIndex, isPlaying]);
 
   const handleVideoEnd = () => {
-    setIsLoaded(false); // Reset for the next video
-    setCurrentVideoIndex((prevIndex) =>
-      prevIndex === videoSrcs.length - 1 ? 0 : prevIndex + 1
-    );
+    setIsLoaded(false);
+    if (currentVideoIndex < videoSrcs.length - 1) {
+      // Play the next video in the sequence
+      setCurrentVideoIndex((prevIndex) => prevIndex + 1);
+    } else {
+      // End of video sequence, reset and pause
+      setCurrentVideoIndex(0);
+      setIsPlaying(false);
+    }
+  };
+
+  const togglePlay = () => {
+    if (!isPlaying) {
+      // Reset to the first video if starting a new loop
+      setCurrentVideoIndex(0);
+    }
+    setIsPlaying((prev) => !prev);
   };
 
   return (
@@ -173,7 +184,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       </motion.div>
 
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black">
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black">
           <div className="h-12 w-12 animate-spin rounded-full border-y-4 border-solid border-purple-500 border-t-transparent shadow-md"></div>
         </div>
       )}
@@ -186,20 +197,33 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         onLoadedData={() => setIsLoaded(true)}
         onEnded={handleVideoEnd}
         className="absolute inset-0 h-full w-full object-cover blur-md lg:blur-none"
-        autoPlay
+        autoPlay={isPlaying}
       />
+
+      {/* Centered Play/Pause Button */}
+      <button
+        onClick={togglePlay}
+        className="absolute inset-0 z-30 m-auto flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-white transition-all duration-300 hover:bg-purple-600"
+        aria-label={isPlaying ? "Pause Video" : "Play Video"}
+      >
+        {isPlaying ? (
+          <FaPause className="text-white" size={20} />
+        ) : (
+          <FaPlay className="ml-1 text-white" size={20} />
+        )}
+      </button>
 
       <Image
         src="/assets/icons/logo1024_100.webp"
         alt=""
         width={300}
         height={300}
-        className="mx-auto my-auto max-w-lg -translate-y-[150px] object-contain lg:hidden"
+        className="z-10 mx-auto my-auto max-w-lg -translate-y-[150px] object-contain lg:hidden"
       />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="cutout right-0 top-0 hidden lg:block" />
-        <div className="cutout bottom-0 left-0 hidden lg:block" />
+        <div className="cutout right-0 top-0 z-30 hidden lg:block" />
+        <div className="cutout bottom-0 left-0 z-30 hidden lg:block" />
       </div>
     </div>
   );
