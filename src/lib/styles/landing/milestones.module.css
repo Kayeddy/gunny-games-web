@@ -1,0 +1,15 @@
+.animation-wrapper {
+  width: 70%;
+}
+
+.sphere-animation {
+  width: 380px;
+  height: 380px;
+}
+
+.sphere path {
+  fill: url(#sphereGradient);
+  stroke-width: 1px;
+  stroke: rgba(80, 80, 80, 0.35);
+  backface-visibility: hidden;
+}

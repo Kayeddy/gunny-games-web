@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../lib/styles/landing/characterSection.module.css";
+@import "../lib/styles/landing/rankingSection.module.css";
+@import "../lib/styles/landing/hero.module.css";
+@import "../lib/styles/landing/roadmap.module.css";
+@import "../lib/styles/landing/milestones.module.css";
+
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+@import url("https://db.onlinewebfonts.com/c/e7322a6673613ab13604fadda3d20e56?family=VALORANT");
+@import url("https://db.onlinewebfonts.com/c/b2437a24f47a94383eb02858f8a4df97?family=Insomnia");
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+
+@font-face {
+  font-family: "VALORANT";
+  src: url("../../public/fonts/Valorant.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Insomnia";
+  src: url("../../public/fonts/Insomnia.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pricedown";
+  src: url("../../public/fonts/pricedown_black.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.font-valorant {
+  font-family: "VALORANT", sans-serif;
+}
+
+.font-insomnia {
+  font-family: "Insomnia", sans-serif;
+}
+
+.font-pricedown {
+  font-family: "Pricedown", sans-serif;
+}
+
+:root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --background-custom-dark: #1E1C1C
+
+  --global-animation-delay: 5s;
+
+  --stairtop:#1D1B26;
+  --stairface:#A28497;
+  --stairside:#6F5E5C;
+  --door:#C6CAED;
+
+
+  /** Custom Leadboard incentives styles*/
+
+  --first-place-height: 180px;
+  --second-place-height: 140px;
+  --third-place-height: 100px;
+  --animation: 2s ease forwards 1s;
+
+  /** Custom colors */
+  --white: #ffffff;
+  --black: #000000;
+  --light-t1: #ccc4ed;
+  --text-color-1: rgba(187, 177, 231, 0.62);
+  --text-color-2: rgba(154, 119, 35, 1);
+  --text-color-3: rgba(3, 140, 54, 1);
+  --text-color-4: #a395df;
+  --text-color-5: #FEE865;
+  --text-color-6: #FCD437;
+  --text-color-7: #9a7723;
+  --text-color-8: #eaa742;
+  --text-color-9: #e9a742;
+  --text-color-10: #c4893b;
+  --text-color-11: #ffe0b7;
+  --text-color-12: #dfa650;
+  --text-color-13: #E32931;
+  --border-color-2: #6b5536;
+  --text-color-14: #5797D1;
+  --text-color-15: #04bc49;
+  --text-color-16: #01ab3f;
+  --text-color-17: #d4ffe4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.MuiPagination-root {
+  z-index: 10; /* or higher if necessary */
+  position: relative;
+}
+
+body {
+  font-family: "VALORANT", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: auto;
+  max-width: 2560px;
+  background: var(--white);
+  color: var(--text-color-1);
+  scroll-behavior: smooth;
+}
+body.loading {
+  visibility: hidden;
+}
+
+body.loading .loading-indicator-wrapper {
+  visibility: visible;
+}
+a {
+  text-decoration: none;
+  outline: none;
+  color: var(--text-color-1);
+  cursor: pointer;
+}
+a:hover {
+  color: var(--text-color-1);
+}
+a,
+a:active,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+img {
+  border: none;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+.custom-container {
+  padding: 0 32px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: "Insomnia", sans-serif;
+  font-size: 86px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 104px;
+  letter-spacing: 5.16px;
+  /* background: linear-gradient(180deg, #6d4be7 0%, #FEFEFE 90%); */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h5 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 10.8px;
+  color: var(--text-color-5);
+  text-transform: uppercase;
+}
+h6 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 18.48px;
+  color: var(--text-color-4);
+}
+
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+/* For WebKit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  height: 0; /* Set height to 0 to hide the scrollbar completely */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Ensure the scrollbar thumb is transparent */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Ensure the scrollbar track is transparent */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: none; /* Hides the scrollbar in Firefox */
+}
+
+/* For Internet Explorer and Edge */
+::-ms-scrollbar {
+  height: 0; /* Set height to 0 to hide the scrollbar completely */
+}

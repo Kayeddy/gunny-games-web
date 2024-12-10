@@ -1,0 +1,63 @@
+.custom-landing-media-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-landing-media-box video {
+  position: absolute;
+  inset: 0;
+  width: 99%;
+  height: 99%;
+  object-fit: cover;
+}
+
+.custom-landing-media-box .cutout {
+  position: absolute;
+  width: 200px; /* Increased size to make the cutouts larger */
+  height: 100px; /* Increased size to make the cutouts larger */
+  background-color: transparent;
+}
+
+.custom-landing-media-box .cutout.top-0.right-0 {
+  top: 0;
+  right: 0;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  background-color: #1d1b26;
+}
+
+.custom-landing-media-box .cutout.bottom-0.left-0 {
+  bottom: 0;
+  left: 0;
+  clip-path: polygon(0 0, 0 100%, 100% 0%);
+  background-color: #1d1b26;
+}
+
+.custom-landing-media-box button {
+  position: absolute;
+  padding: 0.5rem;
+  background-color: #1d1b26;
+  color: #1d1b26;
+  border-radius: 30px;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.cutout-button {
+  width: 450px; /* Match the width of the cutout */
+  height: 100px; /* Match the height of the cutout */
+  background-color: white;
+  color: white;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, 0 100%, 100% 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+/* .cutout-button:hover {
+      background-color: #333333; 
+    } */
