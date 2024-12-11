@@ -2,14 +2,14 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaPlay, FaPause } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
-import { Spinner } from "@nextui-org/react";
 
 interface CustomLandingMediaBoxProps {
   width?: number;
   height?: number;
-  videoSrcs: string[]; // Array of video sources
+  videoSrcs: string[];
 }
 
 interface CustomInformativeBoxProps {
@@ -33,7 +33,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.3, // Delay between each child's animation
+      staggerChildren: 0.3,
     },
   },
 };
@@ -48,50 +48,26 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
   link,
   width,
   height,
-}) => {
-  return (
-    <motion.div
-      className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${
-        width && width
-      } ${height && height}`}
-      style={{ bottom: bottomPosition }}
-      variants={boxVariants} // Apply the animation variants
-      initial="hidden"
-      animate="visible"
-    >
-      {link ? (
-        <Link
-          href={link}
-          target="_blank"
-          className="flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-105"
-        >
-          <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
-            <span className="flex flex-col items-start justify-center gap-2">
-              <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
-                {title}
-              </h6>
-              <p className="max-w-[250px] text-sm md:text-base font-sen">
-                {content}
-              </p>
-            </span>
-            {mediaUrl && (
-              <Image
-                src={mediaUrl}
-                alt=""
-                className="object-contain"
-                width={mediaWidth}
-                height={mediaHeight}
-              />
-            )}
-          </div>
-        </Link>
-      ) : (
+}) => (
+  <motion.div
+    className={`absolute right-[2rem] px-1 py-1 bg-[#1e1c1c] bg-opacity-70 backdrop-blur-lg border border-n-1/10 rounded-2xl flex items-center justify-center z-20 ${width} ${height}`}
+    style={{ bottom: bottomPosition }}
+    variants={boxVariants}
+    initial="hidden"
+    animate="visible"
+  >
+    {link ? (
+      <Link
+        href={link}
+        target="_blank"
+        className="flex items-center justify-center transition-all duration-300 ease-in-out hover:scale-105"
+      >
         <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
           <span className="flex flex-col items-start justify-center gap-2">
-            <h6 className="text-xl font-semibold tracking-wider leading-[10px]">
+            <h6 className="text-xl font-semibold leading-[10px] tracking-wider">
               {title}
             </h6>
-            <p className="max-w-[250px] text-sm md:text-base font-sen">
+            <p className="max-w-[250px] font-sen text-sm md:text-base">
               {content}
             </p>
           </span>
@@ -105,10 +81,30 @@ const CustomInformativeBox: React.FC<CustomInformativeBoxProps> = ({
             />
           )}
         </div>
-      )}
-    </motion.div>
-  );
-};
+      </Link>
+    ) : (
+      <div className="flex flex-row items-center justify-center gap-2 p-3 text-white">
+        <span className="flex flex-col items-start justify-center gap-2">
+          <h6 className="text-xl font-semibold leading-[10px] tracking-wider">
+            {title}
+          </h6>
+          <p className="max-w-[250px] font-sen text-sm md:text-base">
+            {content}
+          </p>
+        </span>
+        {mediaUrl && (
+          <Image
+            src={mediaUrl}
+            alt=""
+            className="object-contain"
+            width={mediaWidth}
+            height={mediaHeight}
+          />
+        )}
+      </div>
+    )}
+  </motion.div>
+);
 
 const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   width,
@@ -117,46 +113,44 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
 }) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleVideoLoad = () => {
-    setIsLoaded(true);
-  };
-
-  const handleVideoEnd = () => {
-    setIsLoaded(false); // Reset for the next video
-    setCurrentVideoIndex((prevIndex) =>
-      prevIndex === videoSrcs.length - 1 ? 0 : prevIndex + 1
-    );
-  };
 
   useEffect(() => {
     const videoElement = videoRef.current;
-
-    const handleCanPlay = () => {
-      setIsLoaded(true); // Loader should disappear when the video can play
-      videoElement?.play(); // Play the video once it's ready
-    };
-
-    if (videoElement) {
-      videoElement.addEventListener("canplay", handleCanPlay);
-      videoElement.load(); // Ensure the video is loaded and ready before playing
+    if (videoElement && videoElement.readyState >= 3 && isPlaying) {
+      setIsLoaded(true);
+      videoElement.play();
     }
+  }, [currentVideoIndex, isPlaying]);
 
-    return () => {
-      if (videoElement) {
-        videoElement.removeEventListener("canplay", handleCanPlay);
-      }
-    };
-  }, [currentVideoIndex]);
+  const handleVideoEnd = () => {
+    setIsLoaded(false);
+    if (currentVideoIndex < videoSrcs.length - 1) {
+      // Play the next video in the sequence
+      setCurrentVideoIndex((prevIndex) => prevIndex + 1);
+    } else {
+      // End of video sequence, reset and pause
+      setCurrentVideoIndex(0);
+      setIsPlaying(false);
+    }
+  };
+
+  const togglePlay = () => {
+    if (!isPlaying) {
+      // Reset to the first video if starting a new loop
+      setCurrentVideoIndex(0);
+    }
+    setIsPlaying((prev) => !prev);
+  };
 
   return (
     <div
-      className="lg:w-[75vw] w-screen lg:h-full h-screen lg:-translate-x-7 custom-landing-media-box relative lg:rounded-[30px]"
+      className="custom-landing-media-box relative h-screen w-screen lg:h-full lg:w-[75vw] lg:-translate-x-7 lg:rounded-[30px]"
       style={{ width, height }}
     >
       <motion.div
-        variants={containerVariants} // Apply the container variants
+        variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
@@ -171,29 +165,27 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
           width="w-[250px]"
           height="h-[80px]"
         />
-
         <CustomInformativeBox
           bottomPosition={80}
           title=""
           link="https://apps.apple.com/us/app/gunny-rush-game/id6602913959"
-          content="Download for IOS"
+          content="Download for iOS"
           mediaUrl="/assets/other/apple_icon.webp"
           mediaWidth={40}
           mediaHeight={40}
           width="w-[250px]"
           height="h-[80px]"
         />
-
         <CustomInformativeBox
           bottomPosition={260}
           title=""
-          content="Access Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
+          content="Play Gunny Rush from your mobile device and connect to your Pera Wallet to get started."
         />
       </motion.div>
 
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black">
-          <div className="w-12 h-12 border-purple-500 border-solid rounded-full shadow-md animate-spin border-y-4 border-t-transparent"></div>
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black">
+          <div className="h-12 w-12 animate-spin rounded-full border-y-4 border-solid border-purple-500 border-t-transparent shadow-md"></div>
         </div>
       )}
 
@@ -202,25 +194,36 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         src={videoSrcs[currentVideoIndex]}
         loop={false}
         muted
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5 }} // Faster fade-in
-        onLoadedData={handleVideoLoad}
+        onLoadedData={() => setIsLoaded(true)}
         onEnded={handleVideoEnd}
-        className="absolute inset-0 object-cover w-full h-full blur-md lg:blur-none"
+        className="absolute inset-0 h-full w-full object-cover blur-md lg:blur-none"
+        autoPlay={isPlaying}
       />
+
+      {/* Centered Play/Pause Button */}
+      <button
+        onClick={togglePlay}
+        className="absolute inset-0 z-30 m-auto flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-white transition-all duration-300 hover:bg-purple-600"
+        aria-label={isPlaying ? "Pause Video" : "Play Video"}
+      >
+        {isPlaying ? (
+          <FaPause className="text-white" size={20} />
+        ) : (
+          <FaPlay className="ml-1 text-white" size={20} />
+        )}
+      </button>
 
       <Image
         src="/assets/icons/logo1024_100.webp"
         alt=""
         width={300}
         height={300}
-        className="object-contain max-w-lg mx-auto my-auto lg:hidden -translate-y-[150px]"
+        className="z-10 mx-auto my-auto max-w-lg -translate-y-[150px] object-contain lg:hidden"
       />
 
       <div className="absolute inset-0 overflow-hidden">
-        <div className="top-0 right-0 hidden cutout lg:block" />
-        <div className="bottom-0 left-0 hidden cutout lg:block" />
+        <div className="cutout right-0 top-0 z-30 hidden lg:block" />
+        <div className="cutout bottom-0 left-0 z-30 hidden lg:block" />
       </div>
     </div>
   );

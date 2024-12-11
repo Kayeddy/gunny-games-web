@@ -193,6 +193,7 @@ const CharacterContentSection: React.FC<CharacterContentProps> = ({
               <span className="z-10 w-full h-full text-lg">
                 View on explorer
               </span>
+              {/* To-Do: add link to diferent explorers like allo */}
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
                 <div className="relative w-10 h-full bg-white/30"></div>
               </div>

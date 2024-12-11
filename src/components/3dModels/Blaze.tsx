@@ -19,24 +19,24 @@ const BlazeModelContent: React.FC = () => {
     }
 
     // Thoroughly log the structure of the GLTF model
-    console.log("GLTF Scene Structure (Detailed):", gltf.scene);
+    // console.log("GLTF Scene Structure (Detailed):", gltf.scene);
 
     // Traverse and find different types of objects
     gltf.scene.traverse((node: any) => {
       if (node.isMesh) {
-        console.log("Found a Mesh:", node);
+        // console.log("Found a Mesh:", node);
       } else if (node.isGroup) {
-        console.log("Found a Group:", node);
+        // console.log("Found a Group:", node);
       } else if (node.isSkinnedMesh) {
-        console.log("Found a SkinnedMesh:", node);
+        // console.log("Found a SkinnedMesh:", node);
       } else {
-        console.log("Found an Object3D:", node);
+        // console.log("Found an Object3D:", node);
       }
     });
 
     // Adjust the entire scene's Y position
     gltf.scene.position.y -= 20;
-    console.log("Adjusted Y Position:", gltf.scene.position.y);
+    // console.log("Adjusted Y Position:", gltf.scene.position.y);
   }, [gltf]);
 
   useFrame((state, delta) => {
@@ -48,7 +48,7 @@ const BlazeModelContent: React.FC = () => {
 
 const BlazeModel: React.FC = () => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{

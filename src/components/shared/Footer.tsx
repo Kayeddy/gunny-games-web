@@ -5,6 +5,7 @@ import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { Divider } from "@nextui-org/react";
 
 export default function Footer() {
+  // To-Do: make a division for the footer to diferenciate from the rest and add social media links 
   return (
     <div className="flex flex-col items-center justify-between w-full gap-8 pb-8 mt-32 lg:flex-row lg:px-32 h-max">
       <div className="flex flex-col items-center justify-center gap-8">
@@ -20,6 +21,7 @@ export default function Footer() {
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-[30px] text-center">FAQS</h1>
         <ul className="flex flex-col items-start justify-center w-full gap-2">
+          {/* To-Do: add title "FAQs" */}
           <FaqsInformationModal
             modalTrigger={<li>Who or What is Gunny?</li>}
             title="Gunny: Pioneering the future of fun on the blockchain"
