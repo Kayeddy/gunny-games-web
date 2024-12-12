@@ -1,3 +1,4 @@
+
 # Gunny Rush
 
 ## Join the Adventure
@@ -97,6 +98,8 @@ Ensure you have the following installed:
 │   │   ├── hooks/     # Custom React hooks
 │   │   ├── scripts/   # Utility scripts
 │   │   ├── styles/    # Shared styles
+│   │   ├── css/       # CSS styles
+│   │   ├── scss/      # SCSS styles
 │   │   ├── types/     # TypeScript type definitions
 │   │   ├── motion.ts  # Framer motion configurations
 │   │   └── utils.ts   # Utility functions
@@ -135,6 +138,7 @@ Gunny Rush leverages a variety of cutting-edge technologies to deliver an except
 
 - **[Tailwind CSS](https://tailwindcss.com/):** Utility-first CSS framework for rapid UI development.
 - **[Framer Motion](https://www.framer.com/motion/):** Animation library for React.
+- **CSS/SCSS:** Stylesheets for additional customization.
 
 ### State Management and Utilities
 
