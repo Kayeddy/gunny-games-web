@@ -130,7 +130,6 @@ Gunny Rush leverages a variety of cutting-edge technologies to deliver an except
 ### Blockchain Integration
 
 - **[Ethers.js](https://docs.ethers.io/):** Ethereum interaction library for managing wallets and contracts.
-- **Smart Contracts:** Seamlessly integrated blockchain functionality.
 
 ### UI and Styling
 
