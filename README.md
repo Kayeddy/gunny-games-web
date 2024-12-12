@@ -142,7 +142,6 @@ Gunny Rush leverages a variety of cutting-edge technologies to deliver an except
 
 ### State Management and Utilities
 
-- **[Zustand](https://zustand-demo.pmnd.rs/):** Lightweight state management library.
 - **[Clsx](https://github.com/lukeed/clsx):** Utility for conditionally applying class names.
 
 ## License
