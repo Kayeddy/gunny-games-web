@@ -129,13 +129,6 @@ body {
   color: var(--text-color-1);
   scroll-behavior: smooth;
 }
-body.loading {
-  visibility: hidden;
-}
-
-body.loading .loading-indicator-wrapper {
-  visibility: visible;
-}
 a {
   text-decoration: none;
   outline: none;

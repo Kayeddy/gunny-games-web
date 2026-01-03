@@ -194,6 +194,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         src={videoSrcs[currentVideoIndex]}
         loop={false}
         muted
+        playsInline
         onLoadedData={() => setIsLoaded(true)}
         onEnded={handleVideoEnd}
         className="absolute inset-0 h-full w-full object-cover blur-md lg:blur-none"

@@ -57,6 +57,8 @@
     "@types/three": "^0.167.2",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.10",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.5",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.8",
     "typescript": "^5"

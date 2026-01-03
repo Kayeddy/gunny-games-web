@@ -18,6 +18,14 @@ const ClientLoaderWrapper: React.FC = () => {
   useEffect(() => {
     // Disable scrolling initially
     document.body.style.overflow = "hidden";
+
+    // Fallback timeout in case video fails to load/play (e.g., on some mobile browsers)
+    const fallbackTimeout = setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.overflow = "";
+    }, 8000); // 8 second fallback
+
+    return () => clearTimeout(fallbackTimeout);
   }, []);
 
   return (

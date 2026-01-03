@@ -41,6 +41,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({
         src="/assets/other/intro.mp4"
         autoPlay
         muted
+        playsInline
         onLoadedData={handleVideoLoad}
         onEnded={handleVideoEnd}
         className="object-contain w-screen h-screen"
