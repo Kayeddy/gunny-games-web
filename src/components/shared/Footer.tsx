@@ -38,7 +38,7 @@ export default function Footer() {
             }
           />
           <FaqsInformationModal
-            modalTrigger={<li>What's the Buzz About Gunny Rush?</li>}
+            modalTrigger={<li>What&apos;s the Buzz About Gunny Rush?</li>}
             title="Experience the Thrill with Gunny Rush"
             customSize="2xl"
             content={
@@ -58,7 +58,7 @@ export default function Footer() {
                   to have fun and earn rewards at the same time.
                   <br />
                   <br />
-                  In Gunny Rush, you'll have the opportunity to play with
+                  In Gunny Rush, you&apos;ll have the opportunity to play with
                   different Inugis, each with a unique appearance and special
                   abilities based on different elements. These adorable and
                   powerful companions can be obtained through exciting airdrops
@@ -86,12 +86,12 @@ export default function Footer() {
             }
           />
           <FaqsInformationModal
-            modalTrigger={<li>Spotted a Bug? Let's Squash It Together!</li>}
+            modalTrigger={<li>Spotted a Bug? Let&apos;s Squash It Together!</li>}
             title="Bug Squashed: We're Here to Help!"
             content={
               <div className="flex flex-col items-start justify-start w-full gap-4">
                 <p>
-                  Oops! Found something that's not working quite right? We're
+                  Oops! Found something that&apos;s not working quite right? We&apos;re
                   here to help!
                 </p>
                 <p>
