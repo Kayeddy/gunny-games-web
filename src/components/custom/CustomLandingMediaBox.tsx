@@ -116,18 +116,45 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Check video ready state when video element or source changes
   useEffect(() => {
     const videoElement = videoRef.current;
-    if (videoElement && videoElement.readyState >= 3 && isPlaying) {
-      setIsLoaded(true);
-      videoElement.play();
+    if (!videoElement) return;
+
+    // Check if video is already ready (cached)
+    const checkReady = () => {
+      if (videoElement.readyState >= 3) {
+        setIsLoaded(true);
+      }
+    };
+
+    // Check immediately in case video is already loaded
+    checkReady();
+
+    // Also listen for canplay event as a backup
+    videoElement.addEventListener("canplay", checkReady);
+
+    return () => {
+      videoElement.removeEventListener("canplay", checkReady);
+    };
+  }, [currentVideoIndex]);
+
+  // Handle play state changes
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    if (isPlaying && videoElement.readyState >= 3) {
+      videoElement.play().catch(() => {
+        // Autoplay blocked - user will need to tap play again
+      });
     }
-  }, [currentVideoIndex, isPlaying]);
+  }, [isPlaying, currentVideoIndex]);
 
   const handleVideoEnd = () => {
-    setIsLoaded(false);
     if (currentVideoIndex < videoSrcs.length - 1) {
       // Play the next video in the sequence
+      setIsLoaded(false);
       setCurrentVideoIndex((prevIndex) => prevIndex + 1);
     } else {
       // End of video sequence, reset and pause
@@ -136,10 +163,15 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
     }
   };
 
+  const handleCanPlay = () => {
+    setIsLoaded(true);
+  };
+
   const togglePlay = () => {
     if (!isPlaying) {
       // Reset to the first video if starting a new loop
       setCurrentVideoIndex(0);
+      setIsLoaded(false);
     }
     setIsPlaying((prev) => !prev);
   };
@@ -195,7 +227,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
         loop={false}
         muted
         playsInline
-        onLoadedData={() => setIsLoaded(true)}
+        onCanPlay={handleCanPlay}
         onEnded={handleVideoEnd}
         className="absolute inset-0 h-full w-full object-cover blur-md lg:blur-none"
         autoPlay={isPlaying}
