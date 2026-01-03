@@ -114,6 +114,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Check video ready state when video element or source changes
@@ -139,17 +140,34 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
     };
   }, [currentVideoIndex]);
 
-  // Handle play state changes
+  // Handle play/pause state changes
   useEffect(() => {
     const videoElement = videoRef.current;
     if (!videoElement) return;
 
-    if (isPlaying && videoElement.readyState >= 3) {
+    if (isPlaying) {
+      if (videoElement.readyState >= 3) {
+        videoElement.play().catch(() => {
+          // Autoplay blocked - reset state
+          setIsPlaying(false);
+        });
+      }
+    } else {
+      videoElement.pause();
+    }
+  }, [isPlaying]);
+
+  // Handle video source changes while playing
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement || !isPlaying) return;
+
+    if (videoElement.readyState >= 3) {
       videoElement.play().catch(() => {
-        // Autoplay blocked - user will need to tap play again
+        setIsPlaying(false);
       });
     }
-  }, [isPlaying, currentVideoIndex]);
+  }, [currentVideoIndex, isPlaying]);
 
   const handleVideoEnd = () => {
     if (currentVideoIndex < videoSrcs.length - 1) {
@@ -160,6 +178,7 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       // End of video sequence, reset and pause
       setCurrentVideoIndex(0);
       setIsPlaying(false);
+      setHasStarted(false);
     }
   };
 
@@ -168,12 +187,30 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
   };
 
   const togglePlay = () => {
+    const videoElement = videoRef.current;
+
     if (!isPlaying) {
-      // Reset to the first video if starting a new loop
-      setCurrentVideoIndex(0);
-      setIsLoaded(false);
+      // Starting to play
+      if (!hasStarted) {
+        // First time playing - start from beginning
+        setCurrentVideoIndex(0);
+        setHasStarted(true);
+      }
+      setIsPlaying(true);
+
+      // Try to play immediately if video is ready
+      if (videoElement && videoElement.readyState >= 3) {
+        videoElement.play().catch(() => {
+          setIsPlaying(false);
+        });
+      }
+    } else {
+      // Pausing
+      setIsPlaying(false);
+      if (videoElement) {
+        videoElement.pause();
+      }
     }
-    setIsPlaying((prev) => !prev);
   };
 
   return (
@@ -236,7 +273,9 @@ const CustomLandingMediaBox: React.FC<CustomLandingMediaBoxProps> = ({
       {/* Centered Play/Pause Button */}
       <button
         onClick={togglePlay}
-        className="absolute inset-0 z-30 m-auto flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-white transition-all duration-300 hover:bg-purple-600"
+        className={`absolute inset-0 z-30 m-auto flex h-12 w-12 items-center justify-center rounded-full bg-purple-500 text-white transition-all duration-300 hover:bg-purple-600 hover:opacity-100 ${
+          isPlaying ? "opacity-30" : "opacity-100"
+        }`}
         aria-label={isPlaying ? "Pause Video" : "Play Video"}
       >
         {isPlaying ? (
