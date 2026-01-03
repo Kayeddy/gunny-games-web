@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Spinner } from "@nextui-org/react";
 
@@ -17,40 +17,35 @@ const PageLoader: React.FC<PageLoaderProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasEndedRef = useRef(false);
 
-  const handleVideoLoad = () => {
+  const triggerEnd = useCallback(() => {
+    if (hasEndedRef.current) return;
+    hasEndedRef.current = true;
+    onVideoEnd();
+  }, [onVideoEnd]);
+
+  const handleCanPlay = () => {
     setVideoLoaded(true);
-  };
-
-  const handleVideoEnd = () => {
-    if (hasEndedRef.current) return;
-    hasEndedRef.current = true;
-    onVideoEnd();
-  };
-
-  const handleVideoError = () => {
-    // If video fails to load, trigger end immediately
-    if (hasEndedRef.current) return;
-    hasEndedRef.current = true;
-    onVideoEnd();
-  };
-
-  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Attempt to play the video and handle autoplay failure
+    // Video is ready - attempt to play
     const playPromise = video.play();
 
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        // Autoplay was blocked - trigger end immediately
-        if (!hasEndedRef.current) {
-          hasEndedRef.current = true;
-          onVideoEnd();
-        }
+        // Autoplay was truly blocked - skip the video
+        triggerEnd();
       });
     }
-  }, [onVideoEnd]);
+  };
+
+  const handleVideoEnd = () => {
+    triggerEnd();
+  };
+
+  const handleVideoError = () => {
+    triggerEnd();
+  };
 
   return (
     <motion.div
@@ -70,7 +65,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({
         autoPlay
         muted
         playsInline
-        onLoadedData={handleVideoLoad}
+        onCanPlay={handleCanPlay}
         onEnded={handleVideoEnd}
         onError={handleVideoError}
         className="object-contain w-screen h-screen"
