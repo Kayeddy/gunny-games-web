@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Gunny Games - Unleash the Elements in Blockchain Gaming",
   description:
     "Join Gunny Games and experience the thrill of blockchain-based gaming. Unleash unique elemental powers, earn rewards, and dominate the leaderboard!",
+  icons: {
+    icon: "/assets/icons/icongunny_100.webp",
+  },
 };
 
 const Valorant = localFont({ src: "../../../public/fonts/Valorant.ttf" });
@@ -23,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://www.yoursite.com/" />
         <link
           rel="stylesheet"
